@@ -13,4 +13,16 @@ title = "About Me"
 
 <img src="/wren_glasses.png" alt="A Wren."/>
 
+# Contacting me
+
+```scss
+blueberry____
+```
+on discord (that's four underscores)
+
+```scss
+jake-87
+```
+on github
+
 <br>

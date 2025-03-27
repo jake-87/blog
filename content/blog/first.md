@@ -5,7 +5,7 @@ date = 2023-06-17
 
 This is just a little blog i'm doing for the sake of spreading stuff I learn about. Fun, right?
 
-There will be mostly math and programming.
+There will be mostly math and programming. \\(a \to b\\)
 
 ```scss, ocaml
 let fac n = if n <= 1 then 1 else n * fac (n - 1)
