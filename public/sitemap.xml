@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>https://blueberrywren.dev/</loc>
+    </url>
+    <url>
+        <loc>https://blueberrywren.dev/blog/</loc>
+    </url>
+    <url>
+        <loc>https://blueberrywren.dev/blog/2025-03-27/</loc>
+        <lastmod>2025-03-27</lastmod>
+    </url>
+    <url>
+        <loc>https://blueberrywren.dev/blog/first/</loc>
+        <lastmod>2023-06-17</lastmod>
+    </url>
+    <url>
+        <loc>https://blueberrywren.dev/me/</loc>
+    </url>
+    <url>
+        <loc>https://blueberrywren.dev/me/about/</loc>
+    </url>
+    <url>
+        <loc>https://blueberrywren.dev/me/inf/</loc>
+    </url>
+    <url>
+        <loc>https://blueberrywren.dev/other/</loc>
+    </url>
+    <url>
+        <loc>https://blueberrywren.dev/other/respect/</loc>
+    </url>
+</urlset>
