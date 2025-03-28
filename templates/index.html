@@ -8,4 +8,7 @@ Hello!
 <p>About me: <a href="{{ get_url(path='@/me/_index.md')}}">click here.</a></p>
 <p>Other websites I recommend: <a href="{{ get_url(path='@/other/_index.md')}}"> see here.</a>
 </p>
-	{% endblock content %}
+
+<p> this blog has an RSS feed! go have a look at <a href="{{ get_url('atom.xml')}}"> here.</a> </p>
+
+{% endblock content %}
