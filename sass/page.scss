@@ -6,7 +6,7 @@ body {
     background-color: $background;
     color: $text;
     font-family: "Roboto Slab", sans-serif;
-    font-size: 15pt;
+    font-size: 14pt;
 }
 
 button {
@@ -34,34 +34,40 @@ div {
     align-items: center;
 }
 
-
 .section {
+    width: 100%;
     margin: 0 auto;
     text-align: center;
     justify-content: center;
 }
 
 .container {
-    max-width: 60%;
-    min-width: 30em;
+    width: 60%;
     justify-content: center;
     margin: 0 auto;
 }
 
+p {
+    justify-content: center;
+}
+
 @media (max-width: 1000px) {
+    .container {
+        width: 100%;
+    }
     body {
         font-size: 11pt;
-        max-width: 100%;
+        max-width: 85%;
     }
     div {
-        margin: 5 3;
+        margin: 1 1 5% 5%;
+        max-width: 90%;
+    }
+    h1 {
         max-width: 100%;
-
     }
     p {
-        margin: 1 auto;
-        max-width: 90%;
-
+        max-width: 100%;
     }
     html, body {
         max-width: 100%;
