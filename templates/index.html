@@ -1,9 +1,17 @@
 {% extends "base.html" %}
-
+<head>
+  <meta property="og:title" content="Blueberry Wren Thoughts" />
+  <title>
+    Blueberry Wren Thoughts
+  </title>
+</head>
 {% block content %}
 <h1 class="title">
-Hello!
+Blueberry Wren Thoughts
 </h1>
+<h2>
+  Hello!
+</h2>
 <p>Posts: <a href="{{ get_url(path='@/blog/_index.md') }}">blog posts.</a></p>
 <p>About me: <a href="{{ get_url(path='@/me/_index.md')}}">click here.</a></p>
 <p>Other websites I recommend: <a href="{{ get_url(path='@/other/_index.md')}}"> see here.</a>
