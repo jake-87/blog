@@ -3,6 +3,9 @@ title = "Alpha equivalence is Evil"
 date = 2025-03-29
 +++
 
+Preface: This is *mostly* in the context of formalization, but it also totally applies to general language creation. Many things (e.g. common subexpression elimination)
+require dealing with a version of alpha equivalence in named systems!
+
 Two terms, for example: \\(\lambda x . x\\) and \\(\lambda y . y\\) are considered "alpha equivalent" (essentially) if they are the same up to renaming bound names.
 
 Alpha equivalence is an awful awful property. Trying to create a formalisation that can easily work with alpha equivalence is miserable; you have few good options, and

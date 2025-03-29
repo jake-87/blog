@@ -18,7 +18,7 @@ button {
 
 button:hover {
     cursor: pointer;
-  border: 3px solid #09BC8A;
+    border: 3px solid #09BC8A;
 }
 
 a:link {
@@ -29,18 +29,45 @@ a:visited {
     color: #A4B0F5;
 }
 
+div {
+    justify-content: center;
+    align-items: center;
+}
 
 
 .section {
-  margin: 0 auto;
-  text-align: center;
+    text-align: center;
+    justify-content: center;
 }
 
 .container {
     max-width: 60%;
     min-width: 30em;
-    margin: 0 auto;
+    justify-content: center;
 }
+
+@media (max-width: 1000px) {
+    body {
+        font-size: 11pt;
+        max-width: 100%;
+    }
+    div {
+        background: yellow;
+        margin: 5 3;
+        max-width: 100%;
+
+    }
+    p {
+        margin: 1 auto;
+        max-width: 90%;
+
+    }
+    html, body {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+}
+
 
 .imgcontainer {
     max-width: 60%;
