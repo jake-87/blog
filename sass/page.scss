@@ -32,15 +32,14 @@ a:visited {
 
 
 .section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 0 auto;
   text-align: center;
 }
 
 .container {
     max-width: 60%;
     min-width: 30em;
+    margin: 0 auto;
 }
 
 .imgcontainer {
