@@ -28,7 +28,7 @@ Once we've gotten to the point of writing that hole, what was once `id` is now `
 solving takes slightly more work, as we can't simply plug in the result of unification - the de Brujin wouldn't line up.
 
 In this conversation, we were discussing relative to András Kovács' excellent "elab-zoo", <a href="https://github.com/AndrasKovacs/elaboration-zoo/">found here</a>.
-We are discussing <a href="https://github.com/AndrasKovacs/elaboration-zoo/blob/master/03-holes/pattern-unification.txt">`03-holes/pattern-unification.txt`</a> and <a href="https://github.com/AndrasKovacs/elaboration-zoo/blob/master/03-holes/Main.hs">`/03-holes/Main.hs`</a> in particular, the former begin a formal treatment of what happens *after* you find a solution, and the latter being an implementation of pattern unification (amongst other things).
+We are discussing <a href="https://github.com/AndrasKovacs/elaboration-zoo/blob/master/03-holes/pattern-unification.txt">`03-holes/pattern-unification.txt`</a> and <a href="https://github.com/AndrasKovacs/elaboration-zoo/blob/master/03-holes/Main.hs">`/03-holes/Main.hs`</a> in particular, the former being a formal treatment of what happens *after* you find a solution, and the latter being an implementation of pattern unification (amongst other things).
 
 ### Comments before the fact
 
@@ -48,6 +48,9 @@ This conversation is *only* going to make sense if you've had a look at at *leas
 
 "Normal unification" here is your fairly traditional unification for typechecking; it is somewhat different in a dependent setting, but not
 too different. (Look here later for a series on this!)
+
+All of the following is then discussing `Main.hs` and the concrete implementation of solving a metavariable.
+This maps somewhat closely from `pattern-unification.txt`, but can be understood standalone.
 
 > Andras' puts it better than i could:
 
