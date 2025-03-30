@@ -51,6 +51,11 @@ p {
     justify-content: center;
 }
 
+blockquote {
+    border-left: 3px solid #78C0A8;
+    padding-left: 1em;
+}
+
 @media (max-width: 1000px) {
     .container {
         width: 100%;
