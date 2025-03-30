@@ -71,16 +71,17 @@ is the pattern unification case.
 
 > `VFlex` is what elab-zoo calls the thing holding an unsolved metavariable (here `m` or `m'`), and a "spine" `sp`, which is a list of everything bound in the context when `m` was created
 
-> you can then imagine the meta to be, essentially, a function:
+> you can then imagine the meta to be, essentially, a function, taking everything bound as arguments (which is what it actually is, in elab zoo)
 
 ```hs
 id : (A : U) -> A -> A
 id A x = x
 
-foo B y = id _ y
+id2 : (B : U) -> B -> B
+id2 B y = id _ y
 =>
 ?m B y = ???
-foo B y = id (?m B y) y
+id2 B y = id (?m B y) y
 ```
 
 > here our normal typechecking would try to unify `?m`'s `???` with `B`
@@ -106,6 +107,31 @@ solve gamma m sp rhs = do
 
 > finally we add the needed lambdas for our function meta (debrujin, remember), evaluate it in the empty context in order to take it into the value domain, and plug it in as the solution
 
+> so then our final solution is
+
+```hs
+id : (A : U) -> A -> A
+id A x = x
+
+id2 : (B : U) -> B -> B
+id2 B y = id _ y
+=>
+?m B y = B
+id2 B y = id (?m B y) y
+```
+> ?m is fully inline though, so
+```hs
+id : (A : U) -> A -> A
+id A x = x
+
+id2 : (B : U) -> B -> B
+id2 B y = id ((λ B y -> B) B y) y
+```
+> which is obviously equal to the "clear solution"
+```hs 
+id2 B y = id B y
+```
+> and so clearly we've solved it!
 
 ### Comments after the fact
 
