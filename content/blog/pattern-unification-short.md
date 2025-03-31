@@ -28,7 +28,7 @@ Once we've gotten to the point of writing that hole, what was once `id` is now `
 solving takes slightly more work, as we can't simply plug in the result of unification - the de Brujin wouldn't line up.
 
 In this conversation, we were discussing relative to András Kovács' excellent "elab-zoo", <a href="https://github.com/AndrasKovacs/elaboration-zoo/">found here</a>.
-We are discussing <a href="https://github.com/AndrasKovacs/elaboration-zoo/blob/master/03-holes/pattern-unification.txt">`03-holes/pattern-unification.txt`</a> and <a href="https://github.com/AndrasKovacs/elaboration-zoo/blob/master/03-holes/Main.hs">`/03-holes/Main.hs`</a> in particular, the former begin a formal treatment of what happens *after* you find a solution, and the latter being an implementation of pattern unification (amongst other things).
+We are discussing <a href="https://github.com/AndrasKovacs/elaboration-zoo/blob/master/03-holes/pattern-unification.txt">`03-holes/pattern-unification.txt`</a> and <a href="https://github.com/AndrasKovacs/elaboration-zoo/blob/master/03-holes/Main.hs">`/03-holes/Main.hs`</a> in particular, the former being a formal treatment of what happens *after* you find a solution, and the latter being an implementation of pattern unification (amongst other things).
 
 ### Comments before the fact
 
@@ -49,6 +49,9 @@ This conversation is *only* going to make sense if you've had a look at at *leas
 "Normal unification" here is your fairly traditional unification for typechecking; it is somewhat different in a dependent setting, but not
 too different. (Look here later for a series on this!)
 
+All of the following is then discussing `Main.hs` and the concrete implementation of solving a metavariable.
+This maps somewhat closely from `pattern-unification.txt`, but can be understood standalone.
+
 > Andras' puts it better than i could:
 
 ```hs
@@ -68,16 +71,17 @@ is the pattern unification case.
 
 > `VFlex` is what elab-zoo calls the thing holding an unsolved metavariable (here `m` or `m'`), and a "spine" `sp`, which is a list of everything bound in the context when `m` was created
 
-> you can then imagine the meta to be, essentially, a function:
+> you can then imagine the meta to be, essentially, a function, taking everything bound as arguments (which is what it actually is, in elab zoo)
 
 ```hs
 id : (A : U) -> A -> A
 id A x = x
 
-foo B y = id _ y
+id2 : (B : U) -> B -> B
+id2 B y = id _ y
 =>
 ?m B y = ???
-foo B y = id (?m B y) y
+id2 B y = id (?m B y) y
 ```
 
 > here our normal typechecking would try to unify `?m`'s `???` with `B`
@@ -103,6 +107,31 @@ solve gamma m sp rhs = do
 
 > finally we add the needed lambdas for our function meta (debrujin, remember), evaluate it in the empty context in order to take it into the value domain, and plug it in as the solution
 
+> so then our final solution is
+
+```hs
+id : (A : U) -> A -> A
+id A x = x
+
+id2 : (B : U) -> B -> B
+id2 B y = id _ y
+=>
+?m B y = B
+id2 B y = id (?m B y) y
+```
+> ?m is fully inline though, so
+```hs
+id : (A : U) -> A -> A
+id A x = x
+
+id2 : (B : U) -> B -> B
+id2 B y = id ((λ B y -> B) B y) y
+```
+> which is obviously equal to the "clear solution"
+```hs 
+id2 B y = id B y
+```
+> and so clearly we've solved it!
 
 ### Comments after the fact
 
