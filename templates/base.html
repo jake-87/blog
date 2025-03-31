@@ -25,12 +25,34 @@
 <style>.katex { font-size: 1.5em; }
 </style>
 <body>
+<script>
+  function do_dark() {
+      if (localStorage.getItem('dark_mode') != "true") {
+          document.body.style.backgroundColor = '#1F2226'
+      } else {
+          document.body.style.backgroundColor = '#495159';
+      }
+  }
+  do_dark();
+
+  function flipdark() {
+      if (localStorage.getItem('dark_mode') != "true") {
+          localStorage.setItem('dark_mode', "true");
+      } else {
+          localStorage.setItem('dark_mode', "false");
+      }
+      do_dark();
+  }
+</script>
+  
   <section class="section">
     <div class="container">
+
+
       {% block content %} {% endblock %}
       <br><br>
 
-      <button onclick="location.href = location.href + '..'">Back?</button>
+      <button onclick="location.href = location.href + '..'">back?</button>
     </div>
   </section>
 

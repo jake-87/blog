@@ -9,11 +9,15 @@
 </head>
 
 
-
 <h1 class="title">
   {{ page.title }}
 </h1>
-<p class="subtitle"><strong>{{ page.date }}</strong></p>
+<p class="subtitle">
+  <strong>{{ page.date }}</strong>
+  <br><br>
+  <button onclick='flipdark()'> dark mode? </button>
+  <button onclick="location.href = location.href + '..'">back?</button>
+</p>
 {{ page.content | safe }}
 
 
