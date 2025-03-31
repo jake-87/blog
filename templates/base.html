@@ -27,7 +27,7 @@
 <body>
 <script>
   function do_dark() {
-      if (localStorage.getItem('dark_mode') != "true") {
+      if (localStorage.getItem('dark_mode') == "true") {
           document.body.style.backgroundColor = '#1F2226'
       } else {
           document.body.style.backgroundColor = '#495159';
