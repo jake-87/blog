@@ -43,9 +43,9 @@ they have played us for absolute fools
 <details>
   <summary>credits</summary>
   
-  - Agda credit: <a href="https://1lab.dev/Cat.Displayed.BeckChevalley.html#6773">The excellent 1lab</a>
+  - Agda credit: <a href="https://1lab.dev/Cat.Monoidal.Base.html">1Lab</a>
   
   - Lean credit: <a href="https://github.com/leanprover-community/mathlib4/blob/362bdac45f1c3e9307252e394f8ecfff137c4d85/Mathlib/MeasureTheory/Integral/SetIntegral.lean#L1183-L1185">Mathlib4</a>
   
-  - Roqc credit: <a href="https://github.com/rocq-community/fourcolor/blob/master/theories/proof/birkhoff.v">4 color theorem proof</a>
+  - Roqc credit: <a href="https://github.com/rocq-community/fourcolor/blob/master/theories/proof/birkhoff.v">4 Color Theorem Proof</a>
 </details>
