@@ -38,6 +38,8 @@ I think this explanation is somewhat reasonable for what's actually happening. N
 
 This conversation is *only* going to make sense if you've had a look at at *least* the latter linked file above (`Main.hs`). I recommend also having a look at `pattern-unification.txt` if you really want to grasp it, though.
 
+I also make no concrete warning that the below is 100% correct; while it is to the best of ability, i'm still learning this too!
+
 ### The conversation as written, minorly edited to exclude comments from people other than me
 
 (In reference to `pattern-unification.txt`)
