@@ -1,6 +1,6 @@
 +++
 title = "A short excerpt on pattern unification"
-date = 2025-04-30
+date = 2025-03-30
 +++
 
 Preface: Low effort post.
