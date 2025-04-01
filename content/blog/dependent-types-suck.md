@@ -6,7 +6,7 @@ date = 2025-04-01
 STOP DOING DEPENDENT TYPES
 - Types were not supposed to be given computation!
 - YEARS of typechecking but NO real world use for going higher than GADTS
-- Wanted to go higher anyway for a laugh? We had a tool for that: It was call RUNTIME VERIFICATION
+- Wanted to go higher anyway for a laugh? We had a tool for that: It was called RUNTIME VERIFICATION
 - "Yes please give me `Id A x x` of something. Please give me `Vec (m + n) A` of it." -- Statements dreamed up by the UTTERLY INSANE 
 
 Look at what computer scientists have been doing, with all the languages and typecheckers we built for them: 
