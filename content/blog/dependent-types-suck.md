@@ -13,8 +13,13 @@ Look at what computer scientists have been doing, with all the languages and typ
 (This is REAL dependent types, done by REAL computer scientists)
 
 ```agda
-k^!h^*-comparison : ∀ b' → Hom[ id ] (k.^! (g.^* b')) (h.^* (f.^! b'))
-k^!h^*-comparison b' = k.universalv (g.^* b') (h^*-interp b')
+sq2 : ◀.F-map-iso (◀.F-map-iso (ρ≅ Iso⁻¹)) ∙Iso α≅
+    ≡ (α≅ ∙Iso α≅) ∙Iso ▶.F-map-iso (λ≅ Iso⁻¹)
+sq2 = ≅-path $
+    α→ _ _ _ ∘ ((ρ← ⊗₁ id) ⊗₁ id)    ≡
+    (ρ← ⊗₁ ⌜ id ⊗₁ id ⌝) ∘ α→ _ _ _  ≡
+    (ρ← ⊗₁ id) ∘ α→ _ _ _            ≡˘
+    (id ⊗₁ λ←) ∘ α→ _ _ _ ∘ α→ _ _ _ ∎
 ```
 ```lean
 theorem integral_re {f : X → 𝕜} (hf : Integrable f μ) :
