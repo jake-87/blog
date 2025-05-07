@@ -8,9 +8,13 @@ date = 2025-05-08
 You should at least be familiar with dependent types, using a language such as Agda, Rocq, Idris, or Lean.
 This series will primarily use Agda syntax.
 
+## Supplimentary
+
+I highly recommend András Kovacs' "Elaboration Zoo", found <a href="https://github.com/AndrasKovacs/elaboration-zoo">at this link</a>, as something akin to a source of truth. If this blog series and the Elaboration Zoo explicitly contradict, assume that it is correct (and please contact me!). 
+
 ## Motivation (Why learn this, anyway?)
 
-TODO
+TODO (slightly ironic, I know)
 
 ## Debrujin and why we use it
 
