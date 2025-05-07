@@ -163,7 +163,7 @@ When we wish to typecheck `neg-or-not true x`, we *need* to evaluate in the type
 
 The core ideas of NbE are as follows:
 
-1. Have two representations of your program: A "term language" and a "value language".
+1. Have two representations of your program: A "term language" and a "value language" (In addition to your "raw" language, which represents untypechecked user input).
 2. The term language represents any given term, with no restrictions (except being type correct).
 3. The value language represents only terms in a normal form, correct-by-construction. (It is only possible to form elements of the value type if they are in a normal form.)
 4. The term language uses Debrujin indexes, as they are more suitable for direct translation from user input, and do not rely on knowing "nonlocal information" in order to create new binders.
