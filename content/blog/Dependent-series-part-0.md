@@ -84,10 +84,10 @@ Now we're cool! Everything works as expected, and it takes much less work (and i
 Debrujin levels work similar to debrujin indexes, in that we use numbers to refer to binders. However, in Debrujin levels, the lowest number refers to the *least* recently bound item.
 
 Recall that:
-
-: Named:   λ f. (λ y f. (f y)) f
-: Indexes: λ (λ λ (0 1)) 0
-
+```
+Named:   λ f. (λ y f. (f y)) f
+Indexes: λ (λ λ (0 1)) 0
+```
 Now, with levels:
 
 : Levels:  λ (λ λ (2 1)) 0
@@ -136,14 +136,13 @@ levels:
 if you’re “here”
   v
 λ λ λ
-```
 
 Using indexes, adding anything further left doesn’t affect that binder, or any further right.
 
 Using levels, adding anything further right doesn’t affect that binder, or any further left.
+```
 
-
-Generally, Debrujin indexes are more useful than Debrujin levels, as they're "more local". In order to work with levels, you need to know "how deep" you are in a term at all times. However, the property of adding things not affecting binders further left is very handy in some cases! This will be explored later in the series, but that concludes this exploration for right now.
+Generally, Debrujin indexes are "more useful" than Debrujin levels, as they're "more local". In order to work with levels, you need to know "how deep" you are in a term at all times. However, the property of adding things not affecting binders further left is very handy in some cases! This will be explored later in the series, but that concludes this exploration for right now.
 
 
 ## Evaluation while typechecking
