@@ -1,6 +1,6 @@
 +++
 title = "(WIP) Dependent language series, part 0"
-data = 2025-05-08
+date = 2025-05-08
 +++
 
 ## Assumed knowledge
