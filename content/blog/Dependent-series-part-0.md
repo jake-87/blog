@@ -1,5 +1,5 @@
 +++
-title = "(WIP) Dependent language series, part 0."
+title = "(WIP) Dependent language series, part 0"
 data = 2025-05-08
 +++
 
