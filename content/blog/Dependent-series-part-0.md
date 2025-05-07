@@ -47,11 +47,13 @@ Let's rewrite that term above using this system:
 
 Here's some ascii art showing what refers to what:
 
-: λ   (λ   λ   (0   1))   0
-: |    |    \———/   |     |
-: |    |            |     |
-: |    \————————————/     |
-: \———————————————————————/
+```
+ λ   (λ   λ   (0   1))   0
+ |    |    \———/   |     |
+ |    |            |     |
+ |    \————————————/     |
+ \———————————————————————/
+```
 
 Now, how does this help us with our substituion problem? Surely if we naively subtitute we will still have binding issues - and indeed we do:
 
@@ -65,14 +67,14 @@ No good!
 What Debrujin indexes allow us to do is *simply* avoid capturing. The rule is simple: Every time we go past a binder when substituting, we increment every free variable in our substituted by one, to avoid the new binder:
 
 ```hs
-: λ (λ λ (0 1)) 0
-: ->
-: λ (λ (0 1))
-: ^  ^    ^ incremented by one when we passed "through" lambda b
-: |  |
-: |  \ lambda b
-: |
-: \ lambda a
+ λ (λ λ (0 1)) 0
+ ->
+ λ (λ (0 1))
+ ^  ^    ^ incremented by one when we passed "through" lambda b
+ |  |
+ |  \ lambda b
+ |
+ \ lambda a
 ```
 
 Now we're cool! Everything works as expected, and it takes much less work (and is much more predictable!).
@@ -92,11 +94,13 @@ Now, with levels:
 
 This has the same diagram of what refers to what:
 
-: λ   (λ   λ   (2   1))   0
-: |    |    \———/   |     |
-: |    |            |     |
-: |    \————————————/     |
-: \———————————————————————/
+```
+ λ   (λ   λ   (2   1))   0
+ |    |    \———/   |     |
+ |    |            |     |
+ |    \————————————/     |
+ \———————————————————————/
+```
 
 (As it should! These two representations represent the same term.)
 
@@ -116,6 +120,7 @@ Debrujin levels have a near-dual advantage. When placing a term using levels und
 
 Debrujin indexes and levels can also be summed up via the following:
 
+```
 λa. λb. λc. c
 
 indexes:
@@ -131,6 +136,7 @@ levels:
 if you’re “here”
   v
 λ λ λ
+```
 
 Using indexes, adding anything further left doesn’t affect that binder, or any further right.
 
