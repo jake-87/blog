@@ -89,9 +89,9 @@ Named:   λ f. (λ y f. (f y)) f
 Indexes: λ (λ λ (0 1)) 0
 ```
 Now, with levels:
-
-: Levels:  λ (λ λ (2 1)) 0
-
+```
+Levels:  λ (λ λ (2 1)) 0
+```
 This has the same diagram of what refers to what:
 
 ```
@@ -108,14 +108,14 @@ Debrujin indexes gave us the advantage that bound variables in a substituted ter
 
 Debrujin levels have a near-dual advantage. When placing a term using levels under a binder, no shifting needs to take place in said term.
 
-
-: λ (λ λ (2 1)) 0
-: ->
-: λ (λ (1 0))
-:       ^ ^ this is still zero!
-:       |
-:       \ we had to modify this one though
-
+```
+ λ (λ λ (2 1)) 0
+ ->
+ λ (λ (1 0))
+       ^ ^ this is still zero!
+       |
+       \ we had to modify this one though
+```
 ### Wrapup
 
 Debrujin indexes and levels can also be summed up via the following:
