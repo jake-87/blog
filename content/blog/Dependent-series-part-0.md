@@ -10,7 +10,7 @@ This series will primarily use Agda syntax.
 
 ## Supplimentary
 
-I highly recommend András Kovacs' "Elaboration Zoo", found <a href="https://github.com/AndrasKovacs/elaboration-zoo">at this link</a>, as something akin to a source of truth. If this blog series and the Elaboration Zoo explicitly contradict, assume that it is correct (and please contact me!). 
+I highly recommend András Kovács' "Elaboration Zoo", found <a href="https://github.com/AndrasKovacs/elaboration-zoo">at this link</a>, as something akin to a source of truth. If this blog series and the Elaboration Zoo explicitly contradict, assume that it is correct (and please contact me!). 
 
 ## Motivation (Why learn this, anyway?)
 
