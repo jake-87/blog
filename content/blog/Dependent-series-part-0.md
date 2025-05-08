@@ -16,7 +16,7 @@ I highly recommend András Kovács' "Elaboration Zoo", found <a href="https://gi
 
 TODO (slightly ironic, I know)
 
-## Debrujin and why we use it
+## De Bruijn and why we use it
 
 Let's look at a little imaginary term, in some language.
 
@@ -36,9 +36,9 @@ substitute [y := f] in λ y f. (f y)
 
 Uh oh. We've accidentally captured a variable! Instead of `f` referring to the "outer" `f`, now it refers to the "inner" `f`. This is what i'll call "the capture problem", and it is *very* annoying. Generally to avoid this, we need to rename everything in our "substituted" term to names that are free (do not occur) in the "subsitutee", and therefore nothing is accidentally captured. What if we could introduce a notation that completely avoids this?
 
-### Presenting: Debrujin Indexes!
+### Presenting: De Bruijn Indexes!
 
-Debrujin indexes are a naming scheme where:
+De Bruijn indexes are a naming scheme where:
 
 - We use natural numbers to refer to lambdas
 - Zero refers to the "most recent" lambda; one refers to the second most recent, etc.
@@ -68,7 +68,7 @@ Now, how does this help us with our substituion problem? Surely if we naively su
 ```
 No good!
 
-What Debrujin indexes allow us to do is *simply* avoid capturing. The rule is simple: Every time we go past a binder when substituting, we increment every free variable in our substituted by one, to avoid the new binder:
+What De Bruijn indexes allow us to do is *simply* avoid capturing. The rule is simple: Every time we go past a binder when substituting, we increment every free variable in our substituted by one, to avoid the new binder:
 
 ```hs
  λ (λ λ (0 1)) 0
@@ -83,9 +83,9 @@ What Debrujin indexes allow us to do is *simply* avoid capturing. The rule is si
 
 Now we're cool! Everything works as expected, and it takes much less work (and is much more predictable!).
 
-### Presenting: Debrujin levels!
+### Presenting: De Bruijn levels!
 
-Debrujin levels work similar to debrujin indexes, in that we use numbers to refer to binders. However, in Debrujin levels, the lowest number refers to the *least* recently bound item.
+De Bruijn levels work similar to De Bruijn indexes, in that we use numbers to refer to binders. However, in De Bruijn levels, the lowest number refers to the *least* recently bound item.
 
 Recall that:
 ```
@@ -108,9 +108,9 @@ This has the same diagram of what refers to what:
 
 (As it should! These two representations represent the same term.)
 
-Debrujin indexes gave us the advantage that bound variables in a substituted term need not be interfered with — we simply had to increment free variables.
+De Bruijn indexes gave us the advantage that bound variables in a substituted term need not be interfered with — we simply had to increment free variables.
 
-Debrujin levels have a near-dual advantage. When placing a term using levels under a binder, no shifting needs to take place in said term.
+De Bruijn levels have a near-dual advantage. When placing a term using levels under a binder, no shifting needs to take place in said term.
 
 ```
  λ (λ λ (2 1)) 0
@@ -122,7 +122,7 @@ Debrujin levels have a near-dual advantage. When placing a term using levels und
 ```
 ### Wrapup
 
-Debrujin indexes and levels can also be summed up via the following:
+De Bruijn indexes and levels can also be summed up via the following:
 
 ```
 λa. λb. λc. c
@@ -146,7 +146,7 @@ Using indexes, adding anything further left doesn’t affect that binder, or any
 Using levels, adding anything further right doesn’t affect that binder, or any further left.
 ```
 
-Generally, Debrujin indexes are "more useful" than Debrujin levels, as they're "more local". In order to work with levels, you need to know "how deep" you are in a term at all times. However, the property of adding things not affecting binders further left is very handy in some cases! This will be explored later in the series, but that concludes this exploration for right now.
+Generally, De Bruijn indexes are "more useful" than De Bruijn levels, as they're "more local". In order to work with levels, you need to know "how deep" you are in a term at all times. However, the property of adding things not affecting binders further left is very handy in some cases! This will be explored later in the series, but that concludes this exploration for right now.
 
 
 ## Evaluation while typechecking
@@ -166,8 +166,8 @@ The core ideas of NbE are as follows:
 1. Have two representations of your program: A "term language" and a "value language" (In addition to your "raw" language, which represents untypechecked user input).
 2. The term language represents any given term, with no restrictions (except being type correct).
 3. The value language represents only terms in a normal form, correct-by-construction. (It is only possible to form elements of the value type if they are in a normal form.)
-4. The term language uses Debrujin indexes, as they are more suitable for direct translation from user input, and do not rely on knowing "nonlocal information" in order to create new binders.
-5. The value language uses Debrujin levels, so that values can be placed under binders without the need for shifting.
+4. The term language uses De Bruijn indexes, as they are more suitable for direct translation from user input, and do not rely on knowing "nonlocal information" in order to create new binders.
+5. The value language uses De Bruijn levels, so that values can be placed under binders without the need for shifting.
 6. We have a function, called "evalutate" or "eval", that takes expressions in the term language to the value language (i.e., reduces them to normal form through evaluation).
 7. We have a function, called "quote", that takes expressions in the value language back to the term language.
 
