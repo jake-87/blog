@@ -34,13 +34,13 @@ substitute [y := f] in λ y f. (f y)
 λ f. (λ f. f f)
 ```
 
-Uh oh. We've accidentally captured a variable! Instead of `f` referring to the "outer" `f`, now it refers to the "inner" `f`. This is what i'll call "the capture problem", and it is *very* annoying. Generally to avoid this, we need to rename everything in our "substituted" term to names that are free (do not occur) in the "subsitutee", and therefore nothing is accidentally captured. What if we could introduce a notation that completely avoids this?
+Uh oh. We've accidentally captured a variable! Instead of `f` referring to the outer `f`, now it refers to the inner `f`. This is "the capture problem", and it is quite annoying. Generally to avoid this, we need to rename _everything_ in our "substituted" term to names that are free (do not occur) in the "subsitutee" so nothing is accidentally captured. What if we could introduce a notation that completely avoids this?
 
 ### Presenting: De Bruijn Indexes!
 
 De Bruijn indexes are a naming scheme where:
 
-- We use natural numbers to refer to lambdas
+- We use natural numbers to refer to lambdas, and
 - Zero refers to the "most recent" lambda; one refers to the second most recent, etc.
 
 Let's rewrite that term above using this system:
@@ -68,7 +68,7 @@ Now, how does this help us with our substituion problem? Surely if we naively su
 ```
 No good!
 
-What De Bruijn indexes allow us to do is *simply* avoid capturing. The rule is simple: Every time we go past a binder when substituting, we increment every free variable in our substituted by one, to avoid the new binder:
+What De Bruijn indexes allow us to do is simply avoid capturing. The rule is simple: Every time we go past a binder when substituting, we increment every free variable[^1] in our substituted by one, to avoid the new binder:
 
 ```hs
  λ (λ λ (0 1)) 0
@@ -108,19 +108,22 @@ This has the same diagram of what refers to what:
 
 (As it should! These two representations represent the same term.)
 
-De Bruijn indexes gave us the advantage that bound variables in a substituted term need not be interfered with — we simply had to increment free variables.
+As you might expect, de Bruijn indexes and levels are each beneficial in their own situations.
 
-De Bruijn levels have a near-dual advantage. When placing a term using levels under a binder, no shifting needs to take place in said term.
+Generally, De Bruijn indexes are "more useful" than De Bruijn levels, as they're "more local". In order to work with levels, you need to know "how deep" you are in a term at all times.
+
+De Bruijn indexes give us the advantage that we can freely create new binders without the need for any information about where in a term we are, whereas de Bruijn levels give us the advantage when moving a term under a binder, free variables do not need to be modified.
 
 ```
  λ (λ λ (2 1)) 0
+               ^ this zero...
  ->
  λ (λ (1 0))
-       ^ ^ this is still zero!
+       ^ ^ is still zero!
        |
        \ we had to modify this one though
 ```
-### Wrapup
+### De Bruijn Wrapup
 
 De Bruijn indexes and levels can also be summed up via the following:
 
@@ -136,18 +139,14 @@ levels:
 λ λ λ 2
 ^ ^ ^
 0 1 2
-
+```
 if you’re “here”
+```
   v
 λ λ λ
-
-Using indexes, adding anything further left doesn’t affect that binder, or any further right.
-
-Using levels, adding anything further right doesn’t affect that binder, or any further left.
 ```
-
-Generally, De Bruijn indexes are "more useful" than De Bruijn levels, as they're "more local". In order to work with levels, you need to know "how deep" you are in a term at all times. However, the property of adding things not affecting binders further left is very handy in some cases! This will be explored later in the series, but that concludes this exploration for right now.
-
+- Using indexes, adding anything binders further left doesn’t affect the current binder's variables, or any further right.
+- Using levels, adding anything binders further right doesn’t affect the current binder's variables, or any further left.
 
 ## Evaluation while typechecking
 
@@ -159,17 +158,28 @@ neg-or-not true x = -x
 neg-or-not false x = not x
 ```
 
-When we wish to typecheck `neg-or-not true x`, we *need* to evaluate in the type of `neg-or-not` in order to be able to tell what the type of `x` *should* be. This means our typechecker is going to have evaluation in it! Unlike with "normal" evaluation, we wish to control this evaluation as much as possible. We do not want to be fully computing every term, because that's slow and unnecessary. There are several evaluation techniques that achieve various levels of this — the one we will be exploring is called "Normalization by Evaluation" (NbE). As the title alludes to, the goal of NbE is to normalize (elaborated on later) a term to some desired "normal form" using evaluation, and then stop evaluating at that normal form. Evaluating to a normal form guarantees that two elements, both in this normal form, can be immediately compared for shallow equality without "excess" work. (As is often the goal — in the example above, we wish to compare the type of `x` with the type of `neg-or-not true`.).
+When we wish to typecheck `neg-or-not true x`, we must evaluate in the type of `neg-or-not` in order to be able to tell what the type of `x` should be. This means our typechecker is going to have evaluation in it! Unlike with "normal" runtime evaluation, this evaluation is compile time, and hence we wish to control it as much as possible. We do not want to be fully computing every term, as that's slow and unnecessary. There are several evaluation techniques that achieve various levels of this — the one we will be exploring is called "Normalization by Evaluation" (NbE). As the title alludes to, the goal of NbE is to normalize a term to our desired "weak normal form"[^2] using evaluation, and then stop evaluating at that normal form. Evaluating to this weak normal form guarantees two things:
+
+1. We do not do excess work. If a value in a let is not used, for example, we will never fully evaluate it. This will be elaborated on in part 1 (coming soon™️), but it is a deliberate consequence of choosing a weak normal form.
+2. That two elements can be immediately compared for shallow equality without "excess" work. We will often need to compare terms fully, which will imply fully evaluating them, but it is worth remembering that programmers often write incorrect programs, so bailing early can be beneficial to performance.
+
 
 The core ideas of NbE are as follows:
 
-1. Have two representations of your program: A "term language" and a "value language" (In addition to your "raw" language, which represents untypechecked user input).
+1. Have two representations of your program: A "term language" and a "value language".
 2. The term language represents any given term, with no restrictions (except being type correct).
-3. The value language represents only terms in a normal form, correct-by-construction. (It is only possible to form elements of the value type if they are in a normal form.)
+3. The value language represents only terms in a normal form[^2], correct-by-construction. (It is only possible to form elements of the value type if they are in a normal form.)
 4. The term language uses De Bruijn indexes, as they are more suitable for direct translation from user input, and do not rely on knowing "nonlocal information" in order to create new binders.
-5. The value language uses De Bruijn levels, so that values can be placed under binders without the need for shifting.
+5. The value language uses De Bruijn levels, so that values can be placed under binders without the need for modification.
 6. We have a function, called "evalutate" or "eval", that takes expressions in the term language to the value language (i.e., reduces them to normal form through evaluation).
 7. We have a function, called "quote", that takes expressions in the value language back to the term language.
 
-Using NbE as a basis, we can then build a typechecker for a dependent language! (using a style called bidirectional typechecking, which will be explained later).
+Using NbE as a basis, we can then build a typechecker for a dependent language! We will have the tools in place to be able to properly reduce dependent types, allowing for typechecking of non-reduced values.
 
+## Notes for the next part
+
+- This series will primarily be in OCaml. I am aiming to stick to simple features --- 
+
+[^1]: A free variable is one that is not bound by the expression we are currently considering. For example, in `λ x. f x`, `f` is free, but `x` is not.
+
+[^2]: In particular we are considering (essentially) what is called a "weak head normal form". This is a normal form in which the outermost part of a term is immediately known, but not necessarily the inside (hence weak). For example, this is usually a variable (potentially with other values applied to it), a binder of some sort, or a constructor.
