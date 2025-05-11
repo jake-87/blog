@@ -52,7 +52,7 @@
       {% block content %} {% endblock %}
       <br><br>
 
-      <button onclick="location.href = location.href + '..'">back?</button>
+      <button onclick="location.href = location.href.substring(0,location.href.lastIndexOf('/')) + '/..'">back?</button>
     </div>
   </section>
 
