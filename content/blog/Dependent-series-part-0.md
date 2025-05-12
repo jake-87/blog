@@ -51,7 +51,7 @@ Let's rewrite that term above using this system:
 
 Here's some ascii art showing what refers to what:
 
-```
+```hs
  λ   (λ   λ   (0   1))   0
  |    |    \———/   |     |
  |    |            |     |
@@ -88,17 +88,17 @@ Now we're cool! Everything works as expected, and it takes much less work (and i
 De Bruijn levels work similar to De Bruijn indexes, in that we use numbers to refer to binders. However, in De Bruijn levels, the lowest number refers to the *least* recently bound item.
 
 Recall that:
-```
+```hs
 Named:   λ f. (λ y f. (f y)) f
 Indexes: λ (λ λ (0 1)) 0
 ```
 Now, with levels:
-```
+```hs
 Levels:  λ (λ λ (2 1)) 0
 ```
 This has the same diagram of what refers to what:
 
-```
+```hs
  λ   (λ   λ   (2   1))   0
  |    |    \———/   |     |
  |    |            |     |
@@ -114,7 +114,7 @@ Generally, De Bruijn indexes are "more useful" than De Bruijn levels, as they're
 
 De Bruijn indexes give us the advantage that we can freely create new binders without the need for any information about where in a term we are, whereas de Bruijn levels give us the advantage when moving a term under a binder, free variables do not need to be modified.
 
-```
+```hs
  λ (λ λ (2 1)) 0
                ^ this zero...
  ->
@@ -127,7 +127,7 @@ De Bruijn indexes give us the advantage that we can freely create new binders wi
 
 De Bruijn indexes and levels can also be summed up via the following:
 
-```
+```hs
 λa. λb. λc. c
 
 indexes:
