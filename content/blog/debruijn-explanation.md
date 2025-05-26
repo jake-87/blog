@@ -135,6 +135,6 @@ if you’re “here”
 - Using indexes, adding anything binders further left doesn’t affect the current binder's variables, or any further right.
 - Using levels, adding anything binders further right doesn’t affect the current binder's variables, or any further left.
 
-[^1]: Technically, this is not actually needed. It is sufficient to keep track of everything and rename only names that would overlap. See <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2002/07/inline.pdf">for more.</a>
+[^1]: Technically, this is not actually needed. It is sufficient to keep track of everything and rename only names that would overlap. See <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2002/07/inline.pdf">here</a> for more.
 
 [^2]: A free variable is one that is not bound by the expression we are currently considering. For example, in `λ x. f x`, `f` is free, but `x` is not.
