@@ -1,5 +1,5 @@
 +++
-title = "Debruijn indexes and levels, and why they're handy"
+title = "Debruijn indexes + levels, and why they're handy"
 date = 2025-05-26
 +++
 
