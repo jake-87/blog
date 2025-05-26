@@ -5,7 +5,7 @@ date = 2025-05-26
 
 # De Bruijn and why we use it
 
-Let's look at a little imaginary term, in some lambda-calculus-like language. For future note, we call the lambda a "binder", as it binds a variable. There are other types of binders, e.g. `let x = ...`, but we will only consider lambdas for the moment. 
+Let's look at a little imaginary term, in some lambda-calculus-like language. For future note, we call the lambda a "binder", as it binds a variable. There are other types of binders, e.g. `let`, but we will only consider lambdas for the moment. 
 
 ```hs
 λ f. (λ y f. (f y)) f
