@@ -5,13 +5,19 @@ date = 2025-05-26
 
 # De Bruijn and why we use it
 
+## Assumed knowledge
+
+At least a familiarity with the lambda calculus, including how it is evaluated. Some base knowledge of programming languages is also assumed.
+
+## The problem
+
 Let's look at a little imaginary term, in some lambda-calculus-like language. For future note, we call the lambda a "binder", as it binds a variable. There are other types of binders, e.g. `let`, but we will only consider lambdas for the moment. 
 
 ```hs
 λ f. (λ y f. (f y)) f
 ```
 
-We can perform what's called "beta reduction" on this term — essentially, applying `f` to the lambda.
+We can perform what's called "beta reduction" on this term — essentially, function application, applying `f` to the lambda.
 
 ```hs
 λ f. (λ y f. (f y)) (f)
