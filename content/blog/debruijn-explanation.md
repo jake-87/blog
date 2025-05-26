@@ -5,7 +5,7 @@ date = 2025-05-26
 
 # De Bruijn and why we use it
 
-Let's look at a little imaginary term, in some lambda-calculus-like language.
+Let's look at a little imaginary term, in some lambda-calculus-like language. For future note, we call the lambda a "binder", as it binds a variable. There are other types of binders, e.g. `let x = ...`, but we will only consider lambdas for the moment. 
 
 ```hs
 λ f. (λ y f. (f y)) f
@@ -132,8 +132,8 @@ if you’re “here”
   v
 λ λ λ
 ```
-- Using indexes, adding anything binders further left doesn’t affect the current binder's variables, or any further right.
-- Using levels, adding anything binders further right doesn’t affect the current binder's variables, or any further left.
+- Using indexes, adding any binders further left doesn’t affect the current binder's variables, or any further right.
+- Using levels, adding any binders further right doesn’t affect the current binder's variables, or any further left.
 
 [^1]: Technically, this is not actually needed. It is sufficient to keep track of everything and rename only names that would overlap. See <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2002/07/inline.pdf">here</a> for more.
 
