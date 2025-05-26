@@ -21,7 +21,7 @@ substitute [y := f] in λ y f. (f y)
 λ f. (λ f. f f)
 ```
 
-Uh oh. We've accidentally captured a variable! Instead of `f` referring to the outer `f`, now it refers to the inner `f`. This is "the capture problem", and it is quite annoying. Generally to avoid this, we need to rename _everything_[^1] in our "substituted" term to names that are free (do not occur) in the "subsitutee" so nothing is accidentally captured. What if we could introduce a notation that completely avoids this?
+Uh oh. We've accidentally captured a variable! Instead of `f` referring to the outer `f`, now it refers to the inner `f`. This is "the capture problem", and it is quite annoying. Generally to avoid this, we need to rename _everything_[^1] in our "substituted" term to names that are free (do not occur) in the "subsitutee" so nothing is accidentally captured. What if we could introduce a notation that avoids this?
 
 ## Presenting: De Bruijn Indexes!
 
