@@ -92,7 +92,7 @@ function debru(p) {
 function printer(p) {
 	if (iso(p)) {
   	let rest = p.bd;
-    return "(λ ".repeat(p.l) + printer(rest) + ")";
+    return "(" + "λ ".repeat(p.l) + printer(rest) + ")";
   }
   else if (islist(p)) {
   	k = "";
