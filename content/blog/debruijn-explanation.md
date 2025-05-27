@@ -270,6 +270,9 @@ Try it out! Some example terms to try:
 \f x. f x
 \x x. x
 \x. (x (\y. y))
+
+\x. \y. y x will not work
+do \x. (\y. y x) or \x y. y x instead
 ```
 (sorry, it does over-parenthesize a bit :P)
 
