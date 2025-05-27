@@ -174,10 +174,9 @@ What De Bruijn indexes allow us to do is simply avoid capturing. The rule is sim
  ->
  λ (λ (1 1))
  ^  ^  ^ ^ 
- |  |  | \ decremented by one
- |  |  \ incremented by one when we passed "through" lambda c
- |  \ lambda c
- \ lambda a
+ a  b  | \ decremented by one
+       |
+       \ incremented by one when we passed "through" lambda c
 ```
 
 Now we're cool! Everything works as expected, and it takes much less work (and is much more predictable!).
