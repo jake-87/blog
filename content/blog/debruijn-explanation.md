@@ -291,7 +291,7 @@ window.onkeyup = keyup;
 
 function keyup(e) {
   //setting your input text to the global Javascript Variable for every key press
-  inputTextValue = e.target.value;
+  inputTextValue = document.getElementById('searchTxt').value;
 
   //listens for you to press the ENTER key, at which point your web address will change to the one you have input in the search box
 	
