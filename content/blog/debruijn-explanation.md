@@ -293,12 +293,12 @@ function keyup(e) {
   inputTextValue = e.target.value;
 
   //listens for you to press the ENTER key, at which point your web address will change to the one you have input in the search box
-  let p = parse(inputTextValue);
+  let p = parse("\_. (" + inputTextValue + ")");
   let k = debru(p);
   let s = printer(k);
-  console.log(s);
+	let sp = s.slice(5).slice(0,-3);
   const thing = document.getElementById('goober');
-  thing.innerHTML = "<span>" + s + "</span>"
+  thing.innerHTML = "<span>" + sp + "</span>"
 }
 </script>
 
