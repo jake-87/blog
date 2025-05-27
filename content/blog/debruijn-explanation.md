@@ -295,7 +295,7 @@ function keyup(e) {
 
   //listens for you to press the ENTER key, at which point your web address will change to the one you have input in the search box
 	
-  let p = parse("\\f. (" + inputTextValue + ")");
+  let p = parse("\\_. (" + inputTextValue + ")");
 	let k = debru(p);
   let s = printer(k);
 	let sp = s.slice(5).slice(0,-3);
