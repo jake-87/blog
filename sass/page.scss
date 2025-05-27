@@ -9,6 +9,13 @@ body {
     font-size: 14pt;
 }
 
+input {
+    background-color: $background;
+    color: $text;
+    font-family: "Roboto Slab", sans-serif;
+    font-size: 14pt;
+}
+
 button {
   all: unset;
   display: revert;
