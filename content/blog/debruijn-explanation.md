@@ -273,7 +273,7 @@ Try it out! Some example terms to try:
 ```
 (sorry, it does over-parenthesize a bit :P)
 
-<input name="searchTxt" type="text" maxlength="512" id="searchTxt" class="searchField"/>
+<input name="searchTxt" type="text" maxlength="512" id="searchTxt" class="searchField" placeholder="Type here!"/>
 <pre data-lang="hs" style="background-color:#383838;color:#e6e1dc;" class="language-hs "><code class="language-hs" data-lang="hs" id="goober">
 
 </code></pre>
