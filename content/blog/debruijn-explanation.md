@@ -116,6 +116,22 @@ De Bruijn indexes give us the advantage that we can freely create new binders wi
        |
        \ we had to modify this one though
 ```
+## Other advantages
+Something that can come up quite a lot in various contexts is comparing whether two terms are equal or not. There are many complicated ways to do so, but de Bruijn gives us an advantage in a critical one, called "alpha-equivalence". Consider the following two terms:
+
+```hs
+λf. λx. f x
+λg. λy. g y
+```
+These terms should clearly be equal, right? They do the exact same thing. In this case, we consider them "alpha-equivalent", meaning they are equal up to the names of variables. Alpha renaming is the process of renaming one term to match the names of another, so that they are "clearly" equal.
+
+Let us consider the de Bruijn index representation of both of these terms:
+```hs
+λf. λx. f x => λ λ 1 0
+λg. λy. g y => λ λ 1 0
+```
+Isn't that nice? They've gone from being alpha-equivalent, but not quite equal, to being equal. de Bruijn gives us the ability to compare terms for equality without having to consider alpha-equivalence at all.
+
 ## Wrapup
 
 De Bruijn indexes and levels can also be summed up via the following:
@@ -140,6 +156,23 @@ if you’re “here”
 ```
 - Using indexes, adding any binders further left doesn’t affect the current binder's variables, or any further right.
 - Using levels, adding any binders further right doesn’t affect the current binder's variables, or any further left.
+
+## Alternatives
+It is worth noting that there are several other methods for gaining the same, or similar, advantages as de Bruijn gives. This post is not intended to explain them, but I will list several here so that the curious reader may read further (tip: when searching, append "lambda calculus" to find the right results quicker):
+
+- HOAS, or "Higher Order Abstract Syntax"
+- PHOAS, or "Parametric HOAS"
+- Locally nameless
+- Nominal signatures
+- Well-scoped de Bruijn indices
+- Well-scoped names
+- <a href="http://doi.acm.org/10.1145/2034773.2034817">“Nameless,
+Painless”</a>
+- Abstract scope graphs
+- Abstract Binding Trees
+- Co-de Bruijn indices
+
+As you can see, there are many approaches! Jesper Cockx has an excellent summary of almost all of these, which can be found <a href="https://jesper.sikanda.be/posts/1001-syntax-representations.html">here.</a> Notably, many are intended for formalization efforts rather than for computational means.
 
 [^1]: Technically, this is not actually needed. It is sufficient to keep track of everything and rename only names that would overlap. See <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2002/07/inline.pdf">here</a> for more.
 
