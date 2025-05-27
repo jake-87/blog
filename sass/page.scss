@@ -16,6 +16,11 @@ input {
     font-size: 14pt;
 }
 
+input[type="text"], textarea {
+  background-color : #383838; 
+}
+
+
 button {
   all: unset;
   display: revert;
