@@ -296,7 +296,7 @@ function keyup(e) {
 	
   let p = parse(inputTextValue);
   console.log(p);
-	console.log(parse("\f. (" + inputTextValue + ")")); 
+	console.log(parse("\\f. (" + inputTextValue + ")")); 
 	let k = debru(p);
   let s = printer(k);
 	let sp = s.slice(5).slice(0,-3);
