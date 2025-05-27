@@ -165,16 +165,18 @@ Now, how does this help us with our substituion problem? Surely if we naively su
 ```
 No good!
 
-What De Bruijn indexes allow us to do is simply avoid capturing. The rule is simple: Every time we go past a binder when substituting, we increment every free variable[^2] in our substituted term by one, to avoid the new binder:
+What De Bruijn indexes allow us to do is simply avoid capturing. The rule is simple: Every time we go past a binder when substituting, we increment every free variable[^2] in our substituted term by one, to avoid the new binder. Just once, we decrement every free varible in the substitutee, to account for the removal of the binder:
 
 ```hs
- λ (λ λ (0 1)) 0
+ λ (λ λ (1 2)) 0
+ ^  ^ ^
+ a  b c
  ->
- λ (λ (0 1))
- ^  ^    ^ incremented by one when we passed "through" lambda b
- |  |
- |  \ lambda b
- |
+ λ (λ (1 1))
+ ^  ^  ^ ^ 
+ |  |  | \ decremented by one
+ |  |  \ incremented by one when we passed "through" lambda c
+ |  \ lambda c
  \ lambda a
 ```
 
@@ -211,7 +213,7 @@ As you might expect, de Bruijn indexes and levels are each beneficial in their o
 
 Generally, De Bruijn indexes are "more useful" than De Bruijn levels, as they're "more local". In order to work with levels, you need to know "how deep" you are in a term at all times.
 
-De Bruijn indexes give us the advantage that we can freely create new binders without the need for any information about where in a term we are, whereas de Bruijn levels give us the advantage when moving a term under a binder, free variables do not need to be modified.
+De Bruijn indexes give us the advantage that we can freely create new binders without the need for any information about where in a term we are, whereas de Bruijn levels give us the advantage when moving a term under a binder, free variables in said term do not need to be modified. Generally, one has many more free variables in a term than bound ones.
 
 ```hs
  λ (λ λ (2 1)) 0
