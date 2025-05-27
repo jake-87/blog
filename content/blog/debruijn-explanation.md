@@ -3,6 +3,110 @@ title = "Debruijn indexes + levels, and why they're handy"
 date = 2025-05-26
 +++
 
+<script>
+ function r(str) {
+while (str.charAt(0) == ' ') {
+  	str = str.slice(1);
+  }
+  return str;
+}
+
+function get_args(str) {
+ 	str = r(str);
+  if (str == "") {
+  	return ["", []]
+  }
+  else if (str.charAt(0) == '.') {
+  	return [str.slice(1), []];
+  }
+  let [rest, l] = get_args(str.slice(1));
+  return [rest, [str.charAt(0)].concat(l)];
+}
+
+function parse_app(str) {
+	str = r(str);
+  if (str == "") {
+  	return ["", []];
+  }
+  else if (str.charAt(0) == '(') {
+  	let [rest, l] = parse(str.slice(1));
+    let [rest1, k] = parse_app(rest);
+    return [rest1, [l].concat(k)];
+  }
+  else if (str.charAt(0) == ')') {
+  	return [str.slice(1), []]
+  } else {
+  	let c = str.charAt(0);
+    let [rest, l] = parse_app(str.slice(1));
+    return [rest, [c].concat(l)];
+  }
+}
+
+function parse(str) {
+	str = r(str);
+  if (str == "") {
+  	return ["", {}]
+  }
+  else if (str.charAt(0) == '\\') {
+  	let [rest, a] = get_args(str.slice(1));
+    let [rest1, bd] = parse_app(rest);
+    return [rest1, {args : a, bd}]
+  } else {
+  	return parse_app(str);
+  }
+}
+
+function iso(x) {
+return typeof x === 'object' && !Array.isArray(x) && x !== null;
+}
+
+function islist(x) {
+return (x.constructor.name == "Array")
+}
+
+function helper(args, p) {
+let r = [];
+for (let l of p) {
+  if (iso(l)) {
+  	r.push(debru_h(args, l));
+  } else if (islist(l)) {
+  	r.push(helper(args, l));
+  }
+  else {
+    	r.push(args.indexOf(l));
+  }
+  }
+  return r;
+}
+
+function debru_h(arg, p) {
+	let args = p.args.reverse().concat(arg);
+ 	return {l : p.args.length, bd : helper(args, p.bd)};
+}
+
+function debru(p) {
+	let [_, bd] = p;
+ 	return debru_h([], bd);
+}
+
+function printer(p) {
+	if (iso(p)) {
+  	let rest = p.bd;
+    return "(λ ".repeat(p.l) + printer(rest) + ")";
+  }
+  else if (islist(p)) {
+  	k = "";
+  	for (let e of p) {
+    	k += " " + printer(e);
+    }
+    return "(" + k.slice(1) + ")";
+  }
+  else {
+   	return p;
+  }
+}
+</script>
+
 # De Bruijn and why we use it
 
 ## Assumed knowledge
@@ -75,6 +179,8 @@ What De Bruijn indexes allow us to do is simply avoid capturing. The rule is sim
 ```
 
 Now we're cool! Everything works as expected, and it takes much less work (and is much more predictable!).
+
+At the bottom of this post there's a little widget that can convert terms to de Bruijn for you, if you want to play around!
 
 ## Presenting: De Bruijn levels!
 
@@ -156,6 +262,41 @@ if you’re “here”
 ```
 - Using indexes, adding any binders further left doesn’t affect the current binder's variables, or any further right.
 - Using levels, adding any binders further right doesn’t affect the current binder's variables, or any further left.
+
+## De Bruijn index widget
+
+Try it out! Some example terms to try:
+```
+\f x. f x
+\x x. x
+\x. (x (\y. y))
+```
+(sorry, it does over-parenthesize a bit :P)
+<input name="searchTxt" type="text" maxlength="512" id="searchTxt" class="searchField"/>
+<pre data-lang="hs" style="background-color:#383838;color:#e6e1dc;" class="language-hs "><code class="language-hs" data-lang="hs" id="goober">
+
+</code></pre>
+<script>
+document.getElementById('searchTxt').style.height="100px";
+document.getElementById('searchTxt').style.fontSize="14pt";
+
+//creates a listener for when you press a key
+window.onkeyup = keyup;
+ var inputTextValue;
+
+function keyup(e) {
+  //setting your input text to the global Javascript Variable for every key press
+  inputTextValue = e.target.value;
+
+  //listens for you to press the ENTER key, at which point your web address will change to the one you have input in the search box
+  let p = parse(inputTextValue);
+  let k = debru(p);
+  let s = printer(k);
+  console.log(s);
+  const thing = document.getElementById('goober');
+  thing.innerHTML = "<span>" + s + "</span>"
+}
+</script>
 
 ## Alternatives
 It is worth noting that there are several other methods for gaining the same, or similar, advantages as de Bruijn gives. This post is not intended to explain them, but I will list several here so that the curious reader may read further (tip: when searching, append "lambda calculus" to find the right results quicker):
