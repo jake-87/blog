@@ -174,6 +174,8 @@ Painless”</a>
 
 As you can see, there are many approaches! Jesper Cockx has an excellent summary of almost all of these, which can be found <a href="https://jesper.sikanda.be/posts/1001-syntax-representations.html">here.</a> Notably, many are intended for formalization efforts rather than for computational usage.
 
+## Footnotes
+
 [^1]: Technically, this is not actually needed. It is sufficient to keep track of everything and rename only names that would overlap. See <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2002/07/inline.pdf">here</a> for more.
 
 [^2]: A free variable is one that is not bound by the expression we are currently considering. For example, in `λ x. f x`, `f` is free, but `x` is not.
