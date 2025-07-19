@@ -73,6 +73,11 @@ blockquote {
     padding-left: 1em;
 }
 
+li {
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+}
+
 @media (max-width: 1000px) {
     .container {
         width: 100%;
