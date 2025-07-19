@@ -180,17 +180,14 @@ We then, by returning a `value`, have a guarantee that whatever comes out of `ev
 ## Wrap up
 
 So far we have covered:
-1. Languages and terms
-2. Simple evaluation strategies for bound variables/closed terms
-3. Values and normal forms
+1. Languages and terms.
+2. Simple evaluation strategies for let bound variables & closed terms.
+3. Values and normal forms.
 
 In the next part, we will explore the evaluation of a language closer to lambda calculus, then open terms, containing unbound variables, and how we can apply this to a programming language.
 
+## Code
 
-
-## Complete code
-
-At the bottom of each page there will be a reference with the complete code so far.
 <details>
 
 ```ocaml
