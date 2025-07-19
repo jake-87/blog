@@ -7,7 +7,7 @@ This series is intended to give an interested layperson some idea of what goes o
 
 I personally hold the belief that dependent languages (or similar) will eventually be the future of programming, so knowing this information seems worthwhile to me. One may also simply be interested for the sake of it, or may be interested in implementing their own dependent language.
 
-This series does assume a base amount of knowledge around dependent programming languages. There are many tutorials out there far better than I could provide, so I will refer the reader to the wider internet if they are curious. (Return here afterwards, though!).
+This series does assume a small base amount of knowledge around dependent programming languages. There are many tutorials out there far better than I could provide, so I will refer the reader to the wider internet if they are curious. (Return here afterwards, though!).
 
 Additionally, the code snippets will be in OCaml, although a Haskell or Rust version may be made available at a later date.
 
@@ -25,7 +25,7 @@ The following are resources I highly recommend for exploring this topic on your 
 
 ## The fundamental operation of typechecking
 
-Anyone that has implemented a typechecker before may have come to the realization that telling when two things are the same is a very large component of typechecking. Whether it be simply checking that two arguments to `+` are both integers, or larger problems with polymorphism, the arguable core of typechecking is deciding equality.
+If you have implemented a typechecker before, you may have come to the realization that telling when two things are the same is a very large component of typechecking. Whether it be simply checking that two arguments to `+` are both integers, or larger problems with polymorphism, the arguable core of typechecking is deciding equality.
 
 In a dependent language, our types can (and often do) contain expressions that must be evaluated. Therefore, in order to explore how we check equality in the presence of evaluation, we will first start by considering how we do this for a very simple language - integer arithmetic. Take two expressions:
 
@@ -149,7 +149,6 @@ In the general case, we call this "suitably-reduced" constraint a "normal form".
 Now we can finish our little evaluator. We do a slight hack to perform arithmetic inside values; if our value type contained more than just the constructor `VLiteral`, we would have to consider how to handle that case. This is something we will cover soon.
 
 ```ocaml
-
 (* OCaml does not have integer exponentiation by default. Definition omitted. *)
 let pow (a : int) (b : int) : int = ...
 
@@ -177,6 +176,8 @@ In the `Let` case, we compute the definition first, then extend our environment 
 
 We then, by returning a `value`, have a guarantee that whatever comes out of `eval` is as simple as we want it to be.
 
+Comparing for equality is then very simple: We use `eval` to evaluate our terms into values, then because our values are in a nice normal form, we can compare them easily guaranteed.
+
 ## Wrap up
 
 So far we have covered:
@@ -184,7 +185,7 @@ So far we have covered:
 2. Simple evaluation strategies for let bound variables & closed terms.
 3. Values and normal forms.
 
-In the next part, we will explore the evaluation of a language closer to lambda calculus, then open terms, containing unbound variables, and how we can apply this to a programming language.
+In the next part, we will explore how to take these concepts and apply them to something much closer to a "real" programming language, with `lambda` expressions and application, which will require the introduction of a "closure". From there, we can explore how to deal with open terms, containing unbound variables, and onwards to dependent types.
 
 ## Code
 
@@ -239,7 +240,6 @@ let rec eval (env : environment) (tm : term) : value =
         let result = eval ctx def in
         let new_env = (nm, result) :: env in
         eval new_env rest
-      
 ```
 
 </details>
