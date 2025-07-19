@@ -190,6 +190,7 @@ In the next part, we will explore the evaluation of a language closer to lambda 
 
 At the bottom of each page there will be a reference with the complete code so far.
 <details>
+
 ```ocaml
 type variable = string
 
@@ -241,4 +242,5 @@ let rec eval (env : environment) (tm : term) : value =
         eval new_env rest
       
 ```
+
 </details>
