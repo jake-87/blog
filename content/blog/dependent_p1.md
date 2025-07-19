@@ -13,6 +13,8 @@ Additionally, the code snippets will be in OCaml, although a Haskell or Rust ver
 
 The technique we will implement in this series can most succinctly be described as "Bidirectional typechecking, utilizing Normalization by Evaluation". I do not expect the reader to understand that sentence for at least a little while ;).
 
+All code snippets will be collated at the end of each page, so scroll all the way down if you're only interested in that.
+
 ## Resources
 
 The following are resources I highly recommend for exploring this topic on your own.
