@@ -107,8 +107,6 @@ function printer(p) {
 }
 </script>
 
-# De Bruijn and why we use it
-
 ## Assumed knowledge
 
 At least a familiarity with the lambda calculus, including how it is evaluated. Some base knowledge of programming languages is also assumed.
