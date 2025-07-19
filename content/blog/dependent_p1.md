@@ -25,7 +25,7 @@ The following are resources I highly recommend for exploring this topic on your 
 
 ## The fundamental operation of typechecking
 
-If you have implemented a typechecker before, you may have come to the realization that telling when two things are the same is a very large component of typechecking. Whether it be simply checking that two arguments to `+` are both integers, or larger problems with polymorphism, the arguable core of typechecking is deciding equality.
+If you have implemented a typechecker before, you may have come to the realization that deciding when two things are the same is a very large component of typechecking. Whether it be simply checking that two arguments to `+` are both integers, or larger problems with polymorphism, the arguable core of typechecking is deciding equality.
 
 In a dependent language, our types can (and often do) contain expressions that must be evaluated. Therefore, in order to explore how we check equality in the presence of evaluation, we will first start by considering how we do this for a very simple language - integer arithmetic. Take two expressions:
 
