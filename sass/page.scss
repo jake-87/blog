@@ -2,10 +2,11 @@ $background: #495159;
 $text: #F5F5F5;
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 body {
     background-color: $background;
     color: $text;
-    font-family: "Roboto Slab", sans-serif;
+    font-family: "Inter", sans-serif;
     font-size: 14pt;
 }
 
