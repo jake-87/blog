@@ -84,7 +84,7 @@ let x = 61;
 
 (In fact, there is yet another optimization to do: What if we don't need to compute it at all, say because it's not used? We will explore this possibility later.)
 
-A simple OCaml interpretation of the terms of this language this may be the following.
+A simple OCaml interpretation of the terms of this language may be the following.
 (sidetrack: A "term" is some element of a language. Above, we have the language of (restricted) integer arithmetic, and our terms are expressions of said. Hence, we call our OCaml interpretation of this language `term`.)
 ```ocaml
 type variable = string
