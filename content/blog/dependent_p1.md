@@ -118,7 +118,7 @@ let rec lookup (env : environment) (name : variable) : term =
 
 Note: In this post, we are not considering the possibility that a name is not bound. We will explore this later.
 
-We now note something curious: Our lookup function need not return a fully computed value! Now, we may not want this to be the case, but imagine the only time we would be looking up a name is to continue evaluation -- in this case we would quite like it to do so. We could of course manually insert invariants that this is the case, but we could still accidentally violate them, and this is less than ideal. Later, we will explore more reasons to differentiate them.
+We now note something curious: Our lookup function need not return a fully computed value! It could return `7 + 2`, which we would have to further evaluate before we could do anything with. It would be possible of course to manually insert invariants ensuring that this is not the case, but we could still accidentally violate them. 
 
 Here we hit one of the most important distinctions in our exploration of dependent typechecking.
 
