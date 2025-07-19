@@ -54,7 +54,13 @@ div {
 
 h2 {
     margin-top: 3em;
+    margin-bottom: 1em;
     font-size: 150%;
+}
+
+p {
+    line-height: 150%;
+    justify-content: center;
 }
 
 .section {
@@ -70,10 +76,6 @@ h2 {
     margin: 0 auto;
 }
 
-p {
-    line-height: 110%;
-    justify-content: center;
-}
 
 blockquote {
     border-left: 3px solid #78C0A8;
