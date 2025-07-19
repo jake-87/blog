@@ -13,8 +13,10 @@
   {{ page.title }}
 </h1>
 <p class="subtitle">
-  <strong>{{ page.date }}</strong>
-  <img style="max-width: 50px; max-height: 50px; align: right;" src="/wren_glasses.png" alt="A Wren."/>
+  <div style="display: flex">
+    <strong>{{ page.date }}</strong>
+    <img style="max-width: 50px; max-height: 50px; align-self: flex-end;" src="/wren_glasses.png" alt="A Wren."/>
+  </div>
   <br><br>
   <button onclick='flipdark()'> dark mode? </button>
   <button onclick="location.href = location.href.substring(0,location.href.lastIndexOf('/')) + '/..'">back?</button>
