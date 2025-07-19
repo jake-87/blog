@@ -36,7 +36,7 @@ In a dependent language, our types can (and often do) contain expressions that m
 
 How might we decide whether these are equal? The obvious solution is to evaluate them. Indeed, (sparing the reader the derivation), we can see they both evaluate to `36`, and so they are equal.
 
-Let us now introduce a small extension: Variables with a known value, using "let". We will refer to the variables themselves as "bound variables", as they are bound by the "let". In this case, they are additionally bound to a value. Terms containing only bound variables are referred to "closed" terms -- this alludes to, for example, closed and open systems in the real world. Getting back to evaluation, We could simply substitute the computed value:
+Let us now introduce a small extension: Variables with a known value, using "let". We will refer to the variables themselves as "bound variables", as they are bound by the "let". In this case, they are additionally bound to a value. Terms containing only bound variables are referred to "closed" terms - this alludes to, for example, closed and open systems in the real world. Getting back to evaluation, we could simply substitute the computed value:
 
 ```js
 let x = 8^2 - 3;
