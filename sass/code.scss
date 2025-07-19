@@ -1,6 +1,7 @@
 pre {
   padding: 1rem;
   overflow: auto;
+  font-style: normal !important;
 }
 // The line numbers already provide some kind of left/right padding
 pre[data-linenos] {
