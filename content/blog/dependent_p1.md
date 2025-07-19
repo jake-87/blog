@@ -19,7 +19,7 @@ All code snippets will be collated at the end of each page, so scroll all the wa
 
 The following are resources I highly recommend for exploring this topic on your own.
 
-- András Kovac's "Elaboration Zoo", <a href="https://github.com/AndrasKovacs/elaboration-zoo">found here</a>. It was a primary source of inspiration for this series.
+- András Kovacs' "Elaboration Zoo", <a href="https://github.com/AndrasKovacs/elaboration-zoo">found here</a>. It was a primary source of inspiration for this series.
 - "A tutorial implementation of a dependently typed lambda calculus", by Andres Löh, Conor McBride, and Wouter Swierstra; <a href="https://www.andres-loeh.de/LambdaPi/LambdaPi.pdf">found here</a>.
 - "Checking Dependent Types with Normalization by Evaluation: A Tutorial", by David Christiansen, <a href="https://davidchristiansen.dk/tutorials/nbe/">found here</a>, for the more lisp-minded.
 
