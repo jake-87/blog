@@ -27,7 +27,7 @@ Anyone that has implemented a typechecker before may have come to the realizatio
 
 In a dependent language, our types can (and often do) contain expressions that must be evaluated. Therefore, we will start with that, first by considering how we do this for a very simple language - integer arithmetic. Take two expressions:
 
-```
+```js
 1: 17 * 2 + 4 - 2
 2: 7^2 - 4 * 4 + 3
 ```
@@ -36,7 +36,7 @@ How might we decide whether these are equal? The obvious solution is to evaluate
 
 Let us now introduce a small extension: Variables with a known value, using "let". We will refer to the variables themselves as "bound variables", as they are bound by the "let". In this case, they are additionally bound to a value. Terms containing only bound variables are referred to "closed" terms -- this alludes to, for example, closed and open systems in the real world. Getting back to evaluation, We could simply substitute the computed value:
 
-```
+```js
 let x = 8^2 - 3;
 
 1: x * 2 - 5
@@ -50,7 +50,7 @@ substitute...
 
 And then evaluate. (In this case, our result is 117.) However, what if the variable occurs multiple times? The following is a little bad, but not awful:
 
-```
+```js
 let x = 8^2 - 3;
 
 1: x * 2 - x^2 + 5
@@ -62,7 +62,7 @@ substitute...
 
 But what if `x` was the following?
 
-```
+```js
 let x = 8 ^ 2 - 3 + (14 * 2 - 4) + 8 - (14 ^ 2) * 3 + 5 * 5 - 18 ^ 3 + 5 * 6 - 12 * 4 * (6 ^ 2) + (8^2 - 3) * 2 - 18 * 14 ^ 3 - 2 * (4 - 3 ^ 2) + 12 * 18 - 3^4 + 1
 ```
 
@@ -70,7 +70,7 @@ Duplicating that would clearly not be ideal!
 
 Perhaps we could compute `x` in advance, and then substitute that result in. This is much better:
 
-```
+```js
 let x = 8^2 - 3;
 
 evaluate and substitute...
