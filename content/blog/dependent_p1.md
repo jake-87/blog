@@ -130,7 +130,7 @@ Instead, what if we defined another type that was guaranteed to be reduced to so
 
 ```ocaml
 type value =
-    | VInteger of int
+    | VLiteral of int
 ```
 We prefix these constructors with `V` to ensure they're distinct. Then, we could modify our environment and lookup function to only deal with values:
 
@@ -161,13 +161,13 @@ let rec do_op (op : int -> int -> int) (a : value) (b : value) : value =
 let rec eval (env : environment) (tm : term) : value =
     match tm with
     | Literal i -> VLiteral i
-    | Name nm -> lookup ctx nm
-    | Mul (a, b) -> do_op ( * ) (eval ctx a) (eval ctx b)
-    | Exp (a, b) -> do_op pow   (eval ctx a) (eval ctx b)
-    | Add (a, b) -> do_op ( + ) (eval ctx a) (eval ctx b)
-    | Sub (a, b) -> do_op ( - ) (eval ctx a) (eval ctx b)
+    | Name nm -> lookup env nm
+    | Mul (a, b) -> do_op ( * ) (eval env a) (eval env b)
+    | Exp (a, b) -> do_op pow   (eval env a) (eval env b)
+    | Add (a, b) -> do_op ( + ) (eval env a) (eval env b)
+    | Sub (a, b) -> do_op ( - ) (eval env a) (eval env b)
     | Let (nm, def, rest) ->
-        let result = eval ctx def in
+        let result = eval env def in
         let new_env = (nm, result) :: env in
         eval new_env rest
 ```
@@ -205,7 +205,7 @@ type term =
       (* let x = ...; ...*)
       
 type value =
-    | VInteger of int
+    | VLiteral of int
       
 type environment = (variable * value) list
 
@@ -231,13 +231,13 @@ let rec do_op (op : int -> int -> int) (a : value) (b : value) : value =
 let rec eval (env : environment) (tm : term) : value =
     match tm with
     | Literal i -> VLiteral i
-    | Name nm -> lookup ctx nm
-    | Mul (a, b) -> do_op ( * ) (eval ctx a) (eval ctx b)
-    | Exp (a, b) -> do_op pow   (eval ctx a) (eval ctx b)
-    | Add (a, b) -> do_op ( + ) (eval ctx a) (eval ctx b)
-    | Sub (a, b) -> do_op ( - ) (eval ctx a) (eval ctx b)
+    | Name nm -> lookup env nm
+    | Mul (a, b) -> do_op ( * ) (eval env a) (eval env b)
+    | Exp (a, b) -> do_op pow   (eval env a) (eval env b)
+    | Add (a, b) -> do_op ( + ) (eval env a) (eval env b)
+    | Sub (a, b) -> do_op ( - ) (eval env a) (eval env b)
     | Let (nm, def, rest) ->
-        let result = eval ctx def in
+        let result = eval env def in
         let new_env = (nm, result) :: env in
         eval new_env rest
 ```
