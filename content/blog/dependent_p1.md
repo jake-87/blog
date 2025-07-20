@@ -116,7 +116,7 @@ let rec lookup (env : environment) (name : variable) : term =
             lookup rest name
 ```
 
-Note: In this post, we are not considering the possibility that a name is not bound. We will explore this later.
+Note: In this series, we will not be considering the possibility that a name is used without being previously defined in some way. This is an error, and can be handled via normals means, e.g. erroring.
 
 We now note something curious: Our lookup function need not return a fully computed value! It could return `7 + 2`, which we would have to further evaluate before we could do anything with. It would be possible of course to manually insert invariants ensuring that this is not the case, but we could still accidentally violate them. 
 
@@ -185,7 +185,7 @@ So far we have covered:
 2. Simple evaluation strategies for let bound variables & closed terms.
 3. Values and normal forms.
 
-In the next part, we will explore how to take these concepts and apply them to something much closer to a "real" programming language, with `lambda` expressions and application, which will require the introduction of a "closure". From there, we can explore how to deal with open terms, containing unbound variables, and onwards to dependent types.
+In the next part, we will explore how to take these concepts and apply them to something much closer to a "real" programming language, with `lambda` expressions and application, which will require the introduction of a "closure". From there, we can explore how to deal with open terms, containing free variables, and onwards to dependent types.
 
 ## Code
 
