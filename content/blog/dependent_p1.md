@@ -100,7 +100,8 @@ type term =
       (* let x = ...; ... *)
 ```
 
-We then must make an "environment", that binds our names to terms. We will make our context a list of pairs `(variable name, term)`, and will reimpliement the lookup function for example's sake, although a suitable function is available as `List.assoc`.
+We then must make an "environment", that associates, or "binds", our names to terms. We will make our context a list of pairs `(variable name, term)`, and will reimpliement the lookup function for example's sake, although a suitable function is available as `List.assoc`. `Let` is often called a "binder" because it binds names to terms in this way.
+
 
 ```ocaml
 type environment = (variable * term) list
