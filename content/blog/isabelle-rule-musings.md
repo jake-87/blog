@@ -142,6 +142,8 @@ Notably, `[of ...]` does still work with the `_tac` family, but there is (as far
 For each of the above,  there is a corresponding `_tac` (standing for tactic): `rule_tac`, `drule_tac`, etc. These `_tac`s are slightly more powerful than their `_tac`less equivalents. Each allows for the various premises to be explicitly instantiated by name. For example, with the `conjI` rule, one could explicitly write
 
 ```hs
+thm conjI (* ⟦?P; ?Q⟧ ==> ?P ∧ ?Q *)
+
 R ==> A ⋀ B
 
 apply (rule_tac P=A and Q=B in conjI)
