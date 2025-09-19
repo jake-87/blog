@@ -160,7 +160,7 @@ with some `n :: nat` mentioned in `P`, `apply (induction n)` will generate the g
 
 ```hs
 P 0 
-⋀ nat. P nat ==> P (Suc nat) 
+⋀ nat. P nat ==> P (Suc nat) (* Variable naming may differ. *)
 ```
 
 `nat` is a meta-forall bound variable. This functions as expected; during the induction step of an inductive proof, we must prove that for any `nat`, `P nat ==> P (Suc nat)`. However, `rule` and friends cannot refer to `nat` directly using `[of ...]` (Although, automatic unification can work). Instead, we must use `rule_tac` and friends to refer to it. I am not quite sure why this is, but I presume it is due to internal complexities around the meta-forall.
