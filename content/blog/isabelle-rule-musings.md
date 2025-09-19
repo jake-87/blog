@@ -3,9 +3,9 @@ title = "Isabelle/HOL rule musings"
 date = 2025-09-19
 +++
 
-The following is very adapted from the <a href="https://isabelle.in.tum.de/dist/Isabelle2025/doc/tutorial.pdf">Isabelle/HOL 2025 tutorial</a>, particularly 5.2 and onwards. It will explain it better than I can.
+The following is adapted from the <a href="https://isabelle.in.tum.de/dist/Isabelle2025/doc/tutorial.pdf">Isabelle/HOL 2025 tutorial</a>, particularly 5.2 and onwards. It will explain much more thoroughly than I can.
 
-I also make no promise that the following is entirely correct. It is my understanding, and while I have verified it best I can, I am sure there are errors.
+I also make no promise that the following is entirely 100% correct. It is ultimately my understanding, but I have run it past several others, and to the best of our knowledge it is correct.
 
 # Notes
 
