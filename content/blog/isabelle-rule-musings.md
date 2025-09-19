@@ -197,7 +197,7 @@ where `vₙ` is a variable occuring in `RULE`, and `tₙ` is a locally bound var
 2. P ∧ Q ==> R
 ```
 
-`d/frule conjE` will by default refer to the first rule. Using `d/frule_tac [i] conjE`, we can refer to the `ith` goal (starting indexing at 1). When combining this with specifying variables, the goal specifier comes first (i.e., `apply (erule_tac [1] P=a in conjE)`.)
+`d/frule conjE` will by default refer to the first goal. Using `d/frule_tac [i] conjE`, we can refer to the `ith` goal (starting indexing at 1). When combining this with specifying variables, the goal specifier comes first (i.e., `apply (erule_tac [1] P=a in conjE)`.)
 
 # `rule`, `erule`, `drule`, and `frule`, (more) formally
 
