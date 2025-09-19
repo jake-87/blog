@@ -117,9 +117,36 @@ apply (frule conjunct1)
 ⟦ P ∧ Q; P ⟧ ==> R
 ```
 
+## Useful related tools 
+
+For all the above rule tactics, `[of P₁ P₂ ... Pₙ]` can be used to explicitly instantiate them, instead of using `rule_tac` (which is explained below). This instantiates left-to-right by occurence, so with 
+```
+thm conjI (* ⟦?P; ?Q⟧ ==> ?P ∧ ?Q *)
+```
+`conjI [of A B]` will result in the instantiation `⟦A; B⟧ ==> A ∧ B`, from where the rule will proceed.
+
+```
+R ==> A ∧ B
+(* Isabelle can solve this on its own, but for the sake of example *)
+apply (rule conjI [of A B]) 
+1. R ==> A
+2. R ==> B
+```
+
 ## `_tac` suffixes
 
-For each of the above,  there is a corresponding `_tac` (standing for tactic): `rule_tac`, `drule_tac`, etc. These `_tac`s are slightly more powerful than their `_tac`less equivalents. They allow the rule to refer to meta-forall-bound variables, which most commonly arise when performing induction or similar. For a goal of form:
+For each of the above,  there is a corresponding `_tac` (standing for tactic): `rule_tac`, `drule_tac`, etc. These `_tac`s are slightly more powerful than their `_tac`less equivalents. Each of these `_tac` rules allows for the various premises to be explicitly instantiated by name. For example, with the `conjI` rule, one could explicitly write
+
+```hs
+R ==> A ⋀ B
+
+apply (rule_tac P=A and Q=B in conjI)
+
+1. R ==> A
+2. R ==> B
+```
+
+This allows the rule to refer to meta-forall-bound variables, which most commonly arise when performing induction or similar. For a goal of form:
 
 ```hs
 P n
@@ -132,13 +159,30 @@ P 0
 ⋀ nat. P nat ==> P (Suc nat) 
 ```
 
-`nat` is a meta-forall bound variable. This functions as expected; during the induction step of an inductive proof, we must prove that for any `nat`, `P nat ==> P (Suc nat)`. However, `rule` and friends cannot work with `nat` directly. Instead, we must use `rule_tac` and similar, with the form `apply (rule_tac P = nat in RULE)`. I am not quite sure why this is, but I presume it is due to internal complexities around the meta-forall.
+`nat` is a meta-forall bound variable. This functions as expected; during the induction step of an inductive proof, we must prove that for any `nat`, `P nat ==> P (Suc nat)`. However, `rule` and friends cannot refer to `nat` directly using `[of ...]` (Although, automatic unification can work). Instead, we must use `rule_tac` and friends to refer to it. I am not quite sure why this is, but I presume it is due to internal complexities around the meta-forall.
+
+<details><summary>A small artificial example of this difference, if the above is not clear.</summary>
+
+Recall that `[of ...]` can be used to explicitly instantiate in the `_tac`less family of rule tactics: 
+
+```hs
+lemma without_forall: "A ∧ B ⟹ A"
+  apply (erule conjE [of A]) (* succeeds *)
+
+lemma with_forall: "⋀ a b. a ∧ b ⟹ a"
+  apply (erule conjE [of a]) (* fails *)
+  apply (erule_tac P=a in conjE) (* succeeds *)
+```
+These lemmas are otherwise equivalent; only their presentation differs.
+
+</details>
+
 
 In general, these `_tac` rules have the form
 ```hs
 rule_tac v₁ = t₁ and v₂ = t₂ and ... and vₙ = tₙ in RULE
 ```
-where `vₙ` is a variable occuring in `RULE`, and tₙ is a local meta-forall bound variable or assumption.
+where `vₙ` is a variable occuring in `RULE`, and tₙ is a locally bound variable or assumption.
 
 `rule_tac` and friends have an additional advantage, which is that they can be told to refer to a specific goal. If we have goals of the form
 
@@ -147,7 +191,7 @@ where `vₙ` is a variable occuring in `RULE`, and tₙ is a local meta-forall b
 2. P ∧ Q ==> R
 ```
 
-`d/frule conjE` will by default refer to the first rule. Using `d/frule_tac [i] conjE`, we can refer to the `ith` goal (indexed at 1). When combining this with specifying variables, the goal specifier comes first.
+`d/frule conjE` will by default refer to the first rule. Using `d/frule_tac [i] conjE`, we can refer to the `ith` goal (starting indexing at 1). When combining this with specifying variables, the goal specifier comes first (i.e., `apply (erule_tac [1] P=a in conjE)`.)
 
 # `rule`, `erule`, `drule`, and `frule`, (more) formally
 
@@ -170,3 +214,5 @@ For elimination rules, `P₁` is referred to as the "Major premise". This will u
 3. Method `drule` unifies `P₁` with the first suitable assumption, which it then deletes. It then adds the `n - 1` subgoals `P₂ ... Pₙ`, and the original subgoal gains the assumption `Q`.
 
 4. Method `frule` is like `drule`, but it does not delete `P₁`.
+
+
