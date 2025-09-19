@@ -127,8 +127,10 @@ thm conjI (* ⟦?P; ?Q⟧ ==> ?P ∧ ?Q *)
 
 ```hs
 R ==> A ∧ B
+
 (* Isabelle can solve this on its own, but for the sake of example *)
-apply (rule conjI [of A B]) 
+apply (rule conjI [of A B])
+
 1. R ==> A
 2. R ==> B
 ```
