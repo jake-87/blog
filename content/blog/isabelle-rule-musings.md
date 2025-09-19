@@ -7,25 +7,6 @@ The following is very adapted from the <a href="https://isabelle.in.tum.de/dist/
 
 I also make no promise that the following is entirely correct. It is my understanding, and while I have verified it best I can, I am sure there are errors.
 
-{% if page.toc %}
-    <ul>
-    {% for h1 in page.toc %}
-        <li>
-            <a href="{{ h1.permalink | safe }}">{{ h1.title }}</a>
-            {% if h1.children %}
-                <ul>
-                    {% for h2 in h1.children %}
-                        <li>
-                            <a href="{{ h2.permalink | safe }}">{{ h2.title }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        </li>
-    {% endfor %}
-    </ul>
-{% endif %}
-
 # Notes
 
 These rule tactics can be used in many different ways. While some general principles are mentioned below, if the prerequisits are met, 
