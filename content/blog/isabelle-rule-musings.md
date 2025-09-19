@@ -120,12 +120,12 @@ apply (frule conjunct1)
 ## Useful related tools 
 
 For all the above rule tactics, `[of P₁ P₂ ... Pₙ]` can be used to explicitly instantiate them, instead of using `rule_tac` (which is explained below). This instantiates left-to-right by occurence, so with 
-```
+```hs
 thm conjI (* ⟦?P; ?Q⟧ ==> ?P ∧ ?Q *)
 ```
 `conjI [of A B]` will result in the instantiation `⟦A; B⟧ ==> A ∧ B`, from where the rule will proceed.
 
-```
+```hs
 R ==> A ∧ B
 (* Isabelle can solve this on its own, but for the sake of example *)
 apply (rule conjI [of A B]) 
