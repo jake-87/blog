@@ -10,8 +10,8 @@ I also make no promise that the following is entirely correct. It is my understa
 # Notes
 
 These rule tactics can be used in many different ways. While some general principles are mentioned below, if the prerequisits are met, 
-every rule can theoretically be used with every rule tactic
-and you will get many results (some of which will even be useful!).
+every rule can theoretically be used with every rule tactic. Many of these various combinations will not be beneficial to proving a given
+goal, and hence it is useful to know how the rule tactics interact with rules and proof states in order to select the correct pairing.
 
 In that vein, the same rule will be interpreted differently by these different rule tactics. Read more for how they work, and hence why.
 
