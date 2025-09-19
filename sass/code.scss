@@ -1,18 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@0,100..900;1,100..900&display=swap');
+
+ @font-face {
+      font-family: 'Julia Mono'; /* Choose a name for your font family */
+      src: local('Julia Mono'), /* Optional: checks for locally installed font */
+           url('/static/JuliaMono-Regular.woff2') format('woff2');
+      font-weight: normal; /* Define font weight if applicable */
+      font-style: normal; /* Define font style if applicable */
+    }
 
 pre {
   padding: 1rem;
   overflow: auto;
   font-style: normal !important;
-  font-family: "Chivo Mono", monospace !important;
+  font-family: "Julia Mono", monospace !important;
 }
 
 code.language-hs {
-  font-family: "Chivo Mono", monospace !important;
+  font-family: "Julia Mono", monospace !important;
 }
 
 code {
-    font-family: "Chivo Mono", monospace !important;
+    font-family: "Julia Mono", monospace !important;
 }
 
 // The line numbers already provide some kind of left/right padding
