@@ -163,7 +163,7 @@ P₁ P₂ ... Pₙ
 
 For elimination rules, `P₁` is referred to as the "Major premise". This will usually be the object being eliminated. In `disjE` for example, it is `P ∨ Q`.
 
-1. Method `rule` unifies `Q` with the current subgoal, and replaces it with the `n` subgoals `P₁ ... P₂`.
+1. Method `rule` unifies `Q` with the current subgoal, and replaces it with the `n` subgoals `P₁ ... Pₙ`.
 
 2. Method `erule` unifies `Q` with the current subgoal, and `P₁` with the first suitable assumption. The subgoal is then replaced with the `n - 1` subgoals `P₂ ... Pₙ`, and the assumption `P₁` is deleted.
 
