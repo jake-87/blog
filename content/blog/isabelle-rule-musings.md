@@ -10,7 +10,7 @@ I also make no promise that the following is entirely correct. It is my understa
 # Notes
 
 These rule tactics can be used in many different ways. While some general principles are mentioned below, if the prerequisits are met, 
-every rule can theoretically be used with every rule tactics
+every rule can theoretically be used with every rule tactic
 and you will get many results (some of which will be useful!).
 
 In that vein, the same rule will be interpreted differently by these different rule tactics! Read more for how they work, and hence why.
