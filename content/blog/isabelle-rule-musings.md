@@ -133,9 +133,11 @@ apply (rule conjI [of A B])
 2. R ==> B
 ```
 
-## `_tac` suffixes
+Notably, `[of ...]` does still work with the `_tac` family, but there is (as far as I know) no reason to use it over `_tac`'s explicit instantiation. Speaking of:
 
-For each of the above,  there is a corresponding `_tac` (standing for tactic): `rule_tac`, `drule_tac`, etc. These `_tac`s are slightly more powerful than their `_tac`less equivalents. Each of these `_tac` rules allows for the various premises to be explicitly instantiated by name. For example, with the `conjI` rule, one could explicitly write
+## The `_tac` suffixes
+
+For each of the above,  there is a corresponding `_tac` (standing for tactic): `rule_tac`, `drule_tac`, etc. These `_tac`s are slightly more powerful than their `_tac`less equivalents. Each allows for the various premises to be explicitly instantiated by name. For example, with the `conjI` rule, one could explicitly write
 
 ```hs
 R ==> A ⋀ B
@@ -163,7 +165,7 @@ P 0
 
 <details><summary>A small artificial example of this difference, if the above is not clear.</summary>
 
-Recall that `[of ...]` can be used to explicitly instantiate in the `_tac`less family of rule tactics: 
+Recall that `[of ...]` can be used to explicitly instantiate:
 
 ```hs
 lemma without_forall: "A ∧ B ⟹ A"
@@ -182,7 +184,7 @@ In general, these `_tac` rules have the form
 ```hs
 rule_tac v₁ = t₁ and v₂ = t₂ and ... and vₙ = tₙ in RULE
 ```
-where `vₙ` is a variable occuring in `RULE`, and tₙ is a locally bound variable or assumption.
+where `vₙ` is a variable occuring in `RULE`, and `tₙ` is a locally bound variable or assumption.
 
 `rule_tac` and friends have an additional advantage, which is that they can be told to refer to a specific goal. If we have goals of the form
 
