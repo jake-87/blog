@@ -1,5 +1,5 @@
 +++
-title = "Isabelle rule musings"
+title = "Isabelle/HOL rule musings"
 date = 2025-09-19
 +++
 
