@@ -69,7 +69,7 @@ Notable: `erule` deletes the already-held assumption, as it is "rarely useful" (
 
 ## Note on `rule` vs `erule`
 
-As mentioned, `erule` deliberately deletes the already-held assumptions when using an elimination rule. Above, we could see that `P ∨ Q` was not present in the generated goals, as it was already proven. By instead using `rule`, we can keep the original goal in our assumptions as follows. If we apply the principles from the `rule` section to `disjE`, we would get:
+As mentioned, `erule` deliberately deletes the already-held assumptions when using an elimination rule. Above, we could see that `P ∨ Q` was not present in the generated goals, as it was already assumed. By instead using `rule`, we can keep the original goal in our assumptions as follows. If we apply the principles from the `rule` section to `disjE`, we would get:
 
 ```hs
 P ∨ Q ==> R
