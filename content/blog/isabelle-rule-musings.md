@@ -119,7 +119,7 @@ apply (frule conjunct1)
 
 ## Useful related tools 
 
-For all the above rule tactics, `[of P₁ P₂ ... Pₙ]` can be used to explicitly instantiate them, instead of using `rule_tac` (which is explained below). This instantiates left-to-right by occurence, so with 
+For all the above rule tactics, `[of P₁ P₂ ... Pₙ]` can be used to explicitly instantiate them instead of using `rule_tac` (which is explained below). This instantiates left-to-right by occurence, so with 
 ```hs
 thm conjI (* ⟦?P; ?Q⟧ ==> ?P ∧ ?Q *)
 ```
