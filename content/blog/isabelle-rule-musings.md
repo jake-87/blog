@@ -36,7 +36,7 @@ If we have a goal of form `R ==> P ∧ Q`, from `conjI` we can infer that it is 
 2. R ==> Q
 ```
 
-which can be then proven seperately. `rule` is for "backwards reasoning"; here we can see that as moving "backwards up" the introduction rule (Starting with the bottom, and ending with the top.) It is therefore useful for introduction rules, as demonstrated.
+which can be then proven seperately. `rule` is for backwards-reasoning; here we can see that as moving "backwards up" the introduction rule (Starting with the bottom, and ending with the top.) It is therefore useful for introduction rules, as demonstrated.
 
 ## `erule`
 
@@ -93,7 +93,7 @@ P ∧ Q
   P
 ```
 
-This rule is more specifically called a "destruction" rule, as it takes apart (destroys) the original term (here the conjunction) and concludes with one of its subterms. The `d` in `drule` therefore stands for `destruction` or `destroy`. Destruction rules are used for forwards-reasoning, as you move "down" the rule.
+This rule is more specifically called a "destruction" rule, as it takes apart (destroys) the original term (here the conjunction) and concludes with one of its subterms. The `d` in `drule` therefore stands for `destruction` or `destroy`. Destruction rules are used for forwards-reasoning, as you move "forwards down" the rule.
 
 `apply (drule conjunct1)` hence replaces an assumption of form `P ∧ Q` with one of `P`, deleting the original `P ∧ Q` assumption.
 
@@ -139,7 +139,7 @@ Notably, `[of ...]` does still work with the `_tac` family, but there is (as far
 
 ## The `_tac` suffixes
 
-For each of the above,  there is a corresponding `_tac` (standing for tactic): `rule_tac`, `drule_tac`, etc. These `_tac`s are slightly more powerful than their `_tac`less equivalents. Each allows for the various premises to be explicitly instantiated by name. For example, with the `conjI` rule, one could explicitly write
+For each of the above,  there is a corresponding `_tac` (standing for tactic): `rule_tac`, `drule_tac`, etc. These `_tac`s are slightly more powerful than their `_tac`less equivalents. Firstly, each allows for the various premises to be explicitly instantiated by name. For example, with the `conjI` rule, one could explicitly write
 
 ```hs
 thm conjI (* ⟦?P; ?Q⟧ ==> ?P ∧ ?Q *)
@@ -158,14 +158,14 @@ This allows the rule to refer to meta-forall-bound variables, which most commonl
 P n
 ```
 
-with some `n :: nat` mentioned in `P`, `apply (induction n)` will generate the goals
+with some `n :: nat` mentioned in `P`, performing `apply (induction n)` will generate the goals
 
 ```hs
 P 0 
 ⋀ nat. P nat ==> P (Suc nat) (* Variable naming may differ. *)
 ```
 
-`nat` is a meta-forall bound variable. This functions as expected; during the induction step of an inductive proof, we must prove that for any `nat`, `P nat ==> P (Suc nat)`. However, `rule` and friends cannot refer to `nat` directly using `[of ...]` (Although, automatic unification can work). Instead, we must use `rule_tac` and friends to refer to it. I am not quite sure why this is, but I presume it is due to internal complexities around the meta-forall.
+`nat` is a meta-forall bound variable. This functions as expected; during the induction step of an inductive proof, we must prove that for any `nat`, `P nat ==> P (Suc nat)`. Because it is meta-forall bound, `rule` and friends cannot refer to `nat` directly using `[of ...]` (Although, automatic unification can work). Instead, we must use `rule_tac` and friends to refer to it. I am not quite sure why this is, but I presume it is due to internal complexities around the meta-forall.
 
 <details><summary>A small artificial example of this difference, if the above is not clear.</summary>
 
@@ -184,7 +184,7 @@ These lemmas are otherwise equivalent; only their presentation differs.
 </details>
 
 
-In general, these `_tac` rules have the form
+In general, these `_tac` methods have the form
 ```hs
 rule_tac v₁ = t₁ and v₂ = t₂ and ... and vₙ = tₙ in RULE
 ```
