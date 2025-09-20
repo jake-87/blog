@@ -95,7 +95,7 @@ P ∧ Q
 
 This rule is more specifically called a "destruction" rule, as it takes apart (destroys) the original term (here the conjunction) and concludes with one of its subterms. The `d` in `drule` therefore stands for `destruction` or `destroy`. Destruction rules are used for forwards-reasoning, as you move "down" the rule.
 
-`apply (drule conjunct1)` therefore replaces an assumption of form `P ∧ Q` with one of `P`, deleting the original `P ∧ Q` assumption.
+`apply (drule conjunct1)` hence replaces an assumption of form `P ∧ Q` with one of `P`, deleting the original `P ∧ Q` assumption.
 
 ```hs
 P ∧ Q ==> R
