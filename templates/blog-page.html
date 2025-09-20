@@ -21,7 +21,9 @@
   <button onclick='flipdark()'> dark mode? </button>
   <button onclick="location.href = location.href.substring(0,location.href.lastIndexOf('/')) + '/..'">back?</button>
 </p>
-
+<details><summary>
+Table of contents
+</summary>
 {% if page.toc %}
     <ul>
     {% for h1 in page.toc %}
@@ -40,6 +42,7 @@
     {% endfor %}
     </ul>
 {% endif %}
+</details>
 
 {{ page.content | safe }}
 
