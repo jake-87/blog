@@ -190,14 +190,14 @@ rule_tac v₁ = t₁ and v₂ = t₂ and ... and vₙ = tₙ in RULE
 ```
 where `vₙ` is a variable occuring in `RULE`, and `tₙ` is a locally bound variable or assumption.
 
-`rule_tac` and friends have an additional advantage, which is that they can be told to refer to a specific goal. If we have goals of the form
+The `_tac` methods have an additional advantage, which is that they can be told to refer to a specific goal. If we have goals of the form
 
 ```hs
 1. A ∧ B ==> R
 2. P ∧ Q ==> R
 ```
 
-`d/frule conjE` will by default refer to the first goal. Using `d/frule_tac [i] conjE`, we can refer to the `ith` goal (starting indexing at 1). When combining this with specifying variables, the goal specifier comes first (i.e., `apply (erule_tac [1] P=a in conjE)`.)
+`erule conjE` and friends will by default refer to the first goal. Using `erule_tac [i] conjE`, we can refer to the `ith` goal (1-indexed.) When combining this with specifying variables, the goal specifier comes first. (i.e., `apply (erule_tac [1] P=a in conjE)`.)
 
 # `rule`, `erule`, `drule`, and `frule`, (more) formally
 
