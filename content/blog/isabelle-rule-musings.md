@@ -188,7 +188,7 @@ In general, these `_tac` methods have the form
 ```hs
 rule_tac v₁ = t₁ and v₂ = t₂ and ... and vₙ = tₙ in RULE
 ```
-where `vₙ` is a variable occuring in `RULE`, and `tₙ` is a locally bound variable or assumption.
+where `vₙ` is a variable occuring in `RULE`, and `tₙ` is a locally bound variable or assumption. Any combination of zero of more of the variables occuring in `RULE` may be used, in any order.
 
 The `_tac` methods have an additional advantage, which is that they can be told to refer to a specific goal. If we have goals of the form
 
