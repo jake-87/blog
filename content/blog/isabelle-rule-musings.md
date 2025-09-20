@@ -9,11 +9,11 @@ I also make no promise that the following is entirely 100% correct. It is ultima
 
 # Notes
 
-These rule tactics can be used in many different ways. While some general principles are mentioned below, if the prerequisits are met, 
-every rule can theoretically be used with every rule tactic. Many of these various combinations will not be beneficial to proving a given
-goal, and hence it is useful to know how the rule tactics interact with rules and proof states in order to select the correct pairing.
+These rule methods can be used in many different ways. While some general principles are mentioned below, if the prerequisits are met, 
+every rule can theoretically be used with every rule method. Many of these various combinations will not be beneficial to proving a given
+goal, and hence it is useful to know how the rule methods interact with rules and proof states in order to select the correct pairing.
 
-In that vein, the same rule will be interpreted differently by these different rule tactics. Read more for how they work, and hence why.
+In that vein, the same rule will be interpreted differently by these different rule methods. Read more for how they work, and hence why.
 
 # `rule`, `erule`, `drule`, and `frule`, informally
 
@@ -119,7 +119,7 @@ apply (frule conjunct1)
 
 ## Useful related tools 
 
-For all the above rule tactics, `[of P₁ P₂ ... Pₙ]` can be used to explicitly instantiate them instead of using the `rule_tac` family (which is explained below). This instantiates left-to-right by occurence, so with 
+For all the above rule methods, `[of P₁ P₂ ... Pₙ]` can be used to explicitly instantiate them instead of using the `rule_tac` family (which is explained below). This instantiates left-to-right by occurence, so with 
 ```hs
 thm conjI (* ⟦?P; ?Q⟧ ==> ?P ∧ ?Q *)
 ```
