@@ -89,7 +89,7 @@ For the sake of example, recall (one of) the conjunction elimination rules:
 
 ```hs
 P ∧ Q
------ conjunct1   (* We stick to the Isabelle/HOL naming. *)
+----- conjunct1
   P
 ```
 
@@ -128,7 +128,7 @@ thm conjI (* ⟦?P; ?Q⟧ ==> ?P ∧ ?Q *)
 ```hs
 R ==> A ∧ B
 
-(* Isabelle can solve this on its own, but for the sake of example *)
+Isabelle can solve this on its own, but for the sake of example.
 apply (rule conjI [of A B])
 
 1. R ==> A
@@ -172,10 +172,10 @@ P 0
 Recall that `[of ...]` can be used to explicitly instantiate:
 
 ```hs
-lemma without_forall: "A ∧ B ⟹ A"
+lemma without_forall: "A ∧ B ==> A"
   apply (erule conjE [of A]) (* succeeds *)
 
-lemma with_forall: "⋀ a b. a ∧ b ⟹ a"
+lemma with_forall: "⋀ a b. a ∧ b ==> a"
   apply (erule conjE [of a]) (* fails *)
   apply (erule_tac P=a in conjE) (* succeeds *)
 ```
@@ -220,5 +220,4 @@ For elimination rules, `P₁` is referred to as the "Major premise". This will u
 3. Method `drule` unifies `P₁` with the first suitable assumption, which it then deletes. It then adds the `n - 1` subgoals `P₂ ... Pₙ`, and the original subgoal gains the assumption `Q`.
 
 4. Method `frule` is like `drule`, but it does not delete `P₁`.
-
 
