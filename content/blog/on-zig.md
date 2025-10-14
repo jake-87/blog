@@ -167,7 +167,7 @@ Of course, all of this is quite reasonable. The Zig compiler has had far, far fe
 
 #### Build system
 
-The Zig build system is confusing. I do not enjoy giving it this little credit; it is very neat to be able to write build system code in the language itself, and this is a feature I believe more languages should have. In the end, though, completely lacking a "simple" build system does not bring a huge amount of benefit for most users, and it is as of current not well documented enough to justify its own complexity. This of course can be improved, and I hope it is.
+The Zig build system is a little confusing. It is very neat to be able to write build system code in the language itself, and this is a feature I believe more languages should have. In the end, though, it is as of current not well documented enough to justify its own complexity. This of course can be improved, and I hope it is.
 
 #### Language server
 
