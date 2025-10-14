@@ -176,6 +176,8 @@ Zig currently does not have a "first class" language server. The "Zig Language S
 - "It is one of the worst LSPs I have ever used"
 - "Don't get me started"
 
+Apparently it is very limited when `comptime` comes into play, and cannot handle compound types like 2D arrays.
+
 I cannot offer much firsthand experience however.
 ### Debug mode
 
