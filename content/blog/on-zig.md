@@ -271,6 +271,6 @@ I do not believe that a few bad apples necessarily spoil the whole barrel here, 
 
 ## Summary
 
-I find Zig interesting, with an unfortunately negative connotation. I believe the goal of a C-like memory unsafe language "for the modern day", while interesting at first glance, ignores many of the issues that makes C a problem in said modern day. I find much of Zig "wishful thinking"; if every programmer was 100% smarter and more capable, perhaps it would work. Alas, they are not; myself included.
+I find Zig interesting, with an unfortunately negative connotation. I believe the goal of a C-like memory unsafe language "for the modern day", while interesting at first glance, ignores many of the issues that makes C a problem in said modern day. Much of Zig seems to me like "wishful thinking"; if every programmer was 150% smarter and more capable, perhaps it would work. Alas, they are not; myself included.
 
 I believe that modern concerns of memory safety and correctness require modern solutions; not performing patchwork fixes over the core issue.
