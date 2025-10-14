@@ -262,7 +262,7 @@ For the most part, the community is about par for the course for programming lan
 
 1. I ask a question about solving something in Zig. Often, given my background, it is about adapting my more functional-esque thinking to Zig.
 2. Someone chimes in with a half-solution that does not actually address my problem.
-3. I attempt to communicate this to them, which often involves explaining the features I would use in <insert other language>.
+3. I attempt to communicate this to them, which often involves explaining the features I would use in \<insert other language\>.
 4. They insist that these features are not needed, but do not elaborate on how one would solve the problem without them.
 
 This is unpleasant, and while it's not a particularly uncommon thing to see in programming language communities, Zig seems to have a bit of a bad case of it. I suspect it is due to Zig's fairly minimalistic nature; it lacks a lot of features that one would otherwise use to solve problems. Of course, this is the appeal for many, but still. It is made worse when said topic is something one is particularly knowledgeable about, and the people you are conversing with believe they can solve the issue without that knowledge.
