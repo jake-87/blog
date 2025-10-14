@@ -171,7 +171,7 @@ The Zig build system is confusing. I do not enjoy giving it this little credit; 
 
 #### Language server
 
-Zig currently does not have a "first class" language server. The "Zig Language Server", or ZLS, is unofficial; I have been told it is still quite nice though. It does not have real compiler integration, so it is unfortunately limited in some ways. The creator of Zig apparently does not use a language server while programming, so I do slightly understand why it is not a priority, but I personally believe "features" like a good language server are quite essential to wider usage.
+Zig currently does not have a "first class" language server. The "Zig Language Server", or ZLS, is unofficial; I have been told it is still "fine enough" though. It does not have real compiler integration, so it is unfortunately limited in some ways. The creator of Zig apparently does not use a language server while programming, so I do slightly understand why it is not a priority, but I personally believe tools like a good language server are quite essential to wider/popular usage.
 
 ### Debug mode
 
