@@ -150,7 +150,7 @@ pub fn main() !void {
 }
 ```
 
-As Zig would correctly, per PLO at the time, but incorrectly per common sense, pass `a` as a reference. 
+As Zig would correctly, per PRO at the time, but incorrectly per common sense, pass `a` as a reference. 
 
 This is actually mildly unfortunate. It's a very interesting optimization, and being able to guarantee behavior around optimization of parameter passing would also be quite beneficial. Unfortunately, Zig simply does not have the level of control needed to do it. Aliasing is freely allowed, and in order to make PRO work, it cannot be. Rust can, and in many cases does, do this! It's a shame Zig has to miss out.
 
