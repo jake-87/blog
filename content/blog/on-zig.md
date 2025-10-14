@@ -91,7 +91,7 @@ Float to int casting additionally can invoke undefined behavior if the float is 
 
 ### Result location semantics (RLS)
 
-<a href="https://ziglang.org/documentation/0.15.1/#Result-Location-Semantics">See here.</a>. 
+<a href="https://ziglang.org/documentation/0.15.1/#Result-Location-Semantics">See here</a>. 
 
 Result location semantics are in theory a quite nice idea. Knowing predictably where things are going to be placed in memory is, of course, good for any systems-adjacent language! In practice, there are several choices within RLS that I find counterintuitive. Take the following example, where we attempt to swap two struct members in place:
 
