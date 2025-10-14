@@ -121,7 +121,7 @@ info: y: .{ .a = 2, .b = 2 }
 
 I will note that the equivalent C can only be written in the former style, and it prints the former.
 
-The only difference between the latter and the former is whether the type name is present. This is intended behavior! Indeed, this very example is given in the Zig reference, a fact that I find odd. Why give a warning against something when you could just fix it? Zig does not have move or copy constructors; I do not think there is very much reason for the latter to ever behave the way it does. One extra register is all you ever need, even for an arbitrary parallel move! <a href="https://compiler.club/parallel-moves/">(Source)</a>.
+The only difference between the latter and the former is whether the type name is present. This is intended behavior! Indeed, this very example is given in the Zig reference, a fact that I find odd. Why give a warning against something when you could just fix it? Zig does not have move or copy constructors; I do not think there is very much reason for the latter to ever behave the way it does. One extra register is all you ever need, even for an arbitrary parallel move! (<a href="https://compiler.club/parallel-moves/">Source</a>.)
 
 
 ### Pointer reference optimization
