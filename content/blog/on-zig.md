@@ -37,8 +37,8 @@ This means that, roughly:
 
 Not ideal.
 
-1. The Node JS runtime, written in C++, has had a lifetime 19,631 issues reported, 1,710 of which contain one of the above keywords.
-2. The Deno JS runtime, written in Rust, has had a lifetime 13,422 issues reported, 552 of which contain one of the above keywords.
+1. The Node/v8 JS runtime, written partially itself in JS and partially in C++, has had a lifetime 19,631 issues reported, 1,710 of which contain one of the above keywords.
+2. The Deno JS runtime, written primarily in Rust, has had a lifetime 13,422 issues reported, 552 of which contain one of the above keywords.
 3. The Bun JS runtime, written in Zig, has had a lifetime 13,828 issues reported, 3676 of which contain one of the above keywords.
 
 Again, this roughly means:
