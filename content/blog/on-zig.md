@@ -171,8 +171,12 @@ The Zig build system is confusing. I do not enjoy giving it this little credit; 
 
 #### Language server
 
-Zig currently does not have a "first class" language server. The "Zig Language Server", or ZLS, is unofficial; I have been told it is still "fine enough" though. It does not have real compiler integration, so it is unfortunately limited in some ways. The creator of Zig apparently does not use a language server while programming, so I do slightly understand why it is not a priority, but I personally believe tools like a good language server are quite essential to wider/popular usage.
+Zig currently does not have a "first class" language server. The "Zig Language Server", or ZLS, is unofficial; It does not have real compiler integration, so it is unfortunately limited in some ways. The creator of Zig apparently does not use a language server while programming, so I do slightly understand why it is not a priority, but I personally believe tools like a good language server are quite essential to wider/popular usage. Here are some quotes I have heard from people who have used it far more than I:
+- "Deeply horrid"
+- "It is one of the worst LSPs I have ever used"
+- "Don't get me started"
 
+I cannot offer much firsthand experience however.
 ### Debug mode
 
 There are always more errors to be caught. I particularly recently noticed that Zig cannot currently catch use-after-realloc errors, like the following:
