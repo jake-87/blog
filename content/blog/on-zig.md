@@ -21,7 +21,7 @@ be memory safe -
 it can catch some things at runtime, with specific allocators, but so can C these days. Indeed, there
 are some cases, like use-after-realloc, that `asan` can catch and Zig cannot.
 
-A language in the modern day that does not make an attempt at memory safety is, in my opinion, not reasonable. It has been shown that in some areas, up to 70% of security bugs are due to memory safety issues. Should we consider these bugs acceptable, in order to give the programmer slightly more control over their program? I do not think so.
+A language in the modern day that does not make an attempt at memory safety is, in my opinion, not reasonable. It has been shown that in some areas, up to 70% of security bugs are due to memory safety issues (<a href="https://www.chromium.org/Home/chromium-security/memory-safety/">Source</a>). Should we consider these bugs acceptable, in order to give the programmer slightly more control over their program? I do not think so.
 
 I subscribe to the idea that the user must be constrained. It is perhaps harsh to say, but for large and complex programs, I believe that there are very few programmers who will write memory-correct code nine times out of ten. When writing code with others, that goes down. I personally do not believe I fit into that category.
 
