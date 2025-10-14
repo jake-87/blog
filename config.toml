@@ -11,7 +11,8 @@ generate_feeds = true
 
 author = "Blueberry Wren"
 
-
+title="Blueberry Wren Thoughts"
+description="The bloggings of Wren"
 
 [markdown]
 # Whether to do syntax highlighting
