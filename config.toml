@@ -13,7 +13,7 @@ author = "Blueberry Wren"
 
 title="Blueberry Wren Thoughts"
 description="The bloggings of Wren"
-language="en"
+default_language="en"
 [markdown]
 # Whether to do syntax highlighting
 # Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
