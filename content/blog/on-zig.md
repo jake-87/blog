@@ -85,6 +85,8 @@ In general, Zig has very little type inference. As someone who is a fan of funct
 
 Zig's casting is a bit cumbersome. To cast a float to a specific int width, for example, must be done with `@as(i32, @intFromFloat(flt))`. Bit of a mouthful. Inference can help here (For example if a variable is already known to be a `i32`, the outer cast is not needed), but I would think that with Zig's comptime abilities, this could be made a bit nicer.
 
+Luckily, it is common Zig practice to annotate everything if possible, so this does come up slightly less in practice. It is still a bit bulky however.
+
 Float to int casting additionally can invoke undefined behavior if the float is outside the integer's range. I personally prefer truncating semantics, with perhaps a specialized method for UB semantics. That's more of a personal preference though.
 
 ## Semantics
