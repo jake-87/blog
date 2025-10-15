@@ -21,7 +21,7 @@ be memory safe -
 it can catch some things at runtime, with specific allocators, but so can C these days. Indeed, there
 are some cases, like use-after-realloc, that `asan` can catch and Zig cannot.
 
-A language in the modern day that does not make an attempt at memory safety is, in my opinion, not reasonable. It has been shown that in some areas, up to 70% of security bugs are due to memory safety issues (<a href="https://www.chromium.org/Home/chromium-security/memory-safety/">Source</a>). Should we consider these bugs acceptable, in order to give the programmer slightly more control over their program? I do not think so.
+A language in the modern day that does not make an attempt at memory safety is, in my opinion, not reasonable. It has been shown that in some areas, up to 70% of security bugs are due to memory safety issues (<a href="https://www.chromium.org/Home/chromium-security/memory-safety/">Source</a>).
 
 I subscribe to the idea that the user must be constrained. It is perhaps harsh to say, but for large and complex programs, I believe that there are very few programmers who will write memory-correct code nine times out of ten. When writing code with others, that goes down. I personally do not believe I fit into that category.
 
@@ -61,7 +61,7 @@ At one point, this part of the article contained a runthrough of the `zig zen`, 
 ### Comptime
 
 Zig does generics in an odd way. I believe this is the best way of putting it. 
-This post is not meant to be, nor will it contain, a proper explanation of Zig's "comptime"
+This post is not meant to be, nor will it contain, a proper explanation of Zig's `comptime`
 capabilities, so I refer the reader to the wider internet there. However, doing generics
 with "normal" code means that there are multiple ways to write the same generic function. 
 There is no standardization between different libraries, different styles of writing code, and 
@@ -76,18 +76,11 @@ As a result, I am inclined to believe that Zig's comptime is a very large and al
 
 I am personally a proponent of a good macro system, but I will readily admit people can also go overboard with one of those. 
 
-
-### Inference
-
-In general, Zig has very little type inference. As someone who is a fan of functional programming, it should be no surprise that I'm a fan of at least function-local inference. I appreciate that theoretically this makes types more stable, and can mean some things are less prone to breaking, but with Zig's lack of extreme type-directed features, (e.g. traits/typeclasses), I think it could benefit from a little more inference. This leads us into the next point quite nicely:
-
 ### Casting
 
-Zig's casting is a bit cumbersome. To cast a float to a specific int width, for example, must be done with `@as(i32, @intFromFloat(flt))`. Bit of a mouthful. Inference can help here (For example if a variable is already known to be a `i32`, the outer cast is not needed), but I would think that with Zig's comptime abilities, this could be made a bit nicer.
+Zig's casting is a bit cumbersome. To cast a float to a specific int width, for example, must be done with `@as(i32, @intFromFloat(flt))`. Bit of a mouthful. Inference can help here (For example if a variable is already known to be a `i32`, the outer cast is not needed), but I would think that with Zig's comptime abilities, this could be made a bit nicer. Luckily, it is common Zig practice to annotate everything if possible, so this does come up slightly less in practice. It is still a bit bulky however.
 
-Luckily, it is common Zig practice to annotate everything if possible, so this does come up slightly less in practice. It is still a bit bulky however.
-
-Float to int casting additionally can invoke undefined behavior if the float is outside the integer's range. I personally prefer truncating semantics, with perhaps a specialized method for UB semantics. That's more of a personal preference though.
+Float to int casting additionally can invoke undefined behavior if the float is outside the integer's range. I personally prefer truncating semantics, with perhaps a specialized method (`intFromFloatUnsafe`?) for UB semantics. That's more of a personal preference though.
 
 ## Semantics
 
@@ -128,7 +121,7 @@ The only difference between the latter and the former is whether the type name i
 
 ### Pointer reference optimization
 
-This has been removed from the language. There was a long period where this would print `5`:
+In its previous form, PRO has been removed from Zig. There was a long period where this would print `5`:
 
 ```rust
 const std = @import("std");
@@ -156,6 +149,7 @@ As Zig would correctly, per PRO at the time, but incorrectly per common sense, p
 
 This is actually mildly unfortunate. It's a very interesting optimization, and being able to guarantee behavior around optimization of parameter passing would also be quite beneficial. Unfortunately, Zig simply does not have the level of control needed to do it. Aliasing is freely allowed, and in order to make PRO work, it cannot be. Rust can, and in many cases does, do this! It's a shame Zig has to miss out.
 
+There is current work to make PRO work in the case of pure functions (<a href="https://github.com/ziglang/zig/issues/5973#issuecomment-2380332493">Source</a>), so I remain hopeful that it will return in some form eventually.
 
 ## Misc. Improvable things
 
@@ -169,7 +163,7 @@ Of course, all of this is quite reasonable. The Zig compiler has had far, far fe
 
 #### Build system
 
-The Zig build system is a little confusing. It is very neat to be able to write build system code in the language itself, and this is a feature I believe more languages should have. In the end, though, it is as of current not well documented enough to justify its own complexity. This of course can be improved, and I hope it is.
+The Zig build system is a little confusing. It is very neat to be able to write build system code in the language itself, and this is a feature I believe more languages should have. Unfortunately, it is as of current not well documented enough to justify its own complexity. This of course can be improved, and I hope it is.
 
 #### Language server
 
@@ -214,7 +208,7 @@ Address sanitizer with Clang can catch this, so theoretically Zig should be able
 
 Apparently, it is desired that comparisons with `undefined` panic. This seems reasonable to me. However, the issue for this has been open <a href="https://github.com/ziglang/zig/issues/63">for almost ten years</a>, which makes me worry that it might be a while still until it is finished. 
 
-This panics, however, so it does partially work.
+This panics in `Debug` and `ReleaseSafe` modes, however, so it does at least work in some cases.
 
 ```rust
 pub fn main() void {
