@@ -1,5 +1,5 @@
 +++
-title = "Opinion piece: On Zig"
+title = "Opinion piece: On Zig (and the design choices within)"
 date = 2025-10-14
 +++
 
