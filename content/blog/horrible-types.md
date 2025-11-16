@@ -1,6 +1,6 @@
 +++
 title = "Horrible answers to \"What is a type?\""
-date = 2025-09-19
+date = 2025-11-17
 +++
 
 - A set.
