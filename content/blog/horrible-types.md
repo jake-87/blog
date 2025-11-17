@@ -11,5 +11,7 @@ date = 2025-11-17
 - The initial algebra/final coalgebra of a generating endofunctor over a reasonable base category (say, `Set`).
 - A metaphorical representation of bytes.
 - A membership function `UNIV → bool`.
+- That thing you put after the `:` to make the computer stop yelling at you :(
 - Propaganda made up by Big Typechecker to make us complacent.
+- Nerd shit.
 - The archetype of person that you tend to feel attracted to romantically.
