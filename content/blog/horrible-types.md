@@ -15,3 +15,4 @@ date = 2025-11-17
 - Propaganda made up by Big Typechecker to make us complacent.
 - Nerd shit.
 - The archetype of person that you tend to feel attracted to romantically.
+- A metal plate with a glyph, used for printing ink onto paper.
