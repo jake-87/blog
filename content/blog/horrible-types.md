@@ -10,6 +10,6 @@ date = 2025-11-17
 - A chosen fixed point of a generating function.
 - The initial algebra/final coalgebra of a generating endofunctor over a reasonable base category (say, `Set`).
 - A metaphorical representation of bytes.
-- A membership function `UNIV -> bool`.
+- A membership function `UNIV → bool`.
 - Propaganda made up by Big Typechecker to make us complacent.
 - The archetype of person that you tend to feel attracted to romantically.
