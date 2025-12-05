@@ -236,7 +236,7 @@ pub fn main() void {
 
 This just seems silly to me. Catching something like this, in the simple case, should be just one pass over the AST; why not do it?
 
-### Tabs
+### Tabs and syntax
 
 Zig simply doesn't allow tabs in comments and strings? <a href="https://github.com/ziglang/zig-spec/issues/38">This issue</a> explains more, but the justification of "it (a tab) is ambiguous (in) how it should be rendered", I do not quite agree with.
 
@@ -249,6 +249,15 @@ tabs.zig:5:36: error: comment contains invalid byte: '\t'
 ```
 
 Very odd.
+
+Similarly, the following will not compile:
+
+```c
+if (a >=b) {
+    ...
+}
+```
+because the whitespace isn't correct. Zig doesn't have warnings, so this is always a compile error.
 
 ### Iteration
 
