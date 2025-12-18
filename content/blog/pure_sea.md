@@ -1,6 +1,6 @@
 +++
 title = "Written in Pure Sea"
-date = 19-12-25
+date = 2025-12-19
 +++
 
 ```
