@@ -124,16 +124,7 @@ Goal : (x, x, refl) = (x, y, eq)
 ```
 Goal : (x, refl) = (y, eq)
 ```
-5. Use that `x = y`:
-<details><summary>Technical note</summary>
-  
-More formally, we need that `(x, p) = (x, q) -> x = y -> (x, p) = (y, q)`. This can be proven using `subst`.
-</details>
-
-```
-Goal : (x, refl) = (x, eq)
-```
-6. Use that `Σ(b : A). x = b` is contractible (`Π (one two : Σ(b : A). x = b)). one = two`):
+5. Use that `Σ(b : A). x = b` is contractible (`Π (one two : Σ(b : A). x = b)). one = two`):
 ```
 Done!
 ```
@@ -154,9 +145,7 @@ J : Π (A : Type)
          P x x refl 
       -> P x y eq
 J A x y eq P Pxxrefl = 
-  subst  (pair-snd-eq
-            (subst-fst eq singleton-contractible))
-         Pxxrefl
+  subst  (pair-snd-eq singleton-contractible) Pxxrefl
 ```
 
 
