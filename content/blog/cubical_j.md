@@ -106,7 +106,7 @@ J : Π (A : Type)
       -> P x y eq
 Goal : P x y eq
 ```
-2. Curry `P`:
+2. Consider the equivalent "curried" version, so curry `P`:
 ```
 J : Π (A : Type) 
       (x y : A)
