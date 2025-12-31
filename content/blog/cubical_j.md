@@ -153,7 +153,10 @@ J : Π (A : Type)
       (P : Π(a b : A). x = y -> Type).
          P x x refl 
       -> P x y eq
-J A x y eq P Pxxrefl = subst (pair-snd-eq (subst-fst eq singleton-contractible)) Pxxrefl
+J A x y eq P Pxxrefl = 
+  subst  (pair-snd-eq
+            (subst-fst eq singleton-contractible))
+         Pxxrefl
 ```
 
 
