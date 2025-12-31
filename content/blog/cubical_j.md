@@ -59,7 +59,7 @@ we can conclude
 P (x, y, eq)
 ```
 
-We will first apply the principle that if `x = y`, then `P x -> P y`, generally called something like `subst`itution. Now we aim to show that:
+We will first apply the principle that if `a = b`, then `P a -> P b`, generally called something like `subst`itution. We can use `P (x, x, refl)` as our "`P a`". Now we aim to show that:
 
 ```
 Given:
