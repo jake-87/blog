@@ -1,9 +1,11 @@
 +++
 title = "Axiom J in Homotopy Type Theory (HoTT)"
-date = 2025-05-26
+date = 2026-01-01
 +++
 
 ## Preface
+
+Happy new years!
 
 ### Notation
 
