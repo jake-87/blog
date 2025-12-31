@@ -82,7 +82,7 @@ and then necessarily
 ```
 Now for the trick. While we do _not_ have that `refl = eq`, we don't actually need it! 
 It turns out that we can prove that any element of `Σ(b : A). x = b` is equal to any other element of `Σ(b : A). x = b`, irregardless of 
-the proof of equality used. This property (only having one inhabitant) is called "contractibility".
+the proof of equality used - in other words, `Σ(b : A). x = b` only has one inhabitant. This property (only having one inhabitant) is called "contractibility".
 
 A "proper" proof of this is fairly involved 
 (One can be found <a href="https://1lab.dev/1Lab.Path.html">here as `Singleton-contract`, in Cubical Agda, courtesy of the 1lab</a>, 
