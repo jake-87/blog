@@ -126,6 +126,7 @@ Goal : (x, refl) = (y, eq)
 ```
 5. Use that `x = y`:
 <details><summary>Technical note</summary>
+  
 More formally, we need that `(x, p) = (x, q) -> x = y -> (x, p) = (y, q)`. This can be proven using `subst`.
 </details>
 
