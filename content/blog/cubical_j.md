@@ -92,7 +92,7 @@ Consider what `Σ(b : A). x = b` _means_. One way of interpreting it is like it'
 "`Σ(b : A). x = b` is the type of things that are elements of `A` equal to `x`".
 However, there's only one of those! Namely, `x` itself. If we chose anything else, we wouldn't have `x = b` in the first place.
 This means that our choice of equality doesn't matter at all - when we consider the tuple as a whole, there can only be one inhabitant.
-Hence, as we already have that `x = y`, we have `(x, refl) = (y, refl) = (y, eq)`, completing our proof.
+Hence, as we already have that `x = y`, we have `(x, refl) = (x, eq) = (y, eq)`, completing our proof.
 
 ## TLDR
 
