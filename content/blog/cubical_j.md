@@ -9,7 +9,7 @@ Happy new years!
 
 ### Notation
 
-`∀` may be used in place of a Pi-type in some cases. A nested `Π (a b : A). ...` represents `Π (a : A). Π (b : A). ...`.
+`∀` may be used in place of a Pi-type in some cases. A nested `Π (a b : A). ...` (or sim. for `Σ`) represents `Π (a : A). Π (b : A). ...`.
 
 ### J
 
