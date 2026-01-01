@@ -111,7 +111,7 @@ Goal : P x y eq
 J : Π (A : Type) 
       (x y : A)
       (eq : x = y)
-      (P : Π(a b : A). x = y -> Type).
+      (P : (Σ(a : A). Σ(b : A). a = b) -> Type).
          P (x, x, refl)
       -> P (x, y, eq)
 Goal : P (x, y, eq)
@@ -141,7 +141,7 @@ We have:
 J : Π (A : Type) 
       (x y : A)
       (eq : x = y)
-      (P : Π(a b : A). x = y -> Type).
+      (P : (Σ(a : A). Σ(b : A). a = b) -> Type).
          P x x refl 
       -> P x y eq
 J A x y eq P Pxxrefl = 
