@@ -85,7 +85,7 @@ It turns out that we can prove that any element of `Σ(b : A). x = b` is equal t
 the proof of equality used - in other words, `Σ(b : A). x = b` only has one inhabitant. This property (only having one inhabitant) is called "contractibility".
 
 A "proper" proof of this requires some careful thinking 
-(One can be found <a href="https://1lab.dev/1Lab.Path.html#36085">here as `Singleton-contract`, in Cubical Agda, courtesy of the 1lab</a>, 
+(One can be found <a href="https://1lab.dev/1Lab.Path.html#34069">here as `Singleton-contract`, in Cubical Agda, courtesy of the 1lab</a>, 
 and it's Lemma 3.11.8 in the HoTT book, at time of writing.), but I'll give an informal one here.
 
 Consider what `Σ(b : A). x = b` _means_. One way of interpreting it is like it's a subset - that 
