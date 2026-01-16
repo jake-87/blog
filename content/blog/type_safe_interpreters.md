@@ -1,5 +1,5 @@
 +++
-title = "Interpreters and type safety"
+title = "Type safe interpreters"
 date = 2026-01-17
 +++
 
