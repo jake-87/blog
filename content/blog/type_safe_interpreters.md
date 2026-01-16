@@ -200,7 +200,7 @@ utop # eval (Lam (fun f -> f));;
 utop # eval (Apply (Lam (fun x -> Add(x,x)), Lit 5));;
 - : int = 10
 
-utop # eval (Apply (Lam (fun b -> If (b, Lit 5, Lit 6)), Bool true));;
+utop # eval (Lam (fun b -> If (b, Lit 5, Lit 6)), Bool true);;
 - : bool expr -> int expr = <fun>
 (* Note that this gives us a function returning `int expr`. We'd need to either use `Apply`, like below,
    or `eval` to get an `int` out of it.
