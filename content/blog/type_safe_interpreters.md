@@ -44,7 +44,7 @@ let get (x : (yes, 'a) maybe) -> 'a =
 and have it be total; there is no missing case, because the missing case is a type error. Note that when writing a 
 function like `or_else : (_, 'a) maybe -> 'a -> 'a`, we need to use this interesting piece of syntax:
 ```ocaml
-let or_else : type m. (m, 'a) maybe -> 'a -> 'a = fun x -> 
+let or_else : type m. (m, 'a) maybe -> 'a -> 'a = fun x def -> 
   match x with
   | Just a -> a
   | Nothing -> def
