@@ -78,6 +78,7 @@ p {
     width: 60%;
     justify-content: center;
     margin: 0 auto;
+    max-width: 50rem;
 }
 
 
@@ -94,6 +95,7 @@ li {
 @media (max-width: 1000px) {
     .container {
         width: 100%;
+        max-width: 50rem;
     }
     body {
         font-size: 11pt;
