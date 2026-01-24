@@ -4,7 +4,7 @@ date = 2026-01-17
 +++
 
 It is well known that most software has bugs<sup><i>[Citation needed]</i></sup>. 
-It is also well known that interpreters are software[^1]. One issue that one might
+It is also well known that interpreters are mostly software[^1]. One issue that one might
 run into in an interpreter is _type safety_: It may very well be possible for your
 typed language's interpreter to nevertheless end up in a state where it is asked 
 to evaluate `1 + "hi!"`. What can we do about that?
@@ -59,14 +59,15 @@ type:
 ```ocaml
 type _ expr =
 ```
-We've added space for a type parameter. What should integers and booleans look like? Maybe they should be indexed by
-their respective "meta" types.
+We've added space for a type parameter. What should integers and booleans look like? Maybe we should paramaterize our expressions
+by the type they "evaluate to" - that way, when we have a `'a expr`, we know that it'll evaluate to something
+of type `'a`. Hence:
 ```ocaml
   | Lit : int -> int expr
   | Bool : bool -> bool expr
 ```
 Now, we want to add a case for `Add` and `Negate`. Naturally, we shouldn't be able to add two booleans, so let's restrict it
-to only taking in `int expr`s. Similar for negate.
+to only taking in `int expr`s, and similar for negate. We also know that these should return integers, too.
 ```ocaml
   | Add : int expr * int expr -> int expr
   | Negate : int expr -> int expr
@@ -78,7 +79,7 @@ and `If` should take a boolean as its first argument, but anything for its secon
   | Leq : int expr * int expr -> bool expr
   | If : bool expr * 'a expr * 'a expr -> 'a expr
 ```
-Hence note that we can still use generic parameters - we just need to think about when it makes sense to do so,
+Note that we can still use generic parameters, like `'a` here - we just need to think about when it makes sense to do so,
 to get the type safety we want.
 
 Now for functions. What should a function look like here? One way of implementing them is with a "Higher-order abstract syntax"(HOAS)[^3] approach, 
