@@ -49,8 +49,9 @@ let or_else : type m. (m, 'a) maybe -> 'a -> 'a = fun x def ->
   | Just a -> a
   | Nothing -> def
 ```
-This is as otherwise OCaml eagerly thinks "Ah, `m` must be `yes`!" (or equivalent for `no`) when seeing the `Just` case
-in the pattern match. The `type` designator tells it to keep `m` as general as possible, instead of refining it.
+This is as otherwise OCaml's normal type inference can get in our way and infer the wrong type, leading to a type error.[^4]
+[^4]: It may for example eagerly infer `(yes, 'a) maybe -> (yes, 'a) maybe`, which is a type error, as we also want to handle the `(no, 'a) maybe` `Nothing` case.
+
 
 ## Type safe interpreters
 
