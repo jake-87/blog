@@ -117,7 +117,7 @@ let rec lookup (env : environment) (name : variable) : term =
             lookup rest name
 ```
 
-Note: In this series, we will not be considering the possibility that a name is used without being previously defined in some way. This is an error, and can be handled via normals means, e.g. erroring.
+Note: In this series, we will not be considering the possibility that a name is used without being previously defined in some way. This is an error, and can be handled via normal means, e.g. a suitable error message.
 
 We now note something curious: Our lookup function need not return a fully computed value! It could return `7 + 2`, which we would have to further evaluate before we could do anything with. It would be possible of course to manually insert invariants ensuring that this is not the case, but we could still accidentally violate them. 
 
@@ -127,13 +127,13 @@ Here we hit one of the most important distinctions in our exploration of depende
 
 A "term", as previously seen, is any element of a chosen language. Above, this was (some subset of) integer arithmetic. We could also consider the language of OCaml programs, of which the above examples would be terms. However, two terms are not always easy to compare. We may need to evaluate one, or both, and we don't know whether that will be needed until we start comparing them.
 
-Instead, what if we defined another type that was guaranteed to be reduced to some suitable level? For this simple case, we could restrict this to contain only fully evaluated terms (i.e., integers).
+Instead, what if we defined another type that was guaranteed to be reduced to some suitable level? For this simple case, we could restrict this to contain only fully evaluated terms (i.e., integers). We'll call these "values".
 
 ```ocaml
 type value =
     | VLiteral of int
 ```
-We prefix these constructors with `V` to ensure they're distinct. Then, we could modify our environment and lookup function to only deal with values:
+We prefix these constructors with `V` to ensure they're distinct, and to remind us that they construct values. Then, we could modify our environment and lookup function to only deal with values:
 
 ```ocaml
 - type environment = (variable * term) list
@@ -177,7 +177,7 @@ In the `Let` case, we compute the definition first, then extend our environment 
 
 We then, by returning a `value`, have a guarantee that whatever comes out of `eval` is as simple as we want it to be.
 
-Comparing for equality is then very simple: We use `eval` to evaluate our terms into values, then because our values are in a nice normal form, we can compare them easily guaranteed.
+Comparing for equality is then very simple: We use `eval` to evaluate our terms into values, then because our values are in a nice normal form, we have the guarantee that we can compare them easily, with no further evaluation needed.
 
 ## Wrap up
 
