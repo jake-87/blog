@@ -8,7 +8,7 @@ date = 2025-10-14
 This post is split up into a few sections. I would also like to preface this post with:
 1. This is a little bit of a rant. I believe it presents some very reasonable points about Zig as a language, but it's not going to be
 perfect or completely objective. It is an opinion piece, and you're free to ignore it if you want.
-2. Existing memory safe languages are not perfect. Rust will be used as an example quite a bit, as from what is currently avaliable, it embodies closer to what I think is reasonable in a programming language. However, there is still much room for improvement in this space.
+2. Existing memory safe languages are not perfect. Rust will be used as an example quite a bit, as from what is currently available, it embodies closer to what I think is reasonable in a programming language. However, there is still much room for improvement in this space.
 3. All of the following is ultimately my opinion. If you disagree, you are welcome to find me somewhere on the internet and ask me more.
 4. I bear no grudge or ill will against anyone who contributes to, works on, or is otherwise involved in the Zig community. The following are things I have noted about the language, not the people behind it. If you enjoy Zig, go and write it, and make cool stuff - I am not the programming language police.
 5. Exception to the above: I have one gripe about the Zig community. This gripe "targets" no one person in particular; rather, larger trends.
