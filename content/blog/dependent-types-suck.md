@@ -47,5 +47,5 @@ they have played us for absolute fools
   
   - Lean credit: <a href="https://github.com/leanprover-community/mathlib4/blob/362bdac45f1c3e9307252e394f8ecfff137c4d85/Mathlib/MeasureTheory/Integral/SetIntegral.lean#L1183-L1185">Mathlib4</a>
   
-  - Roqc credit: <a href="https://github.com/rocq-community/fourcolor/blob/master/theories/proof/birkhoff.v">4 Color Theorem Proof</a>
+  - Rocq credit: <a href="https://github.com/rocq-community/fourcolor/blob/master/theories/proof/birkhoff.v">4 Color Theorem Proof</a>
 </details>
