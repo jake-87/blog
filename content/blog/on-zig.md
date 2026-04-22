@@ -27,7 +27,12 @@ A language in the modern day that does not make an attempt at memory safety is, 
 
 I subscribe to the idea that the user must be constrained. It is perhaps harsh to say, but for large and complex programs, I believe that there are very few programmers who will write memory-correct code nine times out of ten. When writing code with others, that goes down. I personally do not believe I fit into that category.
 
-The fact that Zig allows the user to write faulty software is supported by various somewhat informal, but still useful, statistics. Notably, the following statistic disregard duplicates, and unreported errors. However, general trends are still of note. <details><summary>Here are some:</summary>
+The fact that Zig allows the user to write faulty software is supported by various somewhat informal, but still useful, statistics. Notably, the following statistic disregard duplicates, and unreported errors. However, general trends are still of note. 
+
+UPDATE: Someone has done a much more thorough analysis of crashes in JS runtimes! Thank you to the authors of the <a href="https://js-segfault-compare.sigmasd.workers.dev/">Javascript Runtime Segfault Tracker</a>, which demonstrates my point very effectively. To quote the person who sent me this: "it's a log scale. i'll let you guess which runtime is responsible for that."
+
+For posterity, I leave my own analysis below:
+<details><summary>Here are some:</summary>
 
 1. The Rust compiler has had a lifetime 59,780 issues reported. Of these, 4,158 contain one of "crash", "segmentation fault", or "segfault".
 2. The Zig compiler has had a lifetime 13,269 issues reported. Of these, 2,260 contain one of "crash", "segmentation fault", or "segfault".
@@ -52,7 +57,7 @@ Also not great. Again, these statistics are slightly off at best simply due to t
 
 </details>
 
-If you're not reading the above: It can be summarized as "Not ideal."
+If you're not reading the above: It can be summarized as "Pretty bad."
 
 ### Philosophy
 
