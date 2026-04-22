@@ -29,7 +29,7 @@ I subscribe to the idea that the user must be constrained. It is perhaps harsh t
 
 The fact that Zig allows the user to write faulty software is supported by various somewhat informal, but still useful, statistics. Notably, the following statistic disregard duplicates, and unreported errors. However, general trends are still of note. 
 
-UPDATE: Someone has done a much more thorough analysis of crashes in JS runtimes! Thank you to the authors of the <a href="https://js-segfault-compare.sigmasd.workers.dev/">Javascript Runtime Segfault Tracker</a>, which demonstrates my point very effectively. 
+UPDATE: Someone has done a much more thorough analysis of crashes in JS runtimes! Thank you to the authors of the <a href="https://js-segfault-compare.sigmasd.workers.dev/">Javascript Runtime Segfault Tracker</a>, which demonstrates my point very effectively. To quote the person who sent me this: "it's a log scale. i'll let you guess which runtime is responsible for that."
 
 For posterity, I leave my own analysis below:
 <details><summary>Here are some:</summary>
