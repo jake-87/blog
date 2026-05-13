@@ -36,6 +36,7 @@ type base =
   | Name of string
   | Add of string * string
   | Int of int
+  | Print of string
 
 type anf =
   | Let of string * base * anf
