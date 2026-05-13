@@ -90,7 +90,7 @@ must first convert the "head" (`2`), and then the "body" (`y`).
 
 Converting the `head` will result in something of form
 ```ocaml
-let nm = 2 in 
+let y = 2 in 
 [·]
 ```
 Note that the hole is left to be filled later. This way, the conversion of `y`'s head need know nothing about its environment. 
