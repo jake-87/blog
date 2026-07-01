@@ -154,7 +154,7 @@ Here's some ascii art showing what refers to what:
  \———————————————————————/
 ```
 
-Now, how does this help us with our substituion problem? Surely if we naively subtitute we will still have binding issues - and indeed we do:
+Now, how does this help us with our substitution problem? Surely if we naively subtitute we will still have binding issues - and indeed we do:
 
 ```hs
 λ (λ λ (0 1)) 0
