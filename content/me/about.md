@@ -5,9 +5,11 @@ title = "About Me"
 
 # Things I Enjoy
 
-- Programming languages (especially dependent ones)
+- Programming languages
 - Type theory and type systems
+- Formal methods
 - Singing (both choral and solo)
+- Musical theatre
 
 <br>
 
@@ -24,5 +26,10 @@ on discord (that's four underscores)
 jake-87
 ```
 on github
+
+email:
+```
+contact@blueberrywren.dev
+```
 
 <br>
