@@ -7,6 +7,8 @@ The following is adapted from the <a href="https://isabelle.in.tum.de/documentat
 
 I also make no promise that the following is entirely 100% correct. It is ultimately my understanding, but I have run it past several others, and to the best of our knowledge it is correct.
 
+Out of curiosity, if you're here from UNSW's COMP4161, shoot me an email: `contact@blueberrywren.dev`.
+
 # Notes
 
 These rule methods can be used in many different ways. While some general principles are mentioned below, if the prerequisits are met, 
