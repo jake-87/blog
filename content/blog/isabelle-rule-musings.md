@@ -3,7 +3,7 @@ title = "Isabelle/HOL: The various rule methods"
 date = 2025-09-19
 +++
 
-The following is adapted from the <a href="https://isabelle.in.tum.de/dist/Isabelle2025/doc/tutorial.pdf">Isabelle/HOL 2025 tutorial</a>, particularly 5.2 and onwards. It will explain much more thoroughly than I can.
+The following is adapted from the <a href="https://isabelle.in.tum.de/documentation.html">Isabelle/HOL 2025 tutorial</a>, particularly 5.2 and onwards. It will explain much more thoroughly than I can, so please use it as a source of truth.
 
 I also make no promise that the following is entirely 100% correct. It is ultimately my understanding, but I have run it past several others, and to the best of our knowledge it is correct.
 
