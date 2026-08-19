@@ -29,7 +29,7 @@ on github
 
 email:
 ```
-contact@blueberrywren.dev
+contact AT blueberrywren.dev
 ```
 
 <br>
