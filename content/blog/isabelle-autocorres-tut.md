@@ -98,7 +98,7 @@ external_file "sum_list.c"
 install_C_file "sum_list.c"
 ```
 
-You can use `print_theorems` to see what this defines. Of particular interest is `list_sum_body_def` Then, AutoCorres:
+You can use `print_theorems` to see what this defines. Of particular interest is `list_sum_body_def`. Then, AutoCorres:
 
 ```isabelle
 autocorres [skip_word_abs] "list_sum.c"
