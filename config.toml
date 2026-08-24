@@ -14,14 +14,21 @@ author = "Blueberry Wren"
 title="Blueberry Wren Thoughts"
 description="The bloggings of Wren"
 default_language="en"
+
 [markdown]
-# Whether to do syntax highlighting
-# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
-highlight_code = true
-highlight_theme = "monokai"
 bottom_footnotes = true
+
+[markdown.highlighting]
+# Whether to do syntax highlighting
+highlight_code = true
+# Theme can be a single theme...
+theme = "monokai"
+# ...or split into light/dark variants instead, e.g.:
+# light_theme = "monokai"
+# dark_theme = "monokai"
+
+# Once you add Isabelle support:
+# extra_grammars = ["extra/isabelle.tmLanguage.json"]
+
 [extra]
 # Put all your custom variables here
-
-
-
