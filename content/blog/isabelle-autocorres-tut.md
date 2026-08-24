@@ -65,7 +65,7 @@ unsigned int list_sum(unsigned int *list, unsigned int length) {
     return sum;
 }
 ```
-We use unsigned integers to avoid worrying about overflow. You might not want to!
+The use of unsigned will be expanded on later.
 
 We'll put it in a C file named `list_sum.c`.
 
@@ -103,6 +103,12 @@ You can use `print_theorems` to see what this defines. Of particular interest is
 ```isabelle
 autocorres [skip_word_abs] "list_sum.c"
 ```
+
+## Tangent: What's going on?
+
+The idea the C parser and AutoCorres use for verifying C is that it is reasonable to do a very direct translation of C to Simpl, and then a _refinement_ to the monadic representation. The C parser is correct through inspection, and extensive testing. However, the translation of Simpl to the monadic form is verified - there exist Isabelle-checkable proofs that show that the monadic representation, however different it may be, behaves identically to the Simpl equivalent. This makes the monadic form a refinement of Simpl, and is why the things we prove about the monadic forms translate back down to C.
+
+## Back to AutoCorres
 
 This might also take a second.
 
