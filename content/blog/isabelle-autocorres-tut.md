@@ -547,6 +547,8 @@ lemma list_sum_correct: "ovalid (λs. list_defined_to s list len) (list_sum' lis
   by simp
 
 end
+
+end
 ```
 
 A bit underwhelming for how long it took to explain, perhaps!
