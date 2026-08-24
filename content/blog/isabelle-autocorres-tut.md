@@ -5,7 +5,7 @@ date = 2026-08-28
 
 # Verifying (simple) C in Isabelle/HOL with AutoCorres
 
-This post details the first steps of verifying a C function in Isabelle/HOL using AutoCorres. It'll go over the basic setup for Isabelle and AutoCorres, what AutoCorres gives you, and how we can verify some basic properties of a function (here, the sum of a list.) We use the latest versions of Isabelle and AutoCorres available at time of writing (24/08/26).
+This post details the first steps of verifying a C function in Isabelle/HOL using AutoCorres. It'll go over the basic setup for Isabelle and AutoCorres, what AutoCorres gives you, and how we can verify some basic properties of a function (here, the sum of a list.) I use the latest versions of Isabelle and AutoCorres available at time of writing (24/08/26).
 
 # Caveats
 
