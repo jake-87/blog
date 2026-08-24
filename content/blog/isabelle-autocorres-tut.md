@@ -195,7 +195,9 @@ The argument are:
 Here, `'b option` is used because of the choice of state monad AutoCorres makes. Note that our postcondition takes both the state `'a` and the return value `'b'`. When we use `ovalidNF` with `list_sum'`, `'a` will be our state `lifted_globals`. So, our lemma then becomes:
 
 ```isabelle
-lemma list_sum_no_fail: "ovalidNF (λs. list_defined_to s list len ∧ Q s) (list_sum' list len) (λret s. Q s)"
+lemma list_sum_no_fail: "ovalidNF (λs. list_defined_to s list len ∧ Q s)
+                                  (list_sum' list len)
+                                  (λret s. Q s)"
 ```
 
 If we have our list defined properly and some property Q, and we run our program, then it does not fail and Q is still true.
@@ -318,7 +320,8 @@ It's finally time to start unfolding the definition of `ovalid` so we can crunch
 we're left with
 
 ```isabelle
- 1. ⋀a s. ⟦a ≤ len; list_defined_to s list len; Q s; a < len⟧ ⟹ unat (len - (a + 1)) < unat (len - a)
+ 1. ⋀a s. ⟦a ≤ len; list_defined_to s list len; Q s; a < len⟧
+          ⟹ unat (len - (a + 1)) < unat (len - a)
 ```
 
 which `sledgehammer` takes out nicely.
@@ -342,11 +345,14 @@ The final proof is as follows:
 lemma obind_wp_weak: " ⟦⋀r. ⦉P⦊ g r ⦉Q⦊; ⦉P⦊ f ⦉λs. P⦊⟧ ⟹ ⦉P⦊ obind f g ⦉Q⦊"
   by (erule obind_wp, assumption)
 
-lemma list_sum_no_fail: "ovalidNF (λs. list_defined_to s list len ∧ Q s) (list_sum' list len) (λret s. Q s)"
+lemma list_sum_no_fail: "ovalidNF (λs. list_defined_to s list len ∧ Q s)
+                                  (list_sum' list len)
+                                  (λret s. Q s)"
   apply (unfold list_sum'_def)
   apply auto
   apply wp
-  apply (subst owhile_add_inv[where I="λ(i, sum) s. i ≤ len ∧ list_defined_to s list len ∧ Q s" and M="λ(i, sum) s. unat (len - i)"])
+  apply (subst owhile_add_inv[where I="λ(i, sum) s. i ≤ len ∧ list_defined_to s list len ∧ Q s"
+                                and M="λ(i, sum) s. unat (len - i)"])
   apply wp
      apply auto
      apply (simp add: list_defined_to_def)
@@ -366,7 +372,10 @@ We could have also defined the sum of a list as similar to the following recursi
 
 ```isabelle
 function list_sum_spec :: "lifted_globals ⇒ 32 word ptr ⇒ 32 word ⇒ 32 word ⇒ 32 word" where
-"list_sum_spec s list len i = (if i = 0 then 0 else heap_w32 s (list +⇩p uint (i - 1)) + list_sum_spec s list len (i - 1))"
+"list_sum_spec s list len i = (if i = 0 then 0
+                               else heap_w32 s (list +⇩p uint (i - 1))
+                                    + list_sum_spec s list len (i - 1))"
+  (* The pattern matching is trivially complete. *)
   by pat_completeness auto
 ```
 
@@ -390,7 +399,9 @@ declare list_sum_spec.simps [simp del]
 We can set up our lemma like before, but this time, we use the `ret` parameter:
 
 ```isabelle
-lemma list_sum_no_fail: "ovalid (λs. list_defined_to s list len) (list_sum' list len) (λret s. list_sum_spec s list len len = ret)"
+lemma list_sum_correct: "ovalid (λs. list_defined_to s list len)
+                                (list_sum' list len)
+                                (λret s. list_sum_spec s list len len = ret)"
 ```
 
 We want the result to be equivalent to summing the entire list with our recursive `spec` function. We also don't bother to prove that it doesn't fail here.
@@ -405,7 +416,9 @@ We have to manually `subst list_sum_spec.simps` a few times as we deleted it fro
 
 ```isabelle
 function list_sum_spec :: "lifted_globals ⇒ 32 word ptr ⇒ 32 word ⇒ 32 word ⇒ 32 word" where
-"list_sum_spec s list len i = (if i = 0 then 0 else heap_w32 s (list +⇩p uint (i - 1)) + list_sum_spec s list len (i - 1))"
+"list_sum_spec s list len i = (if i = 0 then 0
+                               else heap_w32 s (list +⇩p uint (i - 1))
+                                    + list_sum_spec s list len (i - 1))"
   by pat_completeness auto
 termination
   apply (rule local.termination[where R="measure (λ(_,_,len,i). unat i)"])
@@ -415,10 +428,14 @@ termination
 
 declare list_sum_spec.simps [simp del]
 
-lemma list_sum_correct: "ovalid (λs. list_defined_to s list len) (list_sum' list len) (λret s. list_sum_spec s list len len = ret)"
+lemma list_sum_correct: "ovalid (λs. list_defined_to s list len)
+                                (list_sum' list len)
+                                (λret s. list_sum_spec s list len len = ret)"
   apply (unfold list_sum'_def)
   apply wp
-  apply (subst owhile_add_inv[where I="λ(i, sum) s. i ≤ len ∧ list_defined_to s list len ∧ list_sum_spec s list len i = sum" and M="λ(i, sum) s. unat (len - i)"])
+  apply (subst owhile_add_inv[where I="λ(i, sum) s. i ≤ len ∧ list_defined_to s list len
+                                                            ∧ list_sum_spec s list len i = sum"
+                                and M="λ(i, sum) s. unat (len - i)"])
   apply wp
     apply auto
      apply (simp add: inc_le)
@@ -461,7 +478,7 @@ unsigned int list_sum(unsigned int *list, unsigned int length) {
 ```
 
 
-`my_theory.thy`:
+`my_theory.thy` (With less indentation fixing, sorry):
 ```isabelle
 theory my_theory
   imports Main "AutoCorres.AutoCorres"
