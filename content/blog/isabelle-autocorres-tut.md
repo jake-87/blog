@@ -237,7 +237,8 @@ The invariants we care about right now are:
 We also care that this loop terminates, so let's add a suitable measure.
 
 ```isabelle
-  apply (subst owhile_add_inv[where I="λ(i, sum) s. i ≤ len ∧ list_defined_to s list len ∧ Q s" and M="λ(i, sum) s. unat (len - i)"])
+  apply (subst owhile_add_inv[where I="λ(i, sum) s. i ≤ len ∧ list_defined_to s list len ∧ Q s"
+                                and M="λ(i, sum) s. unat (len - i)"])
 ```
 
 `I` is our invariant, and `M` is the termination measure for the loop. Note the type conversion in `M`. Then, `wp` again:
