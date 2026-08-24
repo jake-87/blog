@@ -75,7 +75,7 @@ At this point, your directory should look something like
 ```
 autocorres-1.12
 my_theory.thy
-sum_list.c
+list_sum.c
 launch.sh
 ```
 
