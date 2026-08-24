@@ -315,7 +315,7 @@ It's finally time to start unfolding the definition of `ovalid` so we can crunch
     apply (simp add: ovalid_def, clarsimp)
 ```
 
-we're left wiht
+we're left with
 
 ```isabelle
  1. ⋀a s. ⟦a ≤ len; list_defined_to s list len; Q s; a < len⟧ ⟹ unat (len - (a + 1)) < unat (len - a)
