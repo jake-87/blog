@@ -475,17 +475,18 @@ autocorres [skip_word_abs] "list_sum.c"
 
 context list_sum begin
 
-definition list_defined_to :: "lifted_globals \<Rightarrow> 32 word ptr \<Rightarrow> 32 word \<Rightarrow> bool" where
-    "list_defined_to s list len \<equiv> \<forall>i. 0 \<le> i \<and> i < len \<longrightarrow> is_valid_w32 s (list +\<^sub>p uint i)"
+definition list_defined_to :: "lifted_globals ⇒ 32 word ptr ⇒ 32 word ⇒ bool" where
+    "list_defined_to s list len ≡ ∀i. 0 ≤ i ∧ i < len ⟶ is_valid_w32 s (list +⇩p uint i)"
 
-lemma obind_wp_weak: " \<lbrakk>\<And>r. \<lblot>P\<rblot> g r \<lblot>Q\<rblot>; \<lblot>P\<rblot> f \<lblot>\<lambda>s. P\<rblot>\<rbrakk> \<Longrightarrow> \<lblot>P\<rblot> obind f g \<lblot>Q\<rblot>"
+lemma obind_wp_weak: " ⟦⋀r. ⦉P⦊ g r ⦉Q⦊; ⦉P⦊ f ⦉λs. P⦊⟧ ⟹ ⦉P⦊ obind f g ⦉Q⦊"
   by (erule obind_wp, assumption)
 
-lemma list_sum_no_fail: "ovalidNF (\<lambda>s. list_defined_to s list len \<and> Q s) (list_sum' list len) (\<lambda>ret s. Q s)"
+lemma list_sum_no_fail: "ovalidNF (λs. list_defined_to s list len ∧ Q s) (list_sum' list len) (λret s. Q s)"
   apply (unfold list_sum'_def)
   apply auto
   apply wp
-  apply (subst owhile_add_inv[where I="\<lambda>(i, sum) s. i \<le> len \<and> list_defined_to s list len \<and> Q s" and M="\<lambda>(i, sum) s. unat (len - i)"])
+  apply (subst owhile_add_inv[where I="λ(i, sum) s. i ≤ len ∧ list_defined_to s list len ∧ Q s"
+                                and M="λ(i, sum) s. unat (len - i)"])
   apply wp
      apply auto
      apply (simp add: list_defined_to_def)
@@ -495,21 +496,22 @@ lemma list_sum_no_fail: "ovalidNF (\<lambda>s. list_defined_to s list len \<and>
     apply (metis diff_diff_eq gt0_iff_gem1 less_diff_gt0 unat_mono)
   by (simp add: ovalid_def)+
 
-function list_sum_spec :: "lifted_globals \<Rightarrow> 32 word ptr \<Rightarrow> 32 word \<Rightarrow> 32 word \<Rightarrow> 32 word" where
-"list_sum_spec s list len i = (if i = 0 then 0 else heap_w32 s (list +\<^sub>p uint (i - 1)) + list_sum_spec s list len (i - 1))"
+function list_sum_spec :: "lifted_globals ⇒ 32 word ptr ⇒ 32 word ⇒ 32 word ⇒ 32 word" where
+"list_sum_spec s list len i = (if i = 0 then 0 else heap_w32 s (list +⇩p uint (i - 1)) + list_sum_spec s list len (i - 1))"
   by pat_completeness auto
 termination
-  apply (rule local.termination[where R="measure (\<lambda>(_,_,len,i). unat i)"])
+  apply (rule local.termination[where R="measure (λ(_,_,len,i). unat i)"])
    apply blast
   apply (unfold measure_def)
   by (simp add: measure_unat)
 
 declare list_sum_spec.simps [simp del]
 
-lemma list_sum_correct: "ovalid (\<lambda>s. list_defined_to s list len) (list_sum' list len) (\<lambda>ret s. list_sum_spec s list len len = ret)"
+lemma list_sum_correct: "ovalid (λs. list_defined_to s list len) (list_sum' list len) (λret s. list_sum_spec s list len len = ret)"
   apply (unfold list_sum'_def)
   apply wp
-  apply (subst owhile_add_inv[where I="\<lambda>(i, sum) s. i \<le> len \<and> list_defined_to s list len \<and> list_sum_spec s list len i = sum" and M="\<lambda>(i, sum) s. unat (len - i)"])
+  apply (subst owhile_add_inv[where I="λ(i, sum) s. i ≤ len ∧ list_defined_to s list len ∧ list_sum_spec s list len i = sum"
+                                and M="λ(i, sum) s. unat (len - i)"])
   apply wp
     apply auto
      apply (simp add: inc_le)
