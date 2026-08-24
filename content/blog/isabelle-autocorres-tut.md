@@ -106,11 +106,11 @@ autocorres [skip_word_abs] "list_sum.c"
 
 This might also take a second.
 
-We choose to use `skip_word_abs`. This makes unsigned integers perform modular arithmatic instead of using overflow checks; this has positives and negatives. Read the README for more.
+We choose to use `skip_word_abs`. This makes unsigned integers perform modular arithmetic instead of using overflow checks; this has positives and negatives. Read the README for more.
 
 Again, you can use `print_theorems` to see what this gives you. Of particular interest is `list_sum'_def`. This is the monadic embedding of our function.
 
-We then need to enter the locale (think of it as an enviroment) defined by the C parser and AutoCorres, so your file should look something like:
+We then need to enter the locale (think of it as an environment) defined by the C parser and AutoCorres, so your file should look something like:
 
 ```isabelle
 theory my_theory
@@ -137,7 +137,7 @@ end
 end
 ```
 
-We do our work in this locale. If you haven't already, `term list_sum_body` and `term list_sum'`. The former is the deep embedding produced by the C parser, and the latter is the result of AutoCorres's shallow embedding. These can be unfolded with `list_sum_body_def` and `list_sum'_def` respectively. You can examine the types of things with ctrl-hover (cmd-hover on macs.) 
+We do our work in this locale. If you haven't already, `term list_sum_body` and `term list_sum'`. The former is the deep embedding produced by the C parser, and the latter is the result of AutoCorres's shallow embedding. These can be unfolded with `list_sum_body_def` and `list_sum'_def` respectively. You can examine the types of things with ctrl-hover (cmd-hover on Macs.) 
 
 Also examine `term heap_w32`. The type for the monadic state used by AutoCorres is called `lifted_globals` (You may see it displayed as `'a lifted_globals_scheme` in some places.) It's a record containing fields for each type of poinrter used; ours only uses `unsigned int *`, so it only contains information for 32 bit words. We can examine the extract and update functions used in `list_sum'_def` with `term heap_w32` and `term heap_w32_update`.
 
@@ -192,7 +192,7 @@ The argument are:
 2. A computation function. 
 3. A postcondition function.
 
-Here, `'b option` is used because of the choice of state monad AutoCorres makes. Note that our postcondition takes both the state `'a` and the return value `'b'`. When we use `ovalidNF` with `list_sum'`, `'a` will be our state `lifted_globals`. So, our lemma then becomes:
+Here, `'b option` is used because of the choice of state monad AutoCorres makes. Note that our postcondition takes both the state `'a` and the return value `'b`. When we use `ovalidNF` with `list_sum'`, `'a` will be our state `lifted_globals`. So, our lemma then becomes:
 
 ```isabelle
 lemma list_sum_no_fail: "ovalidNF (λs. list_defined_to s list len ∧ Q s)
@@ -226,7 +226,7 @@ As we have a while-loop, a reasonable step is to add an invariant. An invariant 
 ```isabelle
 Reader_Option_VCG.owhile_add_inv: owhile ?C ?B ?x = owhile_inv ?C ?B ?x ?I ?M
 ```
-Most of the time, the prefixes can be ommitted.
+Most of the time, the prefixes can be omitted.
 
 So first, we add an invariant, and then we can use `wp` to transform our `owhile_inv` into theorems we can work with.
 
@@ -269,7 +269,7 @@ The first we talked about earlier - we can solve it by unfolding `list_defined_t
    apply (simp add: list_defined_to_def)
 ```
 
-For the second, it seems obvious - why hasn't `auto` solved it? (If it were on `nat`s, it certainly would have.) Alas, it's on `32 word`s, which as we have chosen to use modular arithmatic, are slightly less nice. It's hard to search for theorems involving `+` as it's so overloaded, but luckily here `find_theorems solves` finds `Word.inc_le: ?i < ?m ⟹ ?i + 1 ≤ ?m`.
+For the second, it seems obvious - why hasn't `auto` solved it? (If it were on `nat`s, it certainly would have.) Alas, it's on `32 word`s, which as we have chosen to use modular arithmetic, are slightly less nice. It's hard to search for theorems involving `+` as it's so overloaded, but luckily here `find_theorems solves` finds `Word.inc_le: ?i < ?m ⟹ ?i + 1 ≤ ?m`.
 ```isabelle
    apply (simp add: inc_le)
 ```
@@ -480,7 +480,7 @@ unsigned int list_sum(unsigned int *list, unsigned int length) {
 ```
 
 
-`my_theory.thy` (With less indentation fixing, sorry):
+`my_theory.thy` (With less fixing of indentation for the web, sorry):
 ```isabelle
 theory my_theory
   imports Main "AutoCorres.AutoCorres"
