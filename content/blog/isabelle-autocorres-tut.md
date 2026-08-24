@@ -409,7 +409,9 @@ We want the result to be equivalent to summing the entire list with our recursiv
 We can begin as before, ommitting the `auto` step. We then need to annotate with a suitable invariant. A hint: We want the sum _at the end_ to be correct, so a good invariant should capture correctness _at every step_, which gives us full correctness when the loop finishes.
 
 ```isabelle
-  apply (subst owhile_add_inv[where I="λ(i, sum) s. i ≤ len ∧ list_defined_to s list len ∧ list_sum_spec s list len i = sum" and M="λ(i, sum) s. unat (len - i)"])
+  apply (subst owhile_add_inv[where I="λ(i, sum) s. i ≤ len ∧ list_defined_to s list len
+                                                            ∧ list_sum_spec s list len i = sum"
+                                and M="λ(i, sum) s. unat (len - i)"])
 ```
 
 We have to manually `subst list_sum_spec.simps` a few times as we deleted it from the simp set, but otherwise the proof is very straightforward. Mine came out to be:
