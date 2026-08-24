@@ -9,7 +9,7 @@ This post details the first steps of verifying a C function in Isabelle/HOL usin
 
 # Caveats
 
-This is _not_ official documentation for AutoCorres, nor may it be 100% correct in all places. All the proofs go through, but I do not work on AutoCorres, nor have I used it professionally; most of my experience is hobby verification. However, I have found resources on it are woefully lacking, so I wished to introduce some more. Much of this information has been gleaned from the official documentation (which can be found at the aformentioned,) and <a href="https://cgi.cse.unsw.edu.au/~cs4161/">this course</a>. When it runs, the slides/similar may be removed for some time - they exist on the internet archive also.
+This is _not_ official documentation for AutoCorres, nor may it be 100% correct in all places. All the proofs go through, but I do not work on AutoCorres, nor have I used it professionally; most of my experience is hobby verification. However, I have found resources on it are woefully lacking, so I wished to introduce some more. Much of this information has been gleaned from the official documentation (which can be found at the aforementioned,) and <a href="https://cgi.cse.unsw.edu.au/~cs4161/">this course</a>. When it runs, the slides/similar may be removed for some time - they exist on the internet archive also.
 
 # Assumed knowledge
 
@@ -145,7 +145,7 @@ end
 
 We do our work in this locale. If you haven't already, `term list_sum_body` and `term list_sum'`. The former is the deep embedding produced by the C parser, and the latter is the result of AutoCorres's shallow embedding. These can be unfolded with `list_sum_body_def` and `list_sum'_def` respectively. You can examine the types of things with ctrl-hover (cmd-hover on Macs.) 
 
-Also examine `term heap_w32`. The type for the monadic state used by AutoCorres is called `lifted_globals` (You may see it displayed as `'a lifted_globals_scheme` in some places.) It's a record containing fields for each type of poinrter used; ours only uses `unsigned int *`, so it only contains information for 32 bit words. We can examine the extract and update functions used in `list_sum'_def` with `term heap_w32` and `term heap_w32_update`.
+Also examine `term heap_w32`. The type for the monadic state used by AutoCorres is called `lifted_globals` (You may see it displayed as `'a lifted_globals_scheme` in some places.) It's a record containing fields for each type of pointer used; ours only uses `unsigned int *`, so it only contains information for 32 bit words. We can examine the extract and update functions used in `list_sum'_def` with `term heap_w32` and `term heap_w32_update`.
 
 Which monad AutoCorres chooses to embed a function into depends on the function, and can also be configured. This function is simple enough that it can be encoded with purely `option`, but others include `pure`, `gets` (option with state,) and `nondet`. 
 
@@ -164,7 +164,7 @@ The not failing example will go into quite a lot of depth, whereas the correctne
 
 # Not failing (good)
 
-Let's consider what we need for this function to not fail in C. The obvious constraint is that `list[i]` must be defined for all `0 <= i < length`. Using `term is_valid_w32 :: "lifted_globals ⇒ 32 word ptr ⇒ bool" `, we can state this as a defintion:
+Let's consider what we need for this function to not fail in C. The obvious constraint is that `list[i]` must be defined for all `0 <= i < length`. Using `term is_valid_w32 :: "lifted_globals ⇒ 32 word ptr ⇒ bool" `, we can state this as a definition:
 
 ```isabelle
 definition list_defined_to :: "lifted_globals ⇒ 32 word ptr ⇒ 32 word ⇒ bool" where
@@ -181,7 +181,7 @@ Now we have our suitable precondition, let's set up our "doesn't fail" lemma. We
   - The list is defined properly 
   - Some other property Q is true
 - Then:
-  - Our function does returns successfully, so
+  - Our function does return successfully, so
   - That property is still true.
   
 We can state this using the combinator `ovalidNF`. The NF stands for `no fail`, and it adds the additional condition that our program does not fail in some way during execution. Precisely what we want! It takes three arguments:
@@ -193,7 +193,7 @@ term ovalidNF
   :: "('a ⇒ bool) ⇒ ('a ⇒ 'b option) ⇒ ('b ⇒ 'a ⇒ bool) ⇒ bool"
 *)
 ```
-The argument are:
+The arguments are:
 1. A precondition function.
 2. A computation function. 
 3. A postcondition function.
@@ -413,7 +413,7 @@ lemma list_sum_correct: "ovalid (λs. list_defined_to s list len)
 
 We want the result to be equivalent to summing the entire list with our recursive `spec` function. We also don't bother to prove that it doesn't fail here.
 
-We can begin as before, ommitting the `auto` step. We then need to annotate with a suitable invariant. A hint: We want the sum _at the end_ to be correct, so a good invariant should capture correctness _at every step_, which gives us full correctness when the loop finishes.
+We can begin as before, omitting the `auto` step. We then need to annotate with a suitable invariant. A hint: We want the sum _at the end_ to be correct, so a good invariant should capture correctness _at every step_, which gives us full correctness when the loop finishes.
 
 ```isabelle
   apply (subst owhile_add_inv[where I="λ(i, sum) s. i ≤ len ∧ list_defined_to s list len
