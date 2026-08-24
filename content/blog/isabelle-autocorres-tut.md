@@ -13,7 +13,7 @@ This is _not_ official documentation for AutoCorres, nor may it be 100% correct 
 
 # Assumed knowledge
 
-This article doesn't assume _much_ Isabelle/HOL knowledge, but some understanding of syntax won't hurt. A bit of C knowledge is required as well, and so is a little knowledge about program verification - a little Hoare logic, and the like. I'll try to explain as much as I can without being excessively verbose, and much of it is very searchable.
+This article assumes a little either Isabelle/HOL or general verification knowledge, but I try to explain wherever feasible. A bit of C knowledge is required as well, and so is a little knowledge about program verification - a little Hoare logic, and the like. I'll try to explain as much as I can without being excessively verbose, and much of it is very searchable.
 
 # Installing Isabelle
 
