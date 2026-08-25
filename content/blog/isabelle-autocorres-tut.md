@@ -212,6 +212,12 @@ If we have our list defined properly and some property Q, and we run our program
 
 If you're familiar with Hoare logic, you'll know we probably want to use some sort of weakest precondition reasoning. Indeed, AutoCorres provides us with a family of tactics such as `wp` and `wpsimp`. However, I find it nice to start these proofs by unfolding the function at hand, and applying `auto` or similar to get some simplification going. Then we can apply `wp` to apply relevant weakest precondition rules automatically.
 
+```isabelle
+  apply (unfold list_sum'_def)
+  apply auto
+  apply wp
+```
+
 This should leave you with a state something like:
 
 ```isabelle
