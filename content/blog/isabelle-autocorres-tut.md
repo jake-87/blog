@@ -246,6 +246,7 @@ The invariants we care about right now are:
 1. ` i ≤ len` (for termination)
 2. `list_defined_to s list len` (for no-failure)
 3. `Q s` (for simplified correctness)
+
 We also care that this loop terminates, so let's add a suitable measure.
 
 ```haskell
