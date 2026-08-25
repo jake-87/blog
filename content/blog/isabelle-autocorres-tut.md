@@ -210,7 +210,7 @@ If we have our list defined properly and some property Q, and we run our program
 
 ## Proof time! (detailed)
 
-If you're familiar with Hoare logic, you'll know we probably want to use some sort of weakest precondition reasoning. Indeed, AutoCorres provides us with a family of tactics such as `wp` and `wpsimp`. However, I find it nice to start these proofs by unfolding the function at hand, and applying `auto` or similar to get some simplification going. Then we can apply `wp` to apply relevant weakest precondition rules automatically.
+If you're familiar with Hoare logic, you'll know we probably want to use some sort of weakest precondition reasoning. A weakest precondition is roughly "what is the smallest amount of information we need to know for this to be true", which allows us to simplify our proof obligations. Indeed, AutoCorres provides us with a family of tactics such as `wp` and `wpsimp`. However, I find it nice to start these proofs by unfolding the function at hand, and applying `auto` or similar to get some simplification going. Then we can apply `wp` to apply relevant weakest precondition rules automatically.
 
 ```isabelle
   apply (unfold list_sum'_def)
