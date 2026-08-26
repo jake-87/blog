@@ -114,7 +114,7 @@ The idea the C parser and AutoCorres use for verifying C is that it is reasonabl
 
 This might also take a second.
 
-We choose to use `skip_word_abs`. This makes unsigned integers perform modular arithmetic instead of using overflow checks; this has positives and negatives. Read the README for more.
+We choose to use `skip_word_abs`, skipping the "word abstraction" that can turn integers into Isabelle `nat`s. This makes unsigned integers perform modular arithmetic instead of using overflow checks; this has positives and negatives. Read the README for more, but perhaps you can guess why this is advantageous in our case? (Hint: is `sum` overflowing allowed?)
 
 Again, you can use `print_theorems` to see what this gives you. Of particular interest is `list_sum'_def`. This is the monadic embedding of our function.
 
