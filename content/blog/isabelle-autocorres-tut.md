@@ -65,7 +65,9 @@ unsigned int list_sum(unsigned int *list, unsigned int length) {
     return sum;
 }
 ```
-The use of unsigned will be expanded on later.
+The following will be expanded on shortly:
+- The use of unsigned
+- What it means to verify code
 
 We'll put it in a C file named `list_sum.c`.
 
