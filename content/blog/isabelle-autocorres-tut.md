@@ -96,8 +96,8 @@ end
 We then need to let AutoCorres perform its magic. First, we "install" the C file with the C parser:
 
 ```ocaml
-external_file "sum_list.c"
-install_C_file "sum_list.c"
+external_file "list_sum.c"
+install_C_file "list_sum.c"
 ```
 
 You can use `print_theorems` to see what this defines. Of particular interest is `list_sum_body_def`. Then, AutoCorres:
