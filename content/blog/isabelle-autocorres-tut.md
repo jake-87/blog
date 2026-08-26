@@ -13,7 +13,7 @@ This is _not_ official documentation for AutoCorres, nor may it be 100% correct 
 
 # Assumed knowledge
 
-This article assumes a little either Isabelle/HOL or general verification knowledge, but I try to explain wherever feasible. A bit of C knowledge is required as well, and so is a little knowledge about program verification - a little Hoare logic, and the like. I'll try to explain as much as I can without being excessively verbose, and much of it is very searchable.
+This article assumes a little either Isabelle/HOL or general verification knowledge, but I try to explain wherever feasible. A bit of C knowledge is required as well, and so is a little knowledge about program verification - a little Hoare logic, and the like. I'll try to explain as much as I can without being excessively verbose, and much of it is very searchable. Let's get into it!
 
 # Installing Isabelle
 
@@ -181,7 +181,8 @@ Now we have our suitable precondition, let's set up our "doesn't fail" lemma. We
   - The list is defined properly 
   - Some other property Q is true
 - Then:
-  - Our function does return successfully, so
+  - Our function does return successfully, and
+  - Our function does not modify any state, so
   - That property is still true.
   
 We can state this using the combinator `ovalidNF`. The NF stands for `no fail`, and it adds the additional condition that our program does not fail in some way during execution. Precisely what we want! It takes three arguments:
@@ -206,7 +207,7 @@ lemma list_sum_no_fail: "ovalidNF (λs. list_defined_to s list len ∧ Q s)
                                   (λret s. Q s)"
 ```
 
-If we have our list defined properly and some property Q, and we run our program, then it does not fail and Q is still true.
+If we have our list defined properly and some property Q, and we run our program, then it does not fail and Q is still true (as our program did not modify any state).
 
 ## Proof time! (detailed)
 
@@ -218,7 +219,7 @@ If you're familiar with Hoare logic, you'll know we probably want to use some so
   apply wp
 ```
 
-This should leave you with a state something like:
+This should leave you with a state something like the following. We can see how our function has been simplified down to combinators like `owhile` and `oreturn`.  
 
 ```ocaml
 proof (prove)
@@ -231,6 +232,7 @@ goal (1 subgoal):
                                                        (0, 0))
      (λr. case r of (x, y) ⇒ Q)
 ```
+If you're unfamiliar with Isabelle, this is our proof goal or obligation - it's what we're required to prove to finish the proof as a whole.
 
 I _highly_ recommend using the Query tab of jedit throughout (or equivalents like `find_theorems`.) `name: foo` will come in handy, and it's a nice fuzzy search. `find_theorems solves` will do what's on the tin, and `find_theorem intro` will find theorems that could apply.
 
@@ -254,15 +256,14 @@ We also care that this loop terminates, so let's add a suitable measure.
                                 and M="λ(i, sum) s. unat (len - i)"])
 ```
 
-`I` is our invariant, and `M` is the termination measure for the loop. Note the type conversion in `M`. Then, `wp` again:
+`I` is our invariant, and `M` is the termination measure for the loop. Note the type conversion in `M`. Then, `wp` (and `auto`) again:
 
 ```ocaml
   apply wp
+  apply auto
 ```
 
-This'll probably give you a few more normal looking goals. `apply auto` can come in handy again to chunk these down.
-
-This leaves me with:
+This leaves me with the following three goals. Again if you're unfamiliar with Isabelle, the left-hand-side represents our "known facts", and the right-hand-side is our goal, like earlier.
 
 ```ocaml
 proof (prove)
@@ -277,7 +278,7 @@ goal (3 subgoals):
        } ⦉λr s. (case r of (i, sum) ⇒ λs. unat (len - i)) s < m⦊
 ```
 
-The first we talked about earlier - we can solve it by unfolding `list_defined_to` via `list_defined_to_def`, and basic reasoning.
+The first we talked about earlier - the access `list[i]` must be valid. We can solve this subgoal by unfolding `list_defined_to` via `list_defined_to_def`, and basic reasoning.
 
 ```ocaml
    apply (simp add: list_defined_to_def)
@@ -288,7 +289,7 @@ For the second, it seems obvious - why hasn't `auto` solved it? (If it were on `
    apply (simp add: inc_le)
 ```
 
-The final goal is more interesting. The initial intuition might be to use `wp` again, but this leaves us with nasty metavariables because of the chaining nature of the binds, and the fact that AutoCorres here is slightly too general. With a little searching we have the following:
+The final goal is more interesting. The initial intuition might be to use `wp` again, but this leaves us with nasty metavariables because of the chaining nature of the binds, and the fact that AutoCorres here is slightly too general. With a little searching we have the following, which presumably `wp` is applying:
 
 ```ocaml
   Reader_Option_VCG.obind_wp: ⟦⋀r. ⦉?R r⦊ ?g r ⦉?Q⦊; ⦉?P⦊ ?f ⦉?R⦊⟧ ⟹ ⦉?P⦊ ?f >>= ?g ⦉?Q⦊
@@ -338,7 +339,7 @@ we're left with
           ⟹ unat (len - (a + 1)) < unat (len - a)
 ```
 
-which `sledgehammer` takes out nicely.
+This is related to our proof that the loop terminates, which `sledgehammer` takes out nicely.
 
 ```ocaml
     apply (metis diff_diff_eq gt0_iff_gem1 less_diff_gt0 unat_mono)
