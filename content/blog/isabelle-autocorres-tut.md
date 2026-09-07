@@ -203,7 +203,7 @@ The arguments are:
 2. A computation function. 
 3. A postcondition function.
 
-Here, `'b option` is used because of the choice of state monad AutoCorres makes. Note that our postcondition takes both the state `'a` and the return value `'b`. When we use `ovalidNF` with `list_sum'`, `'a` will be our state `lifted_globals`. So, our lemma then becomes:
+Note that use the `option` combinators as AutoCorres has translated our function into the `option` monad. Also note that our postcondition takes both the state `'a` and the return value `'b`. When we use `ovalidNF` with `list_sum'`, `'a` will be our state `lifted_globals`. So, our lemma then becomes:
 
 ```ocaml
 lemma list_sum_no_fail: "ovalidNF (λs. list_defined_to s list len ∧ Q s)
