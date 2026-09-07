@@ -11,6 +11,8 @@ This post details the first steps of verifying a C function in Isabelle/HOL usin
 
 This is _not_ official documentation for AutoCorres, nor may it be 100% correct in all places. All the proofs go through, but I do not work on AutoCorres, nor have I used it professionally; most of my experience is hobby verification. However, I have found resources on it are woefully lacking, so I wished to introduce some more. Much of this information has been gleaned from the official documentation (which can be found at the aforementioned,) and <a href="https://cgi.cse.unsw.edu.au/~cs4161/">this course</a>. When it runs, the slides/similar may be removed for some time - they exist on the internet archive also.
 
+Any errors in the prose or code of the following are my own.
+
 # Assumed knowledge
 
 This article assumes a little either Isabelle/HOL or general verification knowledge, but I try to explain wherever feasible. A bit of C knowledge is required as well, and so is a little knowledge about program verification - a little Hoare logic, and the like. I'll try to explain as much as I can without being excessively verbose, and much of it is very searchable. Let's get into it!
@@ -213,7 +215,7 @@ If we have our list defined properly and some property Q, and we run our program
 
 ## Proof time! (detailed)
 
-If you're familiar with Hoare logic, you'll know we probably want to use some sort of weakest precondition reasoning. A weakest precondition is roughly "what is the smallest amount of information we need to know for this to be true", which allows us to simplify our proof obligations. Indeed, AutoCorres provides us with a family of tactics such as `wp` and `wpsimp`. However, I find it nice to start these proofs by unfolding the function at hand, and applying `auto` or similar to get some simplification going. Then we can apply `wp` to apply relevant weakest precondition rules automatically.
+If you're familiar with Hoare logic, you'll know we probably want to use some sort of weakest precondition reasoning. A weakest precondition is roughly "what is the smallest amount of information we need to know for this to be true", which allows us to simplify our proof obligations. Indeed, AutoCorres provides us with a family of tactics such as `wp` and `wpsimp`. However, I've found it useful to start these proofs by unfolding the function at hand, and applying `auto` or similar to get some simplification going. Then we can apply `wp` to apply relevant weakest precondition rules automatically.
 
 ```ocaml
   apply (unfold list_sum'_def)
@@ -258,14 +260,14 @@ We also care that this loop terminates, so let's add a suitable measure.
                                 and M="λ(i, sum) s. unat (len - i)"])
 ```
 
-`I` is our invariant, and `M` is the termination measure for the loop. Note the type conversion in `M`. Then, `wp` (and `auto`) again:
+`I` is our invariant, and `M` is the termination measure for the loop. Note the type conversion in `M`. Then, `wp` for weakest precondition reasoning again:
 
 ```ocaml
   apply wp
   apply auto
 ```
 
-This leaves me with the following three goals. Again if you're unfamiliar with Isabelle, the left-hand-side represents our "known facts", and the right-hand-side is our goal, like earlier.
+(unconstrained `auto` here technically isn't the best practice, as it's affecting multiple goals, but in this instance it works alright.) This leaves me with the following three goals. Again if you're unfamiliar with Isabelle, the left-hand-side represents our "known facts", and the right-hand-side is our goal, like earlier.
 
 ```ocaml
 proof (prove)
@@ -286,24 +288,24 @@ The first we talked about earlier - the access `list[i]` must be valid. We can s
    apply (simp add: list_defined_to_def)
 ```
 
-For the second, it seems obvious - why hasn't `auto` solved it? (If it were on `nat`s, it certainly would have.) Alas, it's on `32 word`s, which as we have chosen to use modular arithmetic, are slightly less nice. It's hard to search for theorems involving `+` as it's so overloaded, but luckily here `find_theorems solves` finds `Word.inc_le: ?i < ?m ⟹ ?i + 1 ≤ ?m`.
+For the second, it seems obvious - why hasn't `auto` solved it? (If it were on `nat`s, it certainly would have.) Alas, it's on `32 word`s, which as we have chosen to use modular arithmetic, are slightly less nice. I found it slightly hard to search for theorems involving `+` as it's so overloaded, but luckily here `find_theorems solves` finds `Word.inc_le: ?i < ?m ⟹ ?i + 1 ≤ ?m`.
 ```ocaml
    apply (simp add: inc_le)
 ```
 
-The final goal is more interesting. The initial intuition might be to use `wp` again, but this leaves us with nasty metavariables because of the chaining nature of the binds, and the fact that AutoCorres here is slightly too general. With a little searching we have the following, which presumably `wp` is applying:
+The final goal is more interesting. The initial intuition might be to use `wp` again, but this leaves us with nasty metavariables because of the chaining nature of the binds, and the fact that AutoCorres here is slightly too general. With a little searching we have the following, which it seems like `wp` is applying:
 
 ```ocaml
   Reader_Option_VCG.obind_wp: ⟦⋀r. ⦉?R r⦊ ?g r ⦉?Q⦊; ⦉?P⦊ ?f ⦉?R⦊⟧ ⟹ ⦉?P⦊ ?f >>= ?g ⦉?Q⦊
 ```
-But we only really need `?R` to be identical to `?P`. We could instantiate `?R` manually each time, or we can make a little helper lemma (which I will do.) Above this lemma, we add
+But we only really need `?R` to be identical to `?P`. We could instantiate `?R` manually each time, or we can make a little helper lemma. Above this lemma, we add
 
 ```ocaml
 lemma obind_wp_weak: " ⟦⋀r. ⦉P⦊ g r ⦉Q⦊; ⦉P⦊ f ⦉λs. P⦊⟧ ⟹ ⦉P⦊ obind f g ⦉Q⦊"
   by (erule obind_wp, assumption)
 ```
 
-Then we can apply `obind_wp_weak` twice (There are two binds.)
+Then we can apply `obind_wp_weak` as many times as needed (There are two binds.)
 
 ```ocaml
   apply (rule obind_wp_weak)+
@@ -341,9 +343,10 @@ we're left with
           ⟹ unat (len - (a + 1)) < unat (len - a)
 ```
 
-This is related to our proof that the loop terminates, which `sledgehammer` takes out nicely.
+This is part of the proof that our measure is correct and our loop terminates. `sledgehammer` takes it out nicely.
 
 ```ocaml
+    (* Found with sledgehammer *)
     apply (metis diff_diff_eq gt0_iff_gem1 less_diff_gt0 unat_mono)
 ```
 
