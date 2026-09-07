@@ -9,7 +9,7 @@ This post details the first steps of verifying a C function in Isabelle/HOL usin
 
 # Caveats
 
-This is _not_ official documentation for AutoCorres, nor may it be 100% correct in all places. All the proofs go through, but I do not work on AutoCorres, nor have I used it professionally; most of my experience is hobby verification. However, I have found resources on it are woefully lacking, so I wished to introduce some more. Much of this information has been gleaned from the official documentation (which can be found at the aforementioned,) and <a href="https://cgi.cse.unsw.edu.au/~cs4161/">this course</a>. When it runs, the slides/similar may be removed for some time - they exist on the internet archive also.
+This is _not_ official documentation for AutoCorres, nor may it be 100% correct in all places. All the proofs go through, but I do not work on AutoCorres, nor have I used it professionally; most of my experience is hobby verification. However, I have found resources on it are woefully lacking, so I wished to introduce some more. Much of this information has been gleaned from the official documentation (which can be found <a href="https://trustworthy.systems/projects/OLD/autocorres/">here</a>,) and <a href="https://cgi.cse.unsw.edu.au/~cs4161/">this UNSW course</a>. When it runs, the slides/similar may be removed for some time - they exist on the internet archive also.
 
 Any errors in the prose or code of the following are my own.
 
