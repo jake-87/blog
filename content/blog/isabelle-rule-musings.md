@@ -40,7 +40,7 @@ which can be then proven seperately. `rule` is for backwards-reasoning; here we 
 
 ## `erule`
 
-`erule` is designed to function with elimination rules. Take for example the elimination rule for disjunction:
+`erule` is designed to function with elimination rules. The `e` hence stands for `elimination`/`eliminator`. Take for example the elimination rule for disjunction:
 
 ```hs
 P ∨ Q     (P ==> R)    (Q ==> R)
