@@ -77,7 +77,7 @@ I'm more a fan of LCF because it seems more amenable to automation, and I don't 
 
 ### Interaction mode
 
-Both Lean and Isabelle/HOL are interacted with interactively. Lean (essentially) forces the use of VSCode, and Isabelle/HOL has its own editor (jEdit) that it also practically forces the use of. This is _fine_; I understand why they do this, as interactive development is reasonably hard to make generic. Both of them make it work.
+Both Lean and Isabelle/HOL are interacted with interactively. Lean has modes for other editors, but high recommends the use of VSCode, and Isabelle/HOL has its own editor (jEdit) that it also practically forces the use of. This is _fine_; I understand why they do this, as interactive development is reasonably hard to make generic. Both of them make it work.
 
 HOL4 is interacted with via either an Emacs mode or a Vim mode, and keybinds that allow one to copy text in/out of a running HOL4 REPL. This sounds weird because it is, but it works surprisingly well. I was already an Emacs user, so nothing really changed for me.
 
