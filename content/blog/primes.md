@@ -4,7 +4,7 @@ date = 2026-10-10
 +++
 
 
-# A tale of four theorem provers, or: A (reasonably) opinionated comparison of Isabelle/HOL, Lean, HOL4, and Agda
+## The above (wow, long title)
 
 In which I compare Lean, Isabelle/HOL, Agda, and HOL4 with only mild regard for "fairness".
 
@@ -114,20 +114,20 @@ These are nowhere near apples-to-apples, but they're still fun.
 We start with defining divisibility. In Agda we cheat and use the standard library version, so we can get proofs around computing divisors, which I didn't feel like redoing.
 
 Isabelle/HOL:
-```ocaml
+```hs
 definition divides :: "nat ⇒ nat ⇒ bool" where
   "divides n k = (∃j. j * n = k)"
 ```
 
 Lean:
-```lean
+```hs
 @[grind]
 def divides (n k : Nat) : Prop :=
   ∃q, k = n * q
 ```
 
 HOL4:
-```ocaml
+```hs
 Definition divides_def:
   divides n k = ∃q. q * n = k
 End
@@ -144,7 +144,7 @@ record _∣_ (m n : ℕ) : Set where
 So, basically the same. Then there's a few lemmas around divisibility proved (`divides k 0`, `divides k k`, etc). One we'll show off is `divides n k ==> divides n j ==> divides n (k - j)`, as it's mildly interesting in some of the theorem provers. In all of the following, the mult/sub lemma essentially states `a * (b - c) = a * b - a * c`.
 
 Isabelle/HOL:
-```ocaml
+```hs
 lemma divides_diff: "divides x k ⟹ divides x n ⟹ divides x (k - n)"
   using divides_def by (metis diff_mult_distrib)
 ```
@@ -152,7 +152,7 @@ lemma divides_diff: "divides x k ⟹ divides x n ⟹ divides x (k - n)"
 The proof search procedure `metis` does most of the work.
 
 Lean:
-```lean
+```hs
 theorem divides_sub (n j k : Nat) (h1 : divides n k) (h2 : divides n j)
   : divides n (k - j) := by
   obtain ⟨q1, h1⟩ := h1
@@ -165,7 +165,7 @@ theorem divides_sub (n j k : Nat) (h1 : divides n k) (h2 : divides n j)
 We do some unpacking, then identify `q1 - q2` as the other term (such that `n * (q1 - q2) = k - j`). Then grind with the appropriate lemma gets us there.
 
 HOL4:
-```ocaml
+```hs
 Theorem divides_sub:
   divides n k ⇒ divides n j ⇒ divides n (k - j)
 Proof
@@ -190,14 +190,14 @@ It was interesting to me that the Lean proof was, to some extent, such a pain. I
 We next need to define the product of a list of numbers, which looks like the following:
 
 Isabelle/HOL:
-```ocaml
+```hs
 fun prod_list :: "nat list ⇒ nat" where
 "prod_list [] = 1" | 
 "prod_list (x # xs) = x * prod_list xs"
 ```
 
 Lean:
-```lean
+```hs
 @[simp, grind]
 def prod_list (xs : List Nat) : Nat :=
   match xs with
@@ -208,7 +208,7 @@ def prod_list (xs : List Nat) : Nat :=
 The `simp` and `grind` markers were meant to help the automated proof methods out, and they did!
 
 HOL4:
-```ocaml
+```hs
 Definition prod_list_def:
   (prod_list [] = 1) ∧
   (prod_list (x :: xs) = x * prod_list xs)
@@ -223,7 +223,7 @@ prod-list (x ∷ xs) = x * prod-list xs
 ```
 
 Defining things in HOL4 is a little interesting, because you're just defining the body as a proof! That definition spits out a theorem `prod_list_def` that is literally
-```ocaml
+```hs
 val it = ⊢ prod_list [] = 1 ∧ ∀x xs. prod_list (x::xs) = x * prod_list xs: thm
 ```
 !
@@ -233,7 +233,7 @@ Here in the Agda proof we also do a bunch of work to set up what will become a d
 Back on track, we need to show a few lemmas around with prod list function. One of the interesting ones is as follows, where we prove that a number in said list will divide the product of the list.
 
 Isabelle/HOL:
-```ocaml
+```hs
 lemma divides_prod_list: "x ∈ set xs ⟹ divides x (prod_list xs)"
   apply (induct xs)
    apply simp
@@ -247,7 +247,7 @@ lemma divides_prod_list: "x ∈ set xs ⟹ divides x (prod_list xs)"
 Very implicit; it's hard to tell what's going on, but the basic structure is there. Induct on the list, do some casing, apply a lemma about `divides _ (_ * _)`.
 
 Lean:
-```lean
+```hs
 theorem divides_prod_list : ∀ xs x, x ∈ xs -> divides x (prod_list xs) := by
   intros xs x mem
   induction xs with
@@ -271,7 +271,7 @@ theorem divides_prod_list : ∀ xs x, x ∈ xs -> divides x (prod_list xs) := by
 Reasonably large. We have to destructure the membership quite manually, which gets a little troublesome. It's a fairly straightforward proof, though.
 
 HOL4:
-```ocaml
+```hs
 Theorem divides_prod_list:
   x ∈ set xs ⇒ divides x (prod_list xs)
 Proof
@@ -308,20 +308,20 @@ While it's much more implicit in Isabelle/HOL and HOL4 (a common theme), all fou
 Then, Primality!
 
 Isabelle/HOL:
-```ocaml
+```hs
 definition prime :: "nat ⇒ bool" where
   "prime p = ((p > 1) ∧ (∀x. divides x p ⟶ x = p ∨ x = 1))"
 ```
 
 Lean:
-```lean
+```hs
 @[simp, grind]
 def prime (n : Nat) : Prop :=
   (n > 1) ∧ (∀k, divides k n -> k = 1 ∨ k = n)
 ```
 
 HOL4:
-```ocaml
+```hs
 Definition prime_def:
   prime n = ((1 < n) ∧ (∀k. divides k n ⇒ k = 1 ∨ k = n))
 End
@@ -342,7 +342,7 @@ In Agda we also define what it means to be composite as a "positive" definition,
 The next "interesting" proof is proving that every not-prime number greater than one has a prime factor. In Agda this is part of the definition of being composite, so we don't bother including it. We're going to move slightly faster from now on, so I won't explain each snippet. Just compare yourselves.
 
 Isabelle/HOL:
-```ocaml
+```hs
 lemma prime_factor: "¬(prime k) ⟹ k > 1 ⟹ ∃p. prime p ∧ divides p k"
   apply (induct k rule: measure_induct[of "id"]; simp)
   apply (rotate_tac 1)
@@ -356,7 +356,7 @@ lemma prime_factor: "¬(prime k) ⟹ k > 1 ⟹ ∃p. prime p ∧ divides p k"
 ```
 
 Lean:
-```lean
+```hs
 theorem prime_factor : ∀k, ¬(prime k) -> 1 < k -> ∃p, prime p ∧ divides p k := by
   intros k nprime kgt1
   induction k using Nat.strongRecOn with
@@ -382,7 +382,7 @@ theorem prime_factor : ∀k, ¬(prime k) -> 1 < k -> ∃p, prime p ∧ divides p
 ```
 
 HOL4:
-```ocaml
+```hs
 Theorem prime_factor:
   ∀k. ¬(prime k) ⇒ 1 < k ⇒ ∃p. prime p ∧ divides p k
 Proof
@@ -409,7 +409,7 @@ QED
 ```
 
 The steps of `0 < k'` ~> `1 < k'` and `k' <= k` ~> `k' < k` in the HOL4 one annoyed me a lot, but I couldn't figure out how to golf them down. Similarly, this line:
-```lean
+```hs
     obtain ⟨x,⟨xd,dvds⟩,xn1,xnk⟩ := nprime kgt1
 ```
 of the Lean proof causes me pain.
@@ -418,7 +418,7 @@ of the Lean proof causes me pain.
 We're almost there now! Two more steps to go: Prove there's always a prime outside a given set (list) of numbers, and use that to show the final statement. First, the former:
 
 Isabelle/HOL:
-```ocaml
+```hs
 lemma another_prime: "(∀x∈set xs. x > 1) ⟹ ∃p. prime p ∧ p ∉ set xs"
   apply (case_tac "prime (Suc (prod_list xs))")
   using prod_list_lt apply fastforce
@@ -432,7 +432,7 @@ lemma another_prime: "(∀x∈set xs. x > 1) ⟹ ∃p. prime p ∧ p ∉ set xs"
 ```
 
 Lean:
-```ocaml
+```hs
 theorem another_prime (xs : List Nat) (xsgt : ∀x, x ∈ xs -> 1 < x)
   : ∃p, prime p ∧ p ∉ xs := by
   by_cases h : prime (Nat.succ (prod_list xs))
@@ -457,7 +457,7 @@ theorem another_prime (xs : List Nat) (xsgt : ∀x, x ∈ xs -> 1 < x)
 ```
 
 HOL4:
-```ocaml
+```hs
 Theorem another_prime:
   ∀(xs : num list). (∀x. x ∈ set xs ⇒ 1 < x)
                     ⇒ ∃p. prime p ∧ p ∉ set xs
@@ -517,7 +517,7 @@ The Isabelle/HOL proof clearly wins in terms of length here, but it's also reall
 We arrive at our final statement! Agda requires some more fiddling as it doesn't have ranges built in like the other two do, but we use our lemma above to construct the list `[2..n]`, and then show there's a prime outside that (and that it hence must be above `n`).
 
 Isabelle/HOL:
-```ocaml
+```hs
 lemma infinite_primes: "∃p. prime p ∧ p > n"
   apply (insert another_prime[where xs="[2 ..< Suc n]"])
   apply (case_tac "n ≤ 1"; clarsimp)
@@ -542,7 +542,7 @@ theorem infinite_primes : ∀ n, ∃p, prime p ∧ p > n := by
 ```
 
 HOL4:
-```ocaml
+```hs
 Theorem infinite_primes:
     ∀n. ∃p. prime p ∧ p > n
 Proof
@@ -661,7 +661,7 @@ Enjoy.
 
 
 Isabelle/HOL:
-```ocaml
+```hs
 theory primes
   imports Main
 begin
@@ -783,7 +783,7 @@ end
 
 
 Lean:
-```ocaml
+```hs
 import Primes.Basic
 import Mathlib.Tactic.ByContra
 
@@ -942,7 +942,7 @@ theorem infinite_primes : ∀ n, ∃p, prime p ∧ p > n := by
 
 
 HOL4:
-```ocaml
+```hs
 open arithmeticTheory listTheory prim_recTheory listRangeTheory;
      
 Definition divides_def:
