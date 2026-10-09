@@ -29,23 +29,23 @@ What follows is a bunch of opinions and somewhat arbitrary categories. Don't exp
 
 There are a few categories by which we can group these theorem provers. We have the above mentioned:
 
-LCF-style: Isabelle/HOL, HOL4
-Dependent-style: Lean, Agda
+- LCF-style: Isabelle/HOL, HOL4
+- Dependent-style: Lean, Agda
 
 But there's also:
 
 ### Interactivity
 
-High-interactivity: Isabelle/HOL, Lean
-Low-interactivity: HOL4, Agda
+- High-interactivity: Isabelle/HOL, Lean
+- Low-interactivity: HOL4, Agda
 
 Reasoning: Both Isabelle/HOL and Lean provide "live updates" as you type, and their structured proofs can be "down-arrow"'d through, to see intermediate steps. In contrast, both completed HOL4 and Agda proofs exist as fully-put-together terms that must be manually taken apart if you wish to inspect their internals. Both HOL4 and Agda can show you your current state and related information at any time, of course.
 
 ### Automation
 
-High-automation: Isabelle/HOL, HOL4
-Medium-automation: Lean
-Low-automation: Agda 
+- High-automation: Isabelle/HOL, HOL4
+- Medium-automation: Lean
+- Low-automation: Agda 
 
 Isabelle/HOL has `sledgehammer`, which calls out to a number of external proof generation methods (SAT/SMT solvers, various FOL solvers, etc). For any goal that looks doable-but-annoying, there's a solid chance `sledgehammer` can solve it - this is nice because it saves you work, but the proofs it generates are also indecipherable, which is perhaps less than ideal. There also exists an equivalent for HOL4 called HolyHammer, but I didn't realize it existed until after I was writing this. Oh well. Isabelle/HOL and HOL4 both have very good support for many automated simplification and proof methods, which come in quite handy when trying to work with complex assumptions, for example. It may not be obvious how to proceed without simplification kicking in to chunk everything down. 
 
@@ -104,10 +104,10 @@ Note: This isn't really meant to be a tutorial for any of these, though I will d
 
 Let's get into the proofs! We'll go segment by segment, exploring sections of the proof and explaining as we go. Before that, some vaguely interesting stats:
 
-Isabelle/HOL: 117 LOC, with 19 proofs.
-Lean: 155 LOC, with 12 proofs.
-HOL4: 190 LOC, with 16 proofs.
-Agda: 264 LOC, with 45 proofs (29, not counting `where` blocks)
+- Isabelle/HOL: 117 LOC, with 19 proofs.
+- Lean: 155 LOC, with 12 proofs.
+- HOL4: 190 LOC, with 16 proofs.
+- Agda: 264 LOC, with 45 proofs (29, not counting `where` blocks)
 
 These are nowhere near apples-to-apples, but they're still fun.
 
