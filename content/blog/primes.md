@@ -6,8 +6,7 @@ date = 2026-10-10
 
 # The above (wow, long title)
 
-In which I compare Lean, Isabelle/HOL, Agda, and HOL4 with only mild regard for "fairness".
-
+In which I compare Lean, Isabelle/HOL, Agda, and HOL4 with only mild regard for "fairness". 
 
 # What are we comparing, anyway?
 
@@ -24,6 +23,8 @@ All of the proofs structurally look similar (mostly, we'll get to that), and hen
 # Comparison time!
 
 What follows is a bunch of opinions and somewhat arbitrary categories. Don't expect an unbiased review, please. If you only want proof comparisons, skip to Proof Comparisons, and if you only want more opinions, read the below and then skip to Arbitrary Rankings. The opinions go first.
+
+I do not claim any of the following proofs are perfect! They're probably quite mediocre, really.
 
 ## Overarching similarities/differences
 
