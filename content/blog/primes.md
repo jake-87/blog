@@ -12,7 +12,7 @@ In which I compare Lean, Isabelle/HOL, Agda, and HOL4 with only mild regard for 
 # What are we comparing, anyway?
 
 All four of the above are theorem proving applications; that is, their purpose is to computer-formalize mathematics.
-Broadly speaking, both Lean and Agda are dependent-types based systems, utilizing the Curry-Howard correspondence to prove theorems, whereas Isabelle/HOL and HOL4 are LCF-style systems, with a small "proof kernel" containing base rules (e.g. `forall x, x = x`) that all proofs must be constructed via.
+Broadly speaking, both Lean and Agda are dependent-types based systems, utilizing the Curry-Howard correspondence to prove theorems via a complex type system, whereas Isabelle/HOL and HOL4 are LCF-style systems, with a small "proof kernel" containing base rules (e.g. `forall x, x = x`) that all proofs must be constructed via.
 Both foundations have advantages and disadvantages, and some will be discussed. 
 
 # And on what?
