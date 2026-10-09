@@ -4,7 +4,7 @@ date = 2026-10-10
 +++
 
 
-## The above (wow, long title)
+# The above (wow, long title)
 
 In which I compare Lean, Isabelle/HOL, Agda, and HOL4 with only mild regard for "fairness".
 
